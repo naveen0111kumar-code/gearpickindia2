@@ -401,18 +401,18 @@ font-size:32px;
 </div>
 
 </section>
-
+</> HTML
 <footer>
 © 2026 GearPick India • Amazon Affiliate Store
 </footer>
-
-<script>
-<!-- SEARCH FUNCTION -->
+  
 <script>
 
 async function loadProducts() {
 
 const sheetURL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
+
+try {
 
 const response = await fetch(sheetURL);
 
@@ -424,7 +424,7 @@ products.forEach(product => {
 
 let category = "gadgets";
 
-const title = product.title.toLowerCase();
+const title = (product.title || "").toLowerCase();
 
 if(title.includes("headphone")){
 category = "headphone";
@@ -441,7 +441,7 @@ html += `
 <div class="product-card" data-category="${category}">
 
 <div class="product-image">
-<img src="${product.image}">
+<img src="${product.image}" alt="${product.title}">
 </div>
 
 <div class="product-content">
@@ -452,8 +452,12 @@ html += `
 
 <div class="price">₹${product.price}</div>
 
-<a href="${product.affiliate_link}" target="_blank" class="buy-btn">
+<a href="${product.affiliate_link}" 
+target="_blank" 
+class="buy-btn">
+
 Buy On Amazon
+
 </a>
 
 </div>
@@ -471,17 +475,33 @@ setupFilter();
 
 }
 
+catch(error){
+
+document.getElementById("products").innerHTML = `
+
+<h2 style="text-align:center;color:red;">
+Products failed to load
+</h2>
+
+`;
+
+console.log(error);
+
+}
+
+}
+
 loadProducts();
 
 
 
-/* SEARCH BAR */
+/* SEARCH */
 
 function setupSearch(){
 
 const searchInput = document.getElementById("searchInput");
 
-searchInput.addEventListener("keyup", function () {
+searchInput.addEventListener("keyup", function(){
 
 const value = this.value.toLowerCase();
 
@@ -506,7 +526,7 @@ card.style.display = "none";
 
 
 
-/* CATEGORY FILTER */
+/* FILTER */
 
 function setupFilter(){
 
@@ -542,17 +562,9 @@ card.style.display = "none";
 
 document.title = "GearPick India - Best Tech Gadgets & Accessories";
 
-const metaDescription = document.createElement('meta');
-
-metaDescription.name = "description";
-
-metaDescription.content = "Buy trending headphones, gaming keyboards, computer accessories and tech gadgets with Amazon affiliate deals.";
-
-document.head.appendChild(metaDescription);
 
 
-
-/* AI PRODUCT DESCRIPTION EFFECT */
+/* AI EFFECT */
 
 setTimeout(() => {
 
@@ -566,7 +578,7 @@ desc.innerHTML += "<br><br><span style='color:#00d9ff;'>🔥 AI Recommendation: 
 
 
 
-/* REDDIT STYLE REVIEWS */
+/* REDDIT SECTION */
 
 const redditSection = document.querySelector(".reddit-section");
 
@@ -590,7 +602,7 @@ redditSection.innerHTML = `
 
 
 
-/* YOUTUBE REVIEWS */
+/* YOUTUBE */
 
 const youtubeSection = document.querySelector(".video-grid");
 
@@ -606,7 +618,7 @@ youtubeSection.innerHTML = `
 
 
 
-/* BLOG POSTS */
+/* BLOGS */
 
 const blogGrid = document.querySelector(".blog-grid");
 
@@ -633,8 +645,6 @@ blogGrid.innerHTML = `
 </div>
 
 `;
-
-</script>
 
 </script>
 
