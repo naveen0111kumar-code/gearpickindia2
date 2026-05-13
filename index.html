@@ -463,7 +463,35 @@
     </div>
   </div>
 </section>
+<script>
+async function loadProducts() {
+  const sheetURL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
 
+  const response = await fetch(sheetURL);
+  const products = await response.json();
+
+  let html = "";
+
+  products.forEach(product => {
+    html += `
+      <div style="background:#111;padding:20px;border-radius:15px;margin:20px 0;">
+        <img src="${product.image}" style="width:100%;border-radius:10px;">
+        <h2>${product.title}</h2>
+        <p>${product.description}</p>
+        <h3>₹${product.price}</h3>
+        <a href="${product.affiliate_link}" target="_blank"
+          style="display:inline-block;padding:12px 20px;background:#00e5ff;color:black;border-radius:10px;text-decoration:none;font-weight:bold;">
+          Buy Now
+        </a>
+      </div>
+    `;
+  });
+
+  document.getElementById("products").innerHTML = html;
+}
+
+loadProducts();
+  </script>
 </body>
 </html>
 ```
