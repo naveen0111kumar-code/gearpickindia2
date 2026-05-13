@@ -407,6 +407,8 @@ font-size:32px;
 </footer>
 
 <script>
+<!-- SEARCH FUNCTION -->
+<script>
 
 async function loadProducts() {
 
@@ -420,9 +422,23 @@ let html = "";
 
 products.forEach(product => {
 
+let category = "gadgets";
+
+const title = product.title.toLowerCase();
+
+if(title.includes("headphone")){
+category = "headphone";
+}
+else if(title.includes("keyboard")){
+category = "keyboard";
+}
+else if(title.includes("mouse")){
+category = "accessories";
+}
+
 html += `
 
-<div class="product-card">
+<div class="product-card" data-category="${category}">
 
 <div class="product-image">
 <img src="${product.image}">
@@ -450,9 +466,175 @@ Buy On Amazon
 
 document.getElementById("products").innerHTML = html;
 
+setupSearch();
+setupFilter();
+
 }
 
 loadProducts();
+
+
+
+/* SEARCH BAR */
+
+function setupSearch(){
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function () {
+
+const value = this.value.toLowerCase();
+
+const cards = document.querySelectorAll(".product-card");
+
+cards.forEach(card => {
+
+const text = card.innerText.toLowerCase();
+
+if(text.includes(value)){
+card.style.display = "block";
+}
+else{
+card.style.display = "none";
+}
+
+});
+
+});
+
+}
+
+
+
+/* CATEGORY FILTER */
+
+function setupFilter(){
+
+const categoryFilter = document.getElementById("categoryFilter");
+
+categoryFilter.addEventListener("change", function(){
+
+const value = this.value;
+
+const cards = document.querySelectorAll(".product-card");
+
+cards.forEach(card => {
+
+if(value === "all"){
+card.style.display = "block";
+}
+else if(card.dataset.category === value){
+card.style.display = "block";
+}
+else{
+card.style.display = "none";
+}
+
+});
+
+});
+
+}
+
+
+
+/* SEO */
+
+document.title = "GearPick India - Best Tech Gadgets & Accessories";
+
+const metaDescription = document.createElement('meta');
+
+metaDescription.name = "description";
+
+metaDescription.content = "Buy trending headphones, gaming keyboards, computer accessories and tech gadgets with Amazon affiliate deals.";
+
+document.head.appendChild(metaDescription);
+
+
+
+/* AI PRODUCT DESCRIPTION EFFECT */
+
+setTimeout(() => {
+
+document.querySelectorAll(".product-content p").forEach(desc => {
+
+desc.innerHTML += "<br><br><span style='color:#00d9ff;'>🔥 AI Recommendation: Best value tech product for daily use.</span>";
+
+});
+
+}, 1500);
+
+
+
+/* REDDIT STYLE REVIEWS */
+
+const redditSection = document.querySelector(".reddit-section");
+
+redditSection.innerHTML = `
+
+<h2 class="section-title">Reddit Reviews</h2>
+
+<div class="review-box">
+<h3>🎧 Headphones Review</h3>
+<p>“Marshall headphones are one of the best for sound quality and battery backup.”</p>
+</div>
+
+<br>
+
+<div class="review-box">
+<h3>⌨️ Keyboard Review</h3>
+<p>“Mechanical keyboards improve gaming and typing experience massively.”</p>
+</div>
+
+`;
+
+
+
+/* YOUTUBE REVIEWS */
+
+const youtubeSection = document.querySelector(".video-grid");
+
+youtubeSection.innerHTML = `
+
+<iframe src="https://www.youtube.com/embed/kXYiU_JCYtU"></iframe>
+
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+
+<iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ"></iframe>
+
+`;
+
+
+
+/* BLOG POSTS */
+
+const blogGrid = document.querySelector(".blog-grid");
+
+blogGrid.innerHTML = `
+
+<div class="blog-card">
+<h3>Best Headphones For Gaming</h3>
+<p>Top wireless gaming headphones with noise cancellation and surround sound.</p>
+</div>
+
+<div class="blog-card">
+<h3>Best Mechanical Keyboards</h3>
+<p>RGB gaming keyboards for pro gamers and creators.</p>
+</div>
+
+<div class="blog-card">
+<h3>Best Computer Accessories</h3>
+<p>Must-have gadgets to improve your PC setup.</p>
+</div>
+
+<div class="blog-card">
+<h3>Best Budget Tech Gadgets</h3>
+<p>Affordable gadgets under budget with premium features.</p>
+</div>
+
+`;
+
+</script>
 
 </script>
 
