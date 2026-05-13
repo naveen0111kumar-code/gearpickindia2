@@ -1,303 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GearPick India</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>GearPick India - Tech Gadgets & Accessories</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+<meta name="description" content="Best headphones, keyboards, computer accessories and tech gadgets with Amazon affiliate deals.">
+<meta name="keywords" content="Headphones, Gaming Keyboard, Tech Gadgets, Computer Accessories, Amazon Deals">
 
-    body {
-      background: #050505;
-      color: white;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    header {
-      padding: 20px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+<style>
 
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      color: #00e5ff;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-    nav a {
-      text-decoration: none;
-      color: white;
-      margin-left: 20px;
-      transition: 0.3s;
-      font-size: 15px;
-    }
+body{
+background:#050505;
+color:white;
+}
 
-    nav a:hover {
-      color: #00e5ff;
-    }
+header{
+background:#000;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid #111;
+}
 
-    .hero {
-      min-height: 85vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 8%;
-      background:
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
-        url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1600&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-    }
+.logo{
+font-size:32px;
+font-weight:700;
+color:#00d9ff;
+}
 
-    .hero-content h1 {
-      font-size: 60px;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
+nav a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+font-weight:500;
+}
 
-    .hero-content h1 span {
-      color: #00e5ff;
-    }
+.hero{
+height:60vh;
+background:url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop') center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+position:relative;
+}
 
-    .hero-content p {
-      color: #cfcfcf;
-      max-width: 750px;
-      margin: auto;
-      line-height: 1.8;
-      margin-bottom: 35px;
-      font-size: 18px;
-    }
+.hero::after{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.65);
+}
 
-    .hero-btn {
-      display: inline-block;
-      padding: 14px 34px;
-      border-radius: 12px;
-      background: #00e5ff;
-      color: black;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-      box-shadow: 0 0 20px rgba(0,229,255,0.5);
-    }
+.hero-content{
+position:relative;
+z-index:2;
+}
 
-    .hero-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 35px rgba(0,229,255,0.8);
-    }
+.hero h1{
+font-size:60px;
+margin-bottom:15px;
+}
 
-    .section-title {
-      text-align: center;
-      font-size: 42px;
-      margin-top: 80px;
-      margin-bottom: 40px;
-    }
+.hero p{
+font-size:20px;
+color:#ddd;
+}
 
-    .section-title span {
-      color: #00e5ff;
-    }
+.search-section{
+padding:40px 8%;
+background:#0b0b0b;
+}
 
-    #products {
-      width: 100%;
-      padding: 20px 8% 100px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
+.search-bar{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
 
-    .product-card {
-      background: #111;
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: 0.4s;
-      position: relative;
-    }
+.search-bar input,
+.search-bar select{
+padding:15px;
+border:none;
+outline:none;
+border-radius:10px;
+background:#111;
+color:white;
+font-size:16px;
+}
 
-    .product-card:hover {
-      transform: translateY(-10px);
-      border-color: #00e5ff;
-      box-shadow: 0 0 30px rgba(0,229,255,0.25);
-    }
+.search-bar input{
+flex:1;
+min-width:250px;
+}
 
-    .product-card img {
-      width: 100%;
-      height: 280px;
-      object-fit: contain;
-      background: #0a0a0a;
-      padding: 20px;
-    }
+.section-title{
+font-size:40px;
+text-align:center;
+margin-bottom:40px;
+color:#00d9ff;
+}
 
-    .product-content {
-      padding: 24px;
-    }
+.categories{
+padding:70px 8%;
+}
 
-    .product-content h2 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
+.category-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
 
-    .product-content p {
-      color: #c7c7c7;
-      line-height: 1.7;
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
+.category-card{
+background:#0d0d0d;
+padding:30px;
+border-radius:20px;
+text-align:center;
+transition:0.3s;
+border:1px solid #151515;
+}
 
-    .price {
-      font-size: 28px;
-      color: #00e5ff;
-      margin-bottom: 18px;
-      font-weight: 700;
-    }
+.category-card:hover{
+transform:translateY(-8px);
+border-color:#00d9ff;
+}
 
-    .buy-btn {
-      width: 100%;
-      display: inline-block;
-      text-align: center;
-      padding: 14px;
-      border-radius: 12px;
-      background: #00e5ff;
-      color: black;
-      font-weight: 700;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+.category-card h3{
+margin-top:15px;
+}
 
-    .buy-btn:hover {
-      background: white;
-      transform: scale(1.02);
-    }
+.top-picks{
+padding:70px 8%;
+}
 
-    footer {
-      padding: 35px;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      color: #888;
-    }
+.products-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
 
-    .loader {
-      text-align: center;
-      padding: 60px;
-      color: #00e5ff;
-      font-size: 22px;
-    }
+.product-card{
+background:#0c0c0c;
+border-radius:20px;
+overflow:hidden;
+border:1px solid #151515;
+transition:0.3s;
+}
 
-    @media(max-width:768px) {
-      .hero-content h1 {
-        font-size: 38px;
-      }
+.product-card:hover{
+transform:translateY(-8px);
+border-color:#00d9ff;
+}
 
-      nav {
-        display: none;
-      }
+.product-image{
+height:300px;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
 
-      .section-title {
-        font-size: 30px;
-      }
-    }
-  </style>
+.product-image img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+}
+
+.product-content{
+padding:25px;
+}
+
+.product-content h2{
+font-size:24px;
+margin-bottom:15px;
+line-height:1.4;
+}
+
+.product-content p{
+color:#bbb;
+font-size:14px;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+.price{
+font-size:34px;
+font-weight:700;
+color:#00d9ff;
+margin-bottom:20px;
+}
+
+.buy-btn{
+display:block;
+width:100%;
+text-align:center;
+padding:15px;
+background:#00d9ff;
+color:black;
+font-weight:700;
+text-decoration:none;
+border-radius:12px;
+transition:0.3s;
+}
+
+.buy-btn:hover{
+background:white;
+}
+
+.youtube-section,
+.reddit-section,
+.blog-section{
+padding:70px 8%;
+}
+
+.video-grid,
+.blog-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+iframe{
+width:100%;
+height:250px;
+border:none;
+border-radius:15px;
+}
+
+.review-box,
+.blog-card{
+background:#0c0c0c;
+padding:25px;
+border-radius:20px;
+border:1px solid #151515;
+}
+
+.review-box h3,
+.blog-card h3{
+margin-bottom:15px;
+color:#00d9ff;
+}
+
+footer{
+padding:30px;
+text-align:center;
+background:#000;
+margin-top:50px;
+color:#aaa;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:38px;
+}
+
+.section-title{
+font-size:32px;
+}
+
+}
+
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">GearPick India</div>
+<header>
+<div class="logo">GearPick India</div>
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#products-section">Products</a>
-      <a href="#footer">Contact</a>
-    </nav>
-  </header>
+<nav>
+<a href="#">Home</a>
+<a href="#categories">Categories</a>
+<a href="#products-section">Products</a>
+<a href="#blogs">Blogs</a>
+</nav>
+</header>
 
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>Best <span>Gaming Gear</span><br>For Pro Gamers</h1>
+<section class="hero">
+<div class="hero-content">
+<h1>Best Tech Gadgets & Accessories</h1>
+<p>Find trending headphones, keyboards & computer accessories</p>
+</div>
+</section>
 
-      <p>
-        Discover premium gaming headphones, keyboards, gaming mice,
-        accessories and top tech products with direct Amazon deals.
-      </p>
+<section class="search-section">
 
-      <a href="#products-section" class="hero-btn">Explore Products</a>
-    </div>
-  </section>
+<div class="search-bar">
 
-  <h2 class="section-title" id="products-section">
-    Trending <span>Products</span>
-  </h2>
+<input type="text" id="searchInput" placeholder="Search products...">
 
-  <div id="products">
-    <div class="loader">Loading Products...</div>
-  </div>
+<select id="categoryFilter">
+<option value="all">All Categories</option>
+<option value="headphone">Headphones</option>
+<option value="keyboard">Keyboard</option>
+<option value="accessories">Accessories</option>
+<option value="gadgets">Tech Gadgets</option>
+</select>
 
-  <footer id="footer">
-    © 2026 GearPick India • Amazon Affiliate Store
-  </footer>
+</div>
 
-  <script>
+</section>
 
-    async function loadProducts() {
+<section class="categories" id="categories">
 
-      const sheetURL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
+<h2 class="section-title">Categories</h2>
 
-      const response = await fetch(sheetURL);
-      const products = await response.json();
+<div class="category-grid">
 
-      let html = "";
+<div class="category-card">
+<h3>🎧 Headphones</h3>
+</div>
 
-      products.forEach(product => {
+<div class="category-card">
+<h3>⌨️ Gaming Keyboards</h3>
+</div>
 
-        html += `
+<div class="category-card">
+<h3>🖱️ Computer Accessories</h3>
+</div>
 
-        <div class="product-card">
+<div class="category-card">
+<h3>⚡ Tech Gadgets</h3>
+</div>
 
-          <img src="${product.image}" alt="${product.title}">
+</div>
 
-          <div class="product-content">
+</section>
 
-            <h2>${product.title}</h2>
+<section class="top-picks">
 
-            <p>${product.description}</p>
+<h2 class="section-title">Top Picks</h2>
 
-            <div class="price">₹${product.price}</div>
+<div class="products-grid" id="products"></div>
 
-            <a href="${product.affiliate_link}" target="_blank" class="buy-btn">
-              Buy On Amazon
-            </a>
+</section>
 
-          </div>
+<section class="youtube-section">
 
-        </div>
+<h2 class="section-title">YouTube Reviews</h2>
 
-        `;
+<div class="video-grid">
 
-      });
+<iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
 
-      document.getElementById("products").innerHTML = html;
-    }
+<iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ"></iframe>
 
-    loadProducts();
+</div>
 
-  </script>
+</section>
+
+<section class="reddit-section">
+
+<h2 class="section-title">Reddit Reviews</h2>
+
+<div class="review-box">
+<h3>🎧 Best Headphones Discussions</h3>
+<p>Users on Reddit highly recommend premium wireless headphones with ANC, long battery life and balanced sound quality.</p>
+</div>
+
+</section>
+
+<section class="blog-section" id="blogs">
+
+<h2 class="section-title">Latest Blogs</h2>
+
+<div class="blog-grid">
+
+<div class="blog-card">
+<h3>Best Gaming Headphones in 2026</h3>
+<p>Top wireless gaming headphones with surround sound and noise cancellation.</p>
+</div>
+
+<div class="blog-card">
+<h3>Top Mechanical Keyboards</h3>
+<p>Best RGB mechanical keyboards for gaming and productivity.</p>
+</div>
+
+<div class="blog-card">
+<h3>Must Have Tech Gadgets</h3>
+<p>Trending computer accessories and smart gadgets for setup lovers.</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 GearPick India • Amazon Affiliate Store
+</footer>
+
+<script>
+
+async function loadProducts() {
+
+const sheetURL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
+
+const response = await fetch(sheetURL);
+
+const products = await response.json();
+
+let html = "";
+
+products.forEach(product => {
+
+html += `
+
+<div class="product-card">
+
+<div class="product-image">
+<img src="${product.image}">
+</div>
+
+<div class="product-content">
+
+<h2>${product.title}</h2>
+
+<p>${product.description}</p>
+
+<div class="price">₹${product.price}</div>
+
+<a href="${product.affiliate_link}" target="_blank" class="buy-btn">
+Buy On Amazon
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("products").innerHTML = html;
+
+}
+
+loadProducts();
+
+</script>
 
 </body>
 </html>
