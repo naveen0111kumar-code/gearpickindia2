@@ -142,11 +142,85 @@ let PRODUCTS = [];
 let currentCategory = "All";
 
 async function loadProducts(){
+    const productsDiv = document.getElementById("products");
+    productsDiv.innerHTML = "<div class='empty'>Loading products from Google Sheet...</div>";
+
     try{
         const res = await fetch(SHEET_URL);
         const data = await res.json();
 
         PRODUCTS = data.map(p => ({
             title: p.title || "No Title",
-            description: p.description || "Great budget gadget with good performance.",
-            image: p.image
+            description: p.description || "Great budget gadget.",
+            image: p.image || "https://via.placeholder.com/300",
+            price: parseFloat(String(p.price || "0").replace(/[^0-9.]/g, "")) || 0,
+            affiliate_link: p.affiliate_link || "#",
+            category: p.category || "Other"
+        })).filter(p => p.title && p.title.trim() !== ""); // Empty rows filter
+
+        renderCategories();
+        render(PRODUCTS);
+    } catch(err){
+        console.error(err);
+        productsDiv.innerHTML = `<div class="empty">❌ Products load nahi ho rahe.<br>Check internet or Sheet sharing.</div>`;
+    }
+}
+
+function renderCategories(){
+    const cats = ["All", ...new Set(PRODUCTS.map(p => p.category))];
+    let html = '';
+    cats.forEach(cat => {
+        html += `<button class="cat-btn ${cat === currentCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>`;
+    });
+    document.getElementById("categories").innerHTML = html;
+}
+
+function filterCategory(cat){
+    currentCategory = cat;
+    renderCategories();
+    if(cat === "All"){
+        render(PRODUCTS);
+    } else {
+        const filtered = PRODUCTS.filter(p => p.category === cat);
+        render(filtered);
+    }
+}
+
+function render(list){
+    let html = "";
+    list.forEach(p => {
+        const original = Math.round(p.price * 1.25);
+        html += `
+            <div class="card">
+                <img src="${p.image}" loading="lazy" alt="${p.title}">
+                <div class="content">
+                    <h3>${p.title}</h3>
+                    <p>${p.description}</p>
+                    <div class="price">₹${p.price}</div>
+                    <div class="original-price">₹${original}</div>
+                    <a class="btn" href="${p.affiliate_link}" target="_blank" rel="noopener">
+                        🛒 Buy on Amazon
+                    </a>
+                </div>
+            </div>
+        `;
+    });
+
+    document.getElementById("products").innerHTML = html || `<div class="empty">No products found</div>`;
+}
+
+// Search Functionality
+document.getElementById("searchBox").addEventListener("input", function(){
+    const val = this.value.toLowerCase();
+    const filtered = PRODUCTS.filter(p => 
+        (p.title || "").toLowerCase().includes(val) ||
+        (p.description || "").toLowerCase().includes(val)
+    );
+    render(filtered);
+});
+
+window.addEventListener("DOMContentLoaded", loadProducts);
+</script>
+
+</body>
+</html>
