@@ -143,31 +143,31 @@ let currentCategory = "All";
 
 async function loadProducts(){
     const productsDiv = document.getElementById("products");
-    productsDiv.innerHTML = "<div class='empty'>Loading products from Google Sheet...</div>";
+    productsDiv.innerHTML = "<div class='empty'>Loading products...</div>";
 
     try{
         const res = await fetch(SHEET_URL);
         const data = await res.json();
 
         PRODUCTS = data.map(p => ({
-            title: p.title || "No Title",
-            description: p.description || "Great budget gadget.",
-            image: p.image || "https://via.placeholder.com/300",
+            title: (p.title || "").trim(),
+            description: (p.description || "Great budget gadget.").trim(),
+            image: (p.image || "").trim() || "https://via.placeholder.com/300x220?text=No+Image",
             price: parseFloat(String(p.price || "0").replace(/[^0-9.]/g, "")) || 0,
             affiliate_link: p.affiliate_link || "#",
-            category: (p.category || "Other").trim()
-        })).filter(p => p.title && p.title.trim() !== "");
+            category: "Headphones & Keyboards"   // Abhi sab ek category mein, baad mein change kar sakte ho
+        })).filter(p => p.title && p.title.length > 5);
 
         renderCategories();
         render(PRODUCTS);
     } catch(err){
         console.error(err);
-        productsDiv.innerHTML = `<div class="empty">❌ Error loading products.<br>Please refresh the page.</div>`;
+        productsDiv.innerHTML = `<div class="empty">Error loading products. Refresh karo.</div>`;
     }
 }
 
 function renderCategories(){
-    const cats = ["All", ...new Set(PRODUCTS.map(p => p.category))];
+    const cats = ["All"];
     let html = '';
     cats.forEach(cat => {
         html += `<button class="cat-btn ${cat === currentCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>`;
@@ -178,26 +178,22 @@ function renderCategories(){
 function filterCategory(cat){
     currentCategory = cat;
     renderCategories();
-    if(cat === "All"){
-        render(PRODUCTS);
-    } else {
-        const filtered = PRODUCTS.filter(p => p.category === cat);
-        render(filtered);
-    }
+    render(PRODUCTS);
 }
 
 function render(list){
     let html = "";
     list.forEach(p => {
-        const original = Math.round(p.price * 1.25);
+        const original = Math.round(p.price * 1.3);
         html += `
             <div class="card">
-                <img src="${p.image}" loading="lazy" alt="${p.title}">
+                <img src="${p.image}" loading="lazy" alt="${p.title}" 
+                     onerror="this.src='https://via.placeholder.com/300x220?text=No+Image'">
                 <div class="content">
                     <h3>${p.title}</h3>
-                    <p>${p.description}</p>
-                    <div class="price">₹${p.price}</div>
-                    <div class="original-price">₹${original}</div>
+                    <p>${p.description.substring(0, 120)}...</p>
+                    <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+                    <div class="original-price">₹${original.toLocaleString('en-IN')}</div>
                     <a class="btn" href="${p.affiliate_link}" target="_blank" rel="noopener">
                         🛒 Buy on Amazon
                     </a>
@@ -211,10 +207,7 @@ function render(list){
 
 document.getElementById("searchBox").addEventListener("input", function(){
     const val = this.value.toLowerCase();
-    const filtered = PRODUCTS.filter(p => 
-        (p.title || "").toLowerCase().includes(val) ||
-        (p.description || "").toLowerCase().includes(val)
-    );
+    const filtered = PRODUCTS.filter(p => p.title.toLowerCase().includes(val));
     render(filtered);
 });
 
