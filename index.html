@@ -975,7 +975,7 @@ async function loadProducts() {
       else if(title.includes("keyboard")) category = "keyboard";
       else if(title.includes("mouse") || title.includes("hub") || title.includes("cable") || title.includes("adapter")) category = "accessories";
 
-      const price = parseInt(product.price) || 999;
+      const price = Number(String(product.price).replace(/[^0-9]/g, '')) || 999;
       const discountPct = [15,20,25,30,35,40][i % 6];
       const originalPrice = Math.round(price / (1 - discountPct/100) / 10) * 10;
       const savings = originalPrice - price;
