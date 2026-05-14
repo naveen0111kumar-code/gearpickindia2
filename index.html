@@ -1,174 +1,601 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-// ==========================
-// 🔥 CLICK TRACKING (ADD ON TOP SAFE)
-// ==========================
-function trackClick(productName, link){
-  let clicks = JSON.parse(localStorage.getItem("clicks") || "[]");
+<title>GearPick India — Best Tech Gadgets & Accessories | Amazon Deals 2026</title>
 
-  clicks.push({
-    product: productName,
-    link: link,
-    time: new Date().toISOString()
-  });
+<meta name="description" content="India's best Amazon tech deals — updated daily. Top headphones, gaming keyboards, computer accessories & gadgets at lowest prices. Trusted affiliate store.">
+<meta name="keywords" content="best headphones India, gaming keyboard Amazon, tech gadgets under 1000, computer accessories India, Amazon deals 2026, affiliate tech store">
+<meta name="author" content="GearPick India">
 
-  localStorage.setItem("clicks", JSON.stringify(clicks));
+<!-- Open Graph for Pinterest & Social Sharing -->
+<meta property="og:title" content="GearPick India — Best Amazon Tech Deals 2026">
+<meta property="og:description" content="Top-rated headphones, keyboards & gadgets at Amazon's best prices. Updated daily!">
+<meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200">
+<meta property="og:url" content="https://naveen0111kumar-code.github.io/gearpickindia2/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://naveen0111kumar-code.github.io/gearpickindia2/">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #00d9ff;
+  --primary-dark: #00b8d9;
+  --amazon: #FF9900;
+  --amazon-dark: #e68900;
+  --bg: #050505;
+  --bg2: #0b0b0b;
+  --bg3: #0d0d0d;
+  --card: #111111;
+  --border: #1e1e1e;
+  --text: #ffffff;
+  --text-muted: #aaaaaa;
+  --green: #00e676;
+  --red: #ff3d3d;
 }
 
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 
-// ==========================
-// 📊 ADMIN PANEL (AUTO)
-// ==========================
-function showStats(){
-  let clicks = JSON.parse(localStorage.getItem("clicks") || "[]");
+body { background:var(--bg); color:var(--text); overflow-x:hidden; }
 
-  let el = document.getElementById("clickStats");
-  if(el){
-    el.innerText = "Total Clicks: " + clicks.length;
-  }
+/* ===== AFFILIATE DISCLOSURE ===== */
+.affiliate-bar {
+  background:#1a1200;
+  border-bottom:1px solid #3a2a00;
+  padding:10px 8%;
+  font-size:12px;
+  color:#cca300;
+  text-align:center;
+}
+.affiliate-bar a { color:#FFD700; }
+
+/* ===== HEADER ===== */
+header {
+  background:#000;
+  padding:18px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  border-bottom:1px solid var(--border);
+}
+.logo { font-size:26px; font-weight:800; color:var(--primary); letter-spacing:-0.5px; }
+.logo span { color:var(--amazon); }
+nav { display:flex; align-items:center; gap:25px; }
+nav a { color:#ccc; text-decoration:none; font-weight:500; font-size:15px; transition:0.2s; }
+nav a:hover { color:var(--primary); }
+.nav-cta {
+  background:var(--primary);
+  color:#000 !important;
+  padding:9px 20px;
+  border-radius:25px;
+  font-weight:700 !important;
+  font-size:14px !important;
+}
+.nav-cta:hover { background:white !important; color:#000 !important; }
+.menu-toggle { display:none; cursor:pointer; font-size:24px; color:white; }
+
+/* ===== HERO ===== */
+.hero {
+  height:70vh;
+  background:url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop') center/cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  position:relative;
+}
+.hero::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,50,60,0.7) 100%);
+}
+.hero-content { position:relative; z-index:2; max-width:700px; }
+.hero-badge {
+  display:inline-block;
+  background:rgba(0,217,255,0.15);
+  border:1px solid var(--primary);
+  color:var(--primary);
+  padding:6px 18px;
+  border-radius:25px;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:20px;
+  letter-spacing:1px;
+}
+.hero h1 { font-size:52px; font-weight:800; margin-bottom:15px; line-height:1.15; }
+.hero h1 span { color:var(--primary); }
+.hero p { font-size:18px; color:#ccc; margin-bottom:35px; }
+.hero-buttons { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; }
+.btn-primary {
+  background:var(--primary);
+  color:#000;
+  padding:15px 35px;
+  border-radius:30px;
+  font-weight:700;
+  text-decoration:none;
+  font-size:16px;
+  transition:0.3s;
+  display:inline-block;
+}
+.btn-primary:hover { background:white; transform:translateY(-2px); }
+.btn-secondary {
+  background:transparent;
+  color:white;
+  padding:14px 35px;
+  border-radius:30px;
+  font-weight:600;
+  text-decoration:none;
+  font-size:16px;
+  border:2px solid rgba(255,255,255,0.4);
+  transition:0.3s;
+  display:inline-block;
+}
+.btn-secondary:hover { border-color:var(--primary); color:var(--primary); }
+
+/* ===== TRUST BAR ===== */
+.trust-bar {
+  background:#070707;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:18px 8%;
+  display:flex;
+  justify-content:center;
+  gap:50px;
+  flex-wrap:wrap;
+}
+.trust-item { display:flex; align-items:center; gap:10px; font-size:14px; color:#aaa; }
+.trust-item span:first-child { font-size:20px; }
+.trust-item strong { color:white; }
+
+/* ===== SEARCH SECTION ===== */
+.search-section { padding:40px 8%; background:var(--bg2); }
+.search-bar { display:flex; gap:15px; flex-wrap:wrap; }
+.search-bar input,
+.search-bar select {
+  padding:14px 20px;
+  border:1px solid var(--border);
+  outline:none;
+  border-radius:12px;
+  background:#111;
+  color:white;
+  font-size:15px;
+  transition:0.3s;
+}
+.search-bar input { flex:1; min-width:250px; }
+.search-bar input:focus,
+.search-bar select:focus { border-color:var(--primary); }
+.search-bar select option { background:#111; }
+
+/* ===== SECTION TITLES ===== */
+.section-title { font-size:36px; font-weight:700; text-align:center; margin-bottom:15px; color:var(--primary); }
+.section-subtitle { text-align:center; color:var(--text-muted); margin-bottom:40px; font-size:16px; }
+
+/* ===== CATEGORIES ===== */
+.categories { padding:70px 8%; }
+.category-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+.category-card {
+  background:var(--card);
+  padding:35px 20px;
+  border-radius:20px;
+  text-align:center;
+  transition:0.3s;
+  border:1px solid var(--border);
+  cursor:pointer;
+  text-decoration:none;
+  color:white;
+  display:block;
+}
+.category-card:hover { transform:translateY(-8px); border-color:var(--primary); background:#0f1f22; }
+.cat-icon { font-size:40px; margin-bottom:12px; }
+.category-card h3 { font-size:17px; font-weight:600; margin-bottom:6px; }
+.category-card p { font-size:13px; color:var(--text-muted); }
+
+/* ===== HOT DEALS BANNER ===== */
+.hot-deals-banner {
+  background:linear-gradient(135deg, #050e10, #0b1a1f);
+  border:1px solid var(--primary);
+  margin:0 8% 60px;
+  border-radius:20px;
+  padding:30px 40px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.hot-deals-text h3 { font-size:24px; font-weight:700; color:var(--primary); margin-bottom:6px; }
+.hot-deals-text p { color:#ccc; font-size:15px; }
+.countdown { display:flex; gap:15px; }
+.count-item { text-align:center; background:rgba(0,217,255,0.08); border:1px solid rgba(0,217,255,0.3); padding:10px 18px; border-radius:12px; }
+.count-item .num { font-size:28px; font-weight:700; color:var(--primary); }
+.count-item .label { font-size:11px; color:#aaa; }
+
+/* ===== PRODUCTS ===== */
+.top-picks { padding:20px 8% 70px; }
+.products-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; }
+
+/* Skeleton Loading */
+.skeleton {
+  background:linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:20px;
+  height:500px;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+.product-card {
+  background:var(--card);
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  transition:0.3s;
+  position:relative;
+}
+.product-card:hover { transform:translateY(-8px); border-color:var(--primary); box-shadow:0 20px 40px rgba(0,217,255,0.08); }
+
+/* Badge */
+.product-badge {
+  position:absolute;
+  top:15px;
+  left:15px;
+  z-index:2;
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+.badge-deal { background:#ff3d3d; color:white; }
+.badge-best { background:var(--amazon); color:#000; }
+.badge-new { background:var(--primary); color:#000; }
+
+.discount-badge {
+  position:absolute;
+  top:15px;
+  right:15px;
+  z-index:2;
+  background:var(--red);
+  color:white;
+  padding:5px 10px;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:700;
 }
 
-function clearStats(){
-  localStorage.removeItem("clicks");
-  showStats();
+.product-image {
+  height:260px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  overflow:hidden;
 }
+.product-image img { max-width:100%; max-height:100%; object-fit:contain; transition:0.4s; }
+.product-card:hover .product-image img { transform:scale(1.05); }
 
-setInterval(showStats, 2000);
+.product-content { padding:22px; }
+.product-content h2 { font-size:17px; font-weight:600; margin-bottom:10px; line-height:1.4; }
 
+.stars { color:#FFD700; font-size:16px; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.stars span { color:var(--text-muted); font-size:13px; }
 
-// ==========================
-// 🔓 F9 PANEL TOGGLE
-// ==========================
-document.addEventListener("keydown", function(e){
-  if(e.key === "F9"){
-    const panel = document.getElementById("adminPanel");
-    if(panel){
-      panel.style.display = (panel.style.display === "block") ? "none" : "block";
-    }
-  }
-});
+.product-content p { color:#999; font-size:13px; line-height:1.7; margin-bottom:15px; }
 
+.price-row { display:flex; align-items:center; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+.price { font-size:28px; font-weight:700; color:var(--primary); }
+.price-original { font-size:16px; color:#666; text-decoration:line-through; }
+.savings { font-size:13px; color:var(--green); font-weight:600; }
 
-// ==========================
-// 🛒 FIXED GOOGLE SHEET LOAD (YOUR SAME SYSTEM)
-// ==========================
-async function loadProducts(){
+.stock-row { font-size:12px; color:var(--text-muted); margin-bottom:15px; display:flex; align-items:center; gap:6px; }
+.stock-dot { width:8px; height:8px; border-radius:50%; background:var(--green); }
 
-  const sheetURL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
-
-  try {
-
-    const res = await fetch(sheetURL);
-    if(!res.ok) throw new Error("Sheet error");
-
-    const products = await res.json();
-
-    const box = document.getElementById("products");
-    box.innerHTML = "";
-
-    let html = "";
-
-    products.forEach((p,i)=>{
-
-      let cat = "gadgets";
-      const t = (p.title || "").toLowerCase();
-
-      if(t.includes("headphone")) cat="headphone";
-      else if(t.includes("keyboard")) cat="keyboard";
-      else if(t.includes("mouse") || t.includes("cable") || t.includes("adapter")) cat="accessories";
-
-      const price = Number(p.price || 0);
-      const original = Math.round(price * 1.3);
-      const save = original - price;
-
-      html += `
-        <div class="product-card" data-category="${cat}">
-
-          <div class="product-image">
-            <img src="${p.image}" alt="${p.title}">
-          </div>
-
-          <div class="product-content">
-            <h2>${p.title}</h2>
-            <p>${p.description || ""}</p>
-
-            <div class="price">₹${price}</div>
-            <div class="price-original">₹${original}</div>
-            <div class="savings">Save ₹${save}</div>
-
-            <a href="${p.affiliate_link}" target="_blank"
-               rel="noopener sponsored"
-               onclick="trackClick('${p.title}','${p.affiliate_link}')"
-               class="buy-btn">
-               🛒 Buy on Amazon
-            </a>
-
-          </div>
-        </div>
-      `;
-    });
-
-    box.innerHTML = html;
-
-    setupSearch();
-    setupFilter();
-
-  } catch(e){
-    document.getElementById("products").innerHTML =
-      "<p style='color:red'>Failed to load products</p>";
-  }
+.buy-btn {
+  display:block;
+  width:100%;
+  text-align:center;
+  padding:14px;
+  background:var(--primary);
+  color:#000;
+  font-weight:700;
+  text-decoration:none;
+  border-radius:12px;
+  transition:0.3s;
+  font-size:15px;
+  letter-spacing:0.3px;
 }
+.buy-btn:hover { background:white; transform:scale(1.02); }
 
-loadProducts();
 
 
-// ==========================
-// 🔍 SEARCH + FILTER (FIXED MERGED)
-// ==========================
-function applyFilters(){
-
-  const search = document.getElementById("searchInput")?.value.toLowerCase() || "";
-  const cat = document.getElementById("categoryFilter")?.value || "all";
-
-  document.querySelectorAll(".product-card").forEach(card=>{
-
-    const text = card.innerText.toLowerCase();
-
-    const ok1 = text.includes(search);
-    const ok2 = cat === "all" || card.dataset.category === cat;
-
-    card.style.display = (ok1 && ok2) ? "block" : "none";
-  });
+/* ===== REDDIT SECTION ===== */
+.reddit-section { padding:70px 8%; }
+.reddit-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+.review-box {
+  background:var(--card);
+  padding:25px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  border-left:3px solid var(--primary);
 }
+.review-box .reddit-icon { font-size:24px; margin-bottom:12px; }
+.review-box h3 { color:var(--primary); font-size:16px; margin-bottom:12px; }
+.review-box blockquote { color:#bbb; font-size:14px; line-height:1.8; font-style:italic; }
+.review-box .author { color:#666; font-size:12px; margin-top:12px; }
+.review-box .upvotes { color:var(--amazon); font-size:12px; font-weight:600; }
 
-function setupSearch(){
-  document.getElementById("searchInput")?.addEventListener("keyup", applyFilters);
+/* ===== EMAIL SIGNUP ===== */
+.email-section {
+  padding:70px 8%;
+  background:linear-gradient(135deg, #070e10, #0b1820);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  text-align:center;
 }
-
-function setupFilter(){
-  document.getElementById("categoryFilter")?.addEventListener("change", applyFilters);
+.email-section h2 { font-size:36px; font-weight:700; margin-bottom:12px; }
+.email-section h2 span { color:var(--primary); }
+.email-section p { color:#aaa; font-size:16px; margin-bottom:35px; }
+.email-form { display:flex; max-width:500px; margin:0 auto; gap:0; border-radius:50px; overflow:hidden; border:2px solid var(--primary); background:#0d1a1d; }
+.email-form input {
+  flex:1;
+  padding:16px 25px;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:white;
+  font-size:15px;
 }
+.email-form button {
+  background:var(--primary);
+  color:#000;
+  border:none;
+  padding:16px 30px;
+  font-weight:700;
+  cursor:pointer;
+  font-size:15px;
+  transition:0.3s;
+  white-space:nowrap;
+}
+.email-form button:hover { background:white; }
+.email-note { font-size:13px; color:#555; margin-top:15px; }
+.email-success { display:none; color:var(--green); font-size:16px; font-weight:600; margin-top:15px; }
 
+/* ===== BLOG SECTION ===== */
+.blog-section { padding:70px 8%; }
+.blog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; }
+.blog-card {
+  background:var(--card);
+  border-radius:20px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:0.3s;
+}
+.blog-card:hover { border-color:var(--primary); transform:translateY(-5px); }
+.blog-thumb { height:180px; background:#111; display:flex; align-items:center; justify-content:center; font-size:60px; background-size:cover; background-position:center; }
+.blog-content { padding:22px; }
+.blog-tag { font-size:11px; font-weight:600; color:var(--primary); letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; }
+.blog-card h3 { font-size:18px; font-weight:600; margin-bottom:10px; line-height:1.4; }
+.blog-card p { color:#888; font-size:14px; line-height:1.7; margin-bottom:18px; }
+.blog-meta { display:flex; justify-content:space-between; align-items:center; }
+.blog-read { color:var(--primary); font-size:14px; font-weight:600; text-decoration:none; }
+.blog-date { color:#555; font-size:12px; }
 
-// ==========================
-// ⏱ COUNTDOWN (SAFE)
-// ==========================
-setInterval(()=>{
+/* ===== FOOTER ===== */
+footer {
+  background:#000;
+  padding:50px 8% 30px;
+  border-top:1px solid var(--border);
+}
+.footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px; margin-bottom:40px; }
+.footer-brand .logo { font-size:22px; margin-bottom:12px; }
+.footer-brand p { color:#666; font-size:14px; line-height:1.8; }
+.footer-col h4 { font-size:16px; font-weight:600; margin-bottom:18px; color:white; }
+.footer-col a { display:block; color:#666; text-decoration:none; font-size:14px; margin-bottom:10px; transition:0.2s; }
+.footer-col a:hover { color:var(--primary); }
+.footer-bottom {
+  border-top:1px solid var(--border);
+  padding-top:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+  font-size:13px;
+  color:#555;
+}
+.footer-bottom a { color:#555; text-decoration:none; }
+.footer-bottom a:hover { color:var(--primary); }
 
-  const now = new Date();
-  const end = new Date();
-  end.setHours(23,59,59,0);
+/* ===== PRIVACY MODAL ===== */
+.modal-overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-overlay.active { display:flex; }
+.modal-box {
+  background:#111;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:40px;
+  max-width:650px;
+  width:100%;
+  max-height:80vh;
+  overflow-y:auto;
+  position:relative;
+}
+.modal-box h2 { color:var(--primary); margin-bottom:20px; }
+.modal-box p, .modal-box li { color:#aaa; font-size:14px; line-height:1.8; margin-bottom:12px; }
+.modal-box h3 { color:white; margin:20px 0 10px; font-size:16px; }
+.modal-close {
+  position:absolute;
+  top:20px; right:20px;
+  font-size:24px;
+  cursor:pointer;
+  color:#666;
+  background:none;
+  border:none;
+  color:#888;
+}
+.modal-close:hover { color:white; }
 
-  const diff = end - now;
+/* ===== CURRENCY BAR ===== */
+.currency-bar {
+  background:#050d10;
+  border-bottom:1px solid #0a2530;
+  padding:8px 8%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  font-size:13px;
+}
+.currency-detected { color:#aaa; display:flex; align-items:center; gap:8px; }
+.currency-detected strong { color:var(--primary); }
+.currency-switcher { display:flex; align-items:center; gap:10px; }
+.currency-switcher label { color:#666; font-size:12px; }
+.currency-switcher select {
+  background:#0d1a1d;
+  border:1px solid var(--border);
+  color:white;
+  padding:5px 10px;
+  border-radius:8px;
+  font-size:13px;
+  cursor:pointer;
+  outline:none;
+}
+.currency-switcher select:focus { border-color:var(--primary); }
+.currency-loading { color:#555; font-size:12px; display:flex; align-items:center; gap:6px; }
+.spin { display:inline-block; animation:spin 1s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
 
-  const h = Math.floor(diff/3600000);
-  const m = Math.floor(diff%3600000/60000);
-  const s = Math.floor(diff%60000/1000);
+/* ===== BACK TO TOP ===== */
+.back-top {
+  position:fixed;
+  bottom:30px; right:30px;
+  background:var(--primary);
+  color:#000;
+  width:45px; height:45px;
+  border-radius:50%;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  cursor:pointer;
+  z-index:999;
+  text-decoration:none;
+  font-weight:700;
+  transition:0.3s;
+}
+.back-top:hover { background:white; }
+.back-top.visible { display:flex; }
 
-  if(document.getElementById("h")) document.getElementById("h").innerText = String(h).padStart(2,"0");
-  if(document.getElementById("m")) document.getElementById("m").innerText = String(m).padStart(2,"0");
-  if(document.getElementById("s")) document.getElementById("s").innerText = String(s).padStart(2,"0");
+/* ===== NO PRODUCTS ===== */
+.no-products { text-align:center; padding:60px; color:#666; font-size:16px; grid-column:1/-1; }
 
-},1000);
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  header { padding:15px 5%; }
+  nav { display:none; }
+  nav.open { display:flex; flex-direction:column; position:fixed; top:65px; left:0; right:0; background:#000; padding:20px; border-bottom:1px solid var(--border); z-index:999; }
+  .menu-toggle { display:block; }
+  .hero h1 { font-size:32px; }
+  .hero p { font-size:15px; }
+  .section-title { font-size:28px; }
+  .hot-deals-banner { margin:0 5% 40px; padding:25px; }
+  .categories, .top-picks, .youtube-section, .reddit-section, .blog-section, .email-section { padding:50px 5%; }
+  footer { padding:40px 5% 25px; }
+  .footer-bottom { flex-direction:column; text-align:center; }
+  .trust-bar { gap:20px; padding:15px 5%; }
+  .products-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
 
-</script>
+<!-- ===== AFFILIATE DISCLOSURE BAR ===== -->
+<div class="affiliate-bar">
+  ⚠️ <strong>Affiliate Disclosure:</strong> As an Amazon Associate, GearPick India earns from qualifying purchases. Prices may vary. <a href="#" onclick="openModal('affiliateModal')">Learn more</a>
+</div>
+
+<!-- ===== CURRENCY BAR ===== -->
+<div class="currency-bar">
+  <div class="currency-detected" id="currencyDetected">
+    <span class="spin">⟳</span>
+    <span class="currency-loading">Detecting your location...</span>
+  </div>
+  <div class="currency-switcher">
+    <label>Change Currency:</label>
+    <select id="currencySelect" onchange="manualCurrencyChange(this.value)">
+      <option value="INR">🇮🇳 INR — Indian Rupee</option>
+      <option value="USD">🇺🇸 USD — US Dollar</option>
+      <option value="GBP">🇬🇧 GBP — British Pound</option>
+      <option value="EUR">🇪🇺 EUR — Euro</option>
+      <option value="AED">🇦🇪 AED — UAE Dirham</option>
+      <option value="SAR">🇸🇦 SAR — Saudi Riyal</option>
+      <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
+      <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+      <option value="SGD">🇸🇬 SGD — Singapore Dollar</option>
+      <option value="MYR">🇲🇾 MYR — Malaysian Ringgit</option>
+      <option value="JPY">🇯🇵 JPY — Japanese Yen</option>
+      <option value="NZD">🇳🇿 NZD — New Zealand Dollar</option>
+    </select>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="logo">GearPick India</div>
+  <nav id="mainNav">
+    <a href="#">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#products-section">Products</a>
+    <a href="#blogs">Blog</a>
+    <a href="#contact">Contact</a>
+    <a href="#products-section" class="nav-cta">🔥 Shop Deals</a>
+  </nav>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🇮🇳 INDIA'S TRUSTED TECH AFFILIATE STORE</div>
+    <h1>Best <span>Amazon Tech</span> Deals — Updated Daily</h1>
+    <p>Top-rated headphones, keyboards & gadgets at India's lowest prices</p>
+    <div class="hero-buttons">
+      <a href="#products-section" class="btn-primary">🛒 Shop Today's Deals</a>
+      <a href="#categories" class="btn-secondary">Browse Categories</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar">
+  <div class="trust-item"><span>✅</span><span><strong>Amazon Verified</strong> Products</span></div>
+  <div class="trust-item"><span>🔄</span><span><strong>Daily Updated</strong> Deals</span></div>
+  <div class="trust-item"><span>⭐</span><span><strong>4.5+ Rated</strong> Items Only</span></div>
+  <div class="trust-item"><span>🚚</span><span><strong>Free Shipping</strong> Available</span></div>
+</div>
+
+<!-- ===== SEARCH SECTION ===== -->
+<section class="search-section">
+  <div class="search-bar">
+    <input type="text" id="
