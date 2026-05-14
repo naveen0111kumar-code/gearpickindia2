@@ -977,7 +977,7 @@ async function loadProducts() {
 
       function formatCurrency(amount, info) {   return new Intl.NumberFormat(info.locale, {     style: 'currency',     currency: currentCode,     maximumFractionDigits: 0   }).format(amount); }
       const discountPct = [15,20,25,30,35,40][i % 6];
-      const originalPrice = Math.round(price / (1 - discountPct/100) / 10) * 10;
+      const price = Number(product.price || 0);
       const savings = originalPrice - price;
 
       const badgeIdx = i % 3;
