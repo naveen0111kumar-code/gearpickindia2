@@ -1,233 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Best Budget Tech Gadgets & Accessories on Amazon India 2026 | Honest Reviews & Latest Deals"/>
+    <title>GearPick India — Best Amazon Tech Deals 2026</title>
 
-<title>GearPick India — Amazon Tech Deals 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root{
+            --primary:#00d9ff;
+            --bg:#050505;
+            --card:#111;
+            --text:#fff;
+            --muted:#aaa;
+            --amazon:#FF9900;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+        body{background:var(--bg);color:var(--text);line-height:1.6;}
 
-<style>
-:root{
-  --primary:#00d9ff;
-  --bg:#050505;
-  --card:#111;
-  --text:#fff;
-  --muted:#aaa;
-  --amazon:#FF9900;
-}
+        header{
+            display:flex; justify-content:space-between; align-items:center;
+            padding:15px 8%; background:#000; position:sticky; top:0; z-index:1000;
+            border-bottom:1px solid #222;
+        }
+        .logo{color:var(--primary); font-size:24px; font-weight:800;}
+        nav a{color:#ccc; margin-left:20px; text-decoration:none;}
+        nav a:hover{color:var(--primary);}
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
-body{background:var(--bg);color:var(--text)}
+        .hero{
+            padding:80px 8% 60px;
+            text-align:center;
+            background:linear-gradient(135deg,#000,#06181c);
+        }
+        .hero h1{font-size:42px; margin-bottom:10px;}
+        .hero span{color:var(--primary);}
+        .hero p{font-size:20px; color:var(--muted); max-width:700px; margin:0 auto 30px;}
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  padding:15px 8%;
-  background:#000;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  border-bottom:1px solid #222;
-}
-.logo{color:var(--primary);font-size:22px;font-weight:800}
-nav a{color:#ccc;margin-left:15px;text-decoration:none}
-nav a:hover{color:var(--primary)}
+        .trust-bar{
+            background:#111; padding:12px; text-align:center; font-size:14px; color:#0f0;
+        }
 
-/* HERO */
-.hero{
-  padding:60px 8%;
-  text-align:center;
-  background:linear-gradient(135deg,#000,#06181c);
-}
-.hero h1{font-size:40px}
-.hero span{color:var(--primary)}
+        .categories{
+            padding:20px 8%; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+        }
+        .cat-btn{
+            padding:10px 20px; background:#222; border:none; border-radius:30px;
+            color:#fff; cursor:pointer; font-size:14px;
+        }
+        .cat-btn.active{background:var(--primary); color:#000; font-weight:600;}
 
-/* SEARCH */
-.search{
-  padding:20px 8%;
-}
-.search input{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #222;
-  background:#111;
-  color:#fff;
-  outline:none;
-}
+        .search{
+            padding:20px 8%; max-width:700px; margin:0 auto;
+        }
+        .search input{
+            width:100%; padding:15px; border-radius:12px; border:1px solid #222;
+            background:#111; color:#fff; font-size:16px; outline:none;
+        }
 
-/* PRODUCTS */
-.products-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  padding:20px 8%;
-}
+        .products-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:24px;
+            padding:20px 8%;
+        }
 
-.card{
-  background:var(--card);
-  border:1px solid #222;
-  border-radius:15px;
-  overflow:hidden;
-  transition:0.3s;
-}
-.card:hover{transform:translateY(-5px)}
+        .card{
+            background:var(--card); border:1px solid #222; border-radius:16px;
+            overflow:hidden; transition:0.3s;
+        }
+        .card:hover{transform:translateY(-8px); box-shadow:0 10px 20px rgba(0,217,255,0.1);}
 
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:contain;
-  background:#fff;
-}
+        .card img{
+            width:100%; height:220px; object-fit:contain; background:#fff; padding:10px;
+        }
 
-.content{padding:15px}
+        .content{padding:16px;}
+        .content h3{font-size:18px; margin-bottom:8px; line-height:1.3;}
+        .content p{color:var(--muted); font-size:14px; margin-bottom:12px;}
 
-.price{
-  color:var(--primary);
-  font-size:20px;
-  font-weight:700;
-}
+        .price{
+            color:var(--primary); font-size:22px; font-weight:700;
+        }
+        .original-price{
+            text-decoration:line-through; color:#777; font-size:14px;
+        }
 
-.small{
-  color:#777;
-  font-size:12px;
-}
+        .btn{
+            display:block; margin-top:15px; padding:14px;
+            background:var(--amazon); color:#000; text-align:center;
+            text-decoration:none; font-weight:700; border-radius:8px; font-size:16px;
+        }
+        .btn:hover{background:#ffad33;}
 
-.btn{
-  display:block;
-  margin-top:10px;
-  padding:10px;
-  background:var(--primary);
-  color:#000;
-  text-align:center;
-  text-decoration:none;
-  font-weight:700;
-  border-radius:8px;
-}
+        .disclosure{
+            padding:30px 8%; background:#111; text-align:center; font-size:13px; color:#888;
+            margin-top:40px;
+        }
 
-/* EMPTY */
-.empty{
-  text-align:center;
-  padding:40px;
-  color:#888;
-}
-</style>
+        .empty{text-align:center; padding:60px 20px; color:#888; font-size:18px;}
+    </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">GearPick India</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#products">Products</a>
-  </nav>
+    <div class="logo">GearPick India</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#">Blog</a>
+    </nav>
 </header>
 
 <section class="hero">
-  <h1>Best <span>Amazon Tech Deals</span></h1>
-  <p>Updated daily gadgets & accessories</p>
+    <h1>Best <span>Budget Tech Gadgets</span> 2026</h1>
+    <p>Amazon India पर सबसे सही deals | Honest Reviews & Updated Prices</p>
+    <div class="trust-bar">✅ Updated Daily • ⭐ Real User Reviews • 💰 Best Prices</div>
+</section>
+
+<section class="categories" id="categories">
+    <!-- JS se dynamically add honge -->
 </section>
 
 <section class="search">
-  <input id="searchBox" placeholder="Search products...">
+    <input id="searchBox" placeholder="Search earbuds, charger, mouse, keyboard...">
 </section>
 
 <section class="products-grid" id="products">
-  <div class="empty">Loading products...</div>
+    <div class="empty">Loading products...</div>
 </section>
 
-<script>
+<div class="disclosure">
+    <strong>Affiliate Disclosure:</strong> GearPick India Amazon Associate है। 
+    इस वेबसाइट पर दिए गए लिंक्स से खरीदारी करने पर हमें छोटा commission मिल सकता है, 
+    लेकिन आपको कोई extra खर्च नहीं करना पड़ेगा। हम सिर्फ वही प्रोडक्ट्स recommend करते हैं जो हमें अच्छे लगते हैं।
+</div>
 
+<script>
+// Sheet URL (tumhara same rakho)
 const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
 
 let PRODUCTS = [];
+let currentCategory = "All";
 
-/* 🔥 FULL FIXED LOADER */
 async function loadProducts(){
-  try{
-    const res = await fetch(SHEET_URL);
-    const data = await res.json();
+    try{
+        const res = await fetch(SHEET_URL);
+        const data = await res.json();
 
-    if(!data || !Array.isArray(data) || data.length === 0){
-      document.getElementById("products").innerHTML =
-        "<div class='empty'>No products found</div>";
-      return;
+        PRODUCTS = data.map(p => ({
+            title: p.title || "No Title",
+            description: p.description || "Great budget gadget with good performance.",
+            image: p.image || "https://via.placeholder.com/300",
+            price: parseFloat(String(p.price || "0").replace(/[^0-9.]/g, "")) || 0,
+            affiliate_link: p.affiliate_link || "#",
+            category: p.category || "Other"
+        }));
+
+        renderCategories();
+        render(PRODUCTS);
+    } catch(err){
+        document.getElementById("products").innerHTML = `<div class="empty">⚠️ Unable to load products. Please try again.</div>`;
     }
+}
 
-    PRODUCTS = data.map(p => {
+function renderCategories(){
+    const cats = ["All", ...new Set(PRODUCTS.map(p => p.category))];
+    let html = '';
+    cats.forEach(cat => {
+        html += `<button class="cat-btn ${cat === currentCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>`;
+    });
+    document.getElementById("categories").innerHTML = html;
+}
 
-      // 🔥 PRICE FIX (MAIN ISSUE FIXED)
-      let cleanPrice = String(p.price || "0")
-        .replace(/[^0-9.]/g, "");
+function filterCategory(cat){
+    currentCategory = cat;
+    renderCategories();
+    
+    if(cat === "All"){
+        render(PRODUCTS);
+    } else {
+        const filtered = PRODUCTS.filter(p => p.category === cat);
+        render(filtered);
+    }
+}
 
-      return {
-        title: p.title || "No Title",
-        description: p.description || "",
-        image: p.image || "https://via.placeholder.com/300",
-        price: parseFloat(cleanPrice) || 0,
-        affiliate_link: p.affiliate_link || "#"
-      };
+function render(list){
+    let html = "";
+    list.forEach(p => {
+        const original = Math.round(p.price * 1.25);
+        html += `
+            <div class="card">
+                <img src="${p.image}" loading="lazy" alt="${p.title}">
+                <div class="content">
+                    <h3>${p.title}</h3>
+                    <p>${p.description}</p>
+                    <div class="price">₹${p.price}</div>
+                    <div class="original-price">₹${original}</div>
+                    <a class="btn" href="${p.affiliate_link}" target="_blank" rel="noopener">
+                        🛒 Buy on Amazon
+                    </a>
+                </div>
+            </div>
+        `;
     });
 
-    render(PRODUCTS);
-
-  }catch(err){
-    console.log(err);
-    document.getElementById("products").innerHTML =
-      "<div class='empty'>⚠️ Failed to load products</div>";
-  }
+    document.getElementById("products").innerHTML = html || `<div class="empty">No products found in this category</div>`;
 }
 
-/* 🔥 SAFE RENDER */
-function render(list){
-  let html = "";
-
-  list.forEach(p => {
-
-    const price = p.price;
-    const original = price ? Math.round(price * 1.3) : 0;
-    const save = price ? original - price : 0;
-
-    html += `
-      <div class="card">
-        <img src="${p.image}" loading="lazy">
-
-        <div class="content">
-          <h3>${p.title}</h3>
-          <p>${p.description}</p>
-
-          <div class="price">₹${price}</div>
-          <div class="small">Save ₹${save}</div>
-
-          <a class="btn" href="${p.affiliate_link}" target="_blank">
-            🛒 Buy on Amazon
-          </a>
-        </div>
-      </div>
-    `;
-  });
-
-  document.getElementById("products").innerHTML = html;
-}
-
-/* SEARCH */
+// Search
 document.getElementById("searchBox").addEventListener("input", function(){
-  const val = this.value.toLowerCase();
-
-  const filtered = PRODUCTS.filter(p =>
-    (p.title || "").toLowerCase().includes(val)
-  );
-
-  render(filtered);
+    const val = this.value.toLowerCase();
+    const filtered = PRODUCTS.filter(p => 
+        (p.title || "").toLowerCase().includes(val) ||
+        (p.description || "").toLowerCase().includes(val)
+    );
+    render(filtered);
 });
 
-/* INIT */
 window.addEventListener("DOMContentLoaded", loadProducts);
-
 </script>
 
 </body>
