@@ -4,102 +4,228 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>GearPick India — Best Tech Deals 2026</title>
+<title>GearPick India — Amazon Tech Deals 2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== KEEP YOUR FULL CSS SAME (UNCHANGED) ===== */
-/* (Tumhara CSS same hai, koi change nahi kiya) */
-body { font-family: Arial; background:#050505; color:#fff; margin:0; }
-.products-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; padding:20px; }
-.product-card { background:#111; padding:15px; border-radius:12px; }
-.product-image img { width:100%; height:200px; object-fit:contain; background:#fff; }
-.buy-btn { display:block; text-align:center; background:#00d9ff; padding:10px; margin-top:10px; color:#000; text-decoration:none; font-weight:bold; border-radius:8px; }
-.skeleton { height:300px; background:#222; border-radius:10px; }
-.no-products { padding:40px; text-align:center; color:#999; }
+:root{
+  --primary:#00d9ff;
+  --bg:#050505;
+  --card:#111;
+  --text:#fff;
+  --muted:#aaa;
+  --amazon:#FF9900;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{background:var(--bg);color:var(--text)}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 8%;
+  background:#000;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  border-bottom:1px solid #222;
+}
+.logo{color:var(--primary);font-size:22px;font-weight:800}
+nav a{color:#ccc;margin-left:15px;text-decoration:none}
+nav a:hover{color:var(--primary)}
+
+/* HERO */
+.hero{
+  padding:60px 8%;
+  text-align:center;
+  background:linear-gradient(135deg,#000,#06181c);
+}
+.hero h1{font-size:40px}
+.hero span{color:var(--primary)}
+
+/* SEARCH */
+.search{
+  padding:20px 8%;
+}
+.search input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #222;
+  background:#111;
+  color:#fff;
+  outline:none;
+}
+
+/* PRODUCTS */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  padding:20px 8%;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid #222;
+  border-radius:15px;
+  overflow:hidden;
+  transition:0.3s;
+}
+.card:hover{transform:translateY(-5px)}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:contain;
+  background:#fff;
+}
+
+.content{padding:15px}
+
+.price{
+  color:var(--primary);
+  font-size:20px;
+  font-weight:700;
+}
+
+.small{
+  color:#777;
+  font-size:12px;
+}
+
+.btn{
+  display:block;
+  margin-top:10px;
+  padding:10px;
+  background:var(--primary);
+  color:#000;
+  text-align:center;
+  text-decoration:none;
+  font-weight:700;
+  border-radius:8px;
+}
+
+/* EMPTY */
+.empty{
+  text-align:center;
+  padding:40px;
+  color:#888;
+}
 </style>
 </head>
 
 <body>
 
-<h2 style="text-align:center; padding:20px;">🛒 Top Products</h2>
+<header>
+  <div class="logo">GearPick India</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#products">Products</a>
+  </nav>
+</header>
 
-<div class="products-grid" id="products">
-  <div class="skeleton"></div>
-  <div class="skeleton"></div>
-  <div class="skeleton"></div>
-</div>
+<section class="hero">
+  <h1>Best <span>Amazon Tech Deals</span></h1>
+  <p>Updated daily gadgets & accessories</p>
+</section>
+
+<section class="search">
+  <input id="searchBox" placeholder="Search products...">
+</section>
+
+<section class="products-grid" id="products">
+  <div class="empty">Loading products...</div>
+</section>
 
 <script>
 
-const sheetURL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
+const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
 
-/* ===== LOAD PRODUCTS FIXED ===== */
-async function loadProducts() {
-  try {
-    const res = await fetch(sheetURL);
-    const products = await res.json();
+let PRODUCTS = [];
 
-    const container = document.getElementById("products");
+/* 🔥 FULL FIXED LOADER */
+async function loadProducts(){
+  try{
+    const res = await fetch(SHEET_URL);
+    const data = await res.json();
 
-    if (!products || products.length === 0) {
-      container.innerHTML = `<div class="no-products">No products found</div>`;
+    if(!data || !Array.isArray(data) || data.length === 0){
+      document.getElementById("products").innerHTML =
+        "<div class='empty'>No products found</div>";
       return;
     }
 
-    let html = "";
+    PRODUCTS = data.map(p => {
 
-    products.forEach((p, i) => {
+      // 🔥 PRICE FIX (MAIN ISSUE FIXED)
+      let cleanPrice = String(p.price || "0")
+        .replace(/[^0-9.]/g, "");
 
-      const title = (p.title || "No Title").toString();
-      const desc = (p.description || "").toString();
-      const image = p.image || "https://via.placeholder.com/300";
-      const link = p.affiliate_link || "#";
-
-      /* ===== FIX PRICE ISSUE ===== */
-      const price = Number(p.price);
-      const safePrice = isNaN(price) ? 0 : price;
-
-      const original = Math.round(safePrice * 1.3);
-      const save = original - safePrice;
-
-      /* ===== CATEGORY FIX ===== */
-      let cat = "gadgets";
-      const t = title.toLowerCase();
-
-      if (t.includes("headphone") || t.includes("ear")) cat = "headphone";
-      else if (t.includes("keyboard")) cat = "keyboard";
-      else if (t.includes("mouse") || t.includes("cable")) cat = "accessories";
-
-      html += `
-      <div class="product-card" data-category="${cat}">
-        <div class="product-image">
-          <img src="${image}" alt="${title}" loading="lazy">
-        </div>
-
-        <h3>${title}</h3>
-        <p>${desc}</p>
-
-        <div style="margin:10px 0;">
-          <b>₹${safePrice}</b>
-          <del style="color:#777;">₹${original}</del>
-          <span style="color:#0f0;"> Save ₹${save}</span>
-        </div>
-
-        <a class="buy-btn" href="${link}" target="_blank">Buy on Amazon</a>
-      </div>
-      `;
+      return {
+        title: p.title || "No Title",
+        description: p.description || "",
+        image: p.image || "https://via.placeholder.com/300",
+        price: parseFloat(cleanPrice) || 0,
+        affiliate_link: p.affiliate_link || "#"
+      };
     });
 
-    container.innerHTML = html;
+    render(PRODUCTS);
 
-  } catch (err) {
-    console.error(err);
+  }catch(err){
+    console.log(err);
     document.getElementById("products").innerHTML =
-      `<div class="no-products">⚠️ Failed to load products (Sheet error)</div>`;
+      "<div class='empty'>⚠️ Failed to load products</div>";
   }
 }
 
-/* ===== FIX: RUN AFTER PAGE LOAD ===== */
+/* 🔥 SAFE RENDER */
+function render(list){
+  let html = "";
+
+  list.forEach(p => {
+
+    const price = p.price;
+    const original = price ? Math.round(price * 1.3) : 0;
+    const save = price ? original - price : 0;
+
+    html += `
+      <div class="card">
+        <img src="${p.image}" loading="lazy">
+
+        <div class="content">
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+
+          <div class="price">₹${price}</div>
+          <div class="small">Save ₹${save}</div>
+
+          <a class="btn" href="${p.affiliate_link}" target="_blank">
+            🛒 Buy on Amazon
+          </a>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("products").innerHTML = html;
+}
+
+/* SEARCH */
+document.getElementById("searchBox").addEventListener("input", function(){
+  const val = this.value.toLowerCase();
+
+  const filtered = PRODUCTS.filter(p =>
+    (p.title || "").toLowerCase().includes(val)
+  );
+
+  render(filtered);
+});
+
+/* INIT */
 window.addEventListener("DOMContentLoaded", loadProducts);
 
 </script>
