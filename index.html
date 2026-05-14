@@ -132,11 +132,11 @@
 <div class="disclosure">
     <strong>Affiliate Disclosure:</strong> GearPick India Amazon Associate है। 
     इस वेबसाइट पर दिए गए लिंक्स से खरीदारी करने पर हमें छोटा commission मिल सकता है, 
-    लेकिन आपको कोई extra खर्च नहीं करना पड़ेगा। हम सिर्फ वही प्रोडक्ट्स recommend करते हैं जो हमें अच्छे लगते हैं।
+    लेकिन आपको कोई extra खर्च नहीं करना पड़ेगा।
 </div>
 
 <script>
-const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";  
+const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/Sheet1";  
 
 let PRODUCTS = [];
 let currentCategory = "All";
@@ -155,14 +155,14 @@ async function loadProducts(){
             image: p.image || "https://via.placeholder.com/300",
             price: parseFloat(String(p.price || "0").replace(/[^0-9.]/g, "")) || 0,
             affiliate_link: p.affiliate_link || "#",
-            category: p.category || "Other"
-        })).filter(p => p.title && p.title.trim() !== ""); // Empty rows filter
+            category: (p.category || "Other").trim()
+        })).filter(p => p.title && p.title.trim() !== "");
 
         renderCategories();
         render(PRODUCTS);
     } catch(err){
         console.error(err);
-        productsDiv.innerHTML = `<div class="empty">❌ Products load nahi ho rahe.<br>Check internet or Sheet sharing.</div>`;
+        productsDiv.innerHTML = `<div class="empty">❌ Error loading products.<br>Please refresh the page.</div>`;
     }
 }
 
@@ -209,7 +209,6 @@ function render(list){
     document.getElementById("products").innerHTML = html || `<div class="empty">No products found</div>`;
 }
 
-// Search Functionality
 document.getElementById("searchBox").addEventListener("input", function(){
     const val = this.value.toLowerCase();
     const filtered = PRODUCTS.filter(p => 
