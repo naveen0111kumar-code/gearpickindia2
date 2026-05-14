@@ -110,7 +110,6 @@
     <nav>
         <a href="#">Home</a>
         <a href="#products">Products</a>
-        <a href="#">Blog</a>
     </nav>
 </header>
 
@@ -120,9 +119,7 @@
     <div class="trust-bar">✅ Updated Daily • ⭐ Real User Reviews • 💰 Best Prices</div>
 </section>
 
-<section class="categories" id="categories">
-    <!-- JS se dynamically add honge -->
-</section>
+<section class="categories" id="categories"></section>
 
 <section class="search">
     <input id="searchBox" placeholder="Search earbuds, charger, mouse, keyboard...">
@@ -139,8 +136,7 @@
 </div>
 
 <script>
-// Sheet URL (tumhara same rakho)
-const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";
+const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/sheet1";  
 
 let PRODUCTS = [];
 let currentCategory = "All";
@@ -153,75 +149,4 @@ async function loadProducts(){
         PRODUCTS = data.map(p => ({
             title: p.title || "No Title",
             description: p.description || "Great budget gadget with good performance.",
-            image: p.image || "https://via.placeholder.com/300",
-            price: parseFloat(String(p.price || "0").replace(/[^0-9.]/g, "")) || 0,
-            affiliate_link: p.affiliate_link || "#",
-            category: p.category || "Other"
-        }));
-
-        renderCategories();
-        render(PRODUCTS);
-    } catch(err){
-        document.getElementById("products").innerHTML = `<div class="empty">⚠️ Unable to load products. Please try again.</div>`;
-    }
-}
-
-function renderCategories(){
-    const cats = ["All", ...new Set(PRODUCTS.map(p => p.category))];
-    let html = '';
-    cats.forEach(cat => {
-        html += `<button class="cat-btn ${cat === currentCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>`;
-    });
-    document.getElementById("categories").innerHTML = html;
-}
-
-function filterCategory(cat){
-    currentCategory = cat;
-    renderCategories();
-    
-    if(cat === "All"){
-        render(PRODUCTS);
-    } else {
-        const filtered = PRODUCTS.filter(p => p.category === cat);
-        render(filtered);
-    }
-}
-
-function render(list){
-    let html = "";
-    list.forEach(p => {
-        const original = Math.round(p.price * 1.25);
-        html += `
-            <div class="card">
-                <img src="${p.image}" loading="lazy" alt="${p.title}">
-                <div class="content">
-                    <h3>${p.title}</h3>
-                    <p>${p.description}</p>
-                    <div class="price">₹${p.price}</div>
-                    <div class="original-price">₹${original}</div>
-                    <a class="btn" href="${p.affiliate_link}" target="_blank" rel="noopener">
-                        🛒 Buy on Amazon
-                    </a>
-                </div>
-            </div>
-        `;
-    });
-
-    document.getElementById("products").innerHTML = html || `<div class="empty">No products found in this category</div>`;
-}
-
-// Search
-document.getElementById("searchBox").addEventListener("input", function(){
-    const val = this.value.toLowerCase();
-    const filtered = PRODUCTS.filter(p => 
-        (p.title || "").toLowerCase().includes(val) ||
-        (p.description || "").toLowerCase().includes(val)
-    );
-    render(filtered);
-});
-
-window.addEventListener("DOMContentLoaded", loadProducts);
-</script>
-
-</body>
-</html>
+            image: p.image
