@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="GearPick India - Best Tech Gadgets Reviews & Buying Guides"/>
+    <meta name="description" content="GearPick India - Best Tech Gadgets, Headphones, Keyboards & Mice"/>
     <title>GearPick India • Premium Tech Picks 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
@@ -24,8 +24,8 @@
         .hero p { font-size: 22px; color: #ccc; }
 
         .controls { padding: 20px 8%; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-        .search-bar { padding: 14px 20px; width: 100%; max-width: 420px; background: #111; border: 1px solid #333; border-radius: 50px; color: white; }
-        .filter-btn { padding: 10px 22px; background: #111; border: 1px solid #333; border-radius: 50px; cursor: pointer; }
+        .search-bar { padding: 14px 20px; width: 100%; max-width: 420px; background: #111; border: 1px solid #333; border-radius: 50px; color: white; font-size: 16px; }
+        .filter-btn { padding: 10px 22px; background: #111; border: 1px solid #333; border-radius: 50px; cursor: pointer; transition: 0.3s; }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: black; font-weight: 600; }
 
         .products { padding: 20px 8% 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
@@ -36,13 +36,10 @@
         .price { font-size: 26px; font-weight: 700; color: var(--primary); }
         .btn { margin-top: 16px; width: 100%; padding: 16px; background: linear-gradient(90deg, #00f5ff, #ff00ff); color: #000; font-weight: 700; border: none; border-radius: 12px; }
 
-        /* Blog Section */
         .blog { padding: 60px 8%; background: rgba(0,0,0,0.4); }
         .blog h2 { text-align:center; margin-bottom:40px; font-size:36px; }
         .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 25px; }
-        .blog-card {
-            background: #111; padding: 25px; border-radius: 20px; transition: 0.3s;
-        }
+        .blog-card { background: #111; padding: 25px; border-radius: 20px; transition: 0.3s; }
         .blog-card:hover { transform: translateY(-8px); }
     </style>
 </head>
@@ -67,7 +64,6 @@
 
 <section class="products" id="products"></section>
 
-<!-- Blog Section - All 10 Articles -->
 <section class="blog">
     <h2>Latest Reviews & Buying Guides</h2>
     <div class="blog-grid" id="blog-grid"></div>
@@ -77,11 +73,70 @@
 const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/Sheet1";
 let PRODUCTS = [];
 
-// Products Load (same as before)
-async function loadProducts() { /* ... same code as previous ... */ }
+async function loadProducts() {
+    try {
+        const res = await fetch(SHEET_URL);
+        const data = await res.json();
 
-// Blog Articles Data
-const blogArticles = [
-    {title: "Marshall Monitor III ANC Headphones Review 2026", desc: "70 Hours battery, Active Noise Cancellation aur premium sound ka complete test.", link: "#"},
-    {title: "Marshall Major V Wireless Headphones Review", desc: "100+ Hours battery wala on-ear beast – Travel ke liye best option?", link: "#"},
-    {title: "Logitech G915 X LIGHTSPEED Keyboard Full Review", desc: "Low-profile wireless keyboard jo gaming aur office dono ke liye perfect hai.", link
+        PRODUCTS = data.map(p => ({
+            title: (p.title || "").trim(),
+            description: (p.description || "").trim(),
+            image: (p.image || "").trim(),
+            price: parseFloat(String(p.price || "0").replace(/[^0-9.]/g, "")) || 0,
+            affiliate_link: p.affiliate_link || "#",
+            category: (p.category || "Other").trim()
+        })).filter(p => p.title.length > 5);
+
+        renderProducts(PRODUCTS);
+    } catch(e) {
+        document.getElementById("products").innerHTML = `<div style="text-align:center; color:red;">Products load nahi ho rahe. Refresh karo.</div>`;
+    }
+}
+
+function renderProducts(list) {
+    let html = "";
+    list.forEach(p => {
+        const original = Math.round(p.price * 1.35);
+        html += `
+            <div class="card">
+                <img src="${p.image}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/666?text=No+Image'">
+                <div class="card-content">
+                    <small style="color:#00f5ff;">${p.category}</small>
+                    <h3>${p.title}</h3>
+                    <p style="color:#aaa; font-size:14.5px; margin:12px 0 15px;">${p.description.substring(0, 110)}...</p>
+                    <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+                    <button class="btn" onclick="window.open('${p.affiliate_link}', '_blank')">Buy on Amazon →</button>
+                </div>
+            </div>
+        `;
+    });
+    document.getElementById("products").innerHTML = html || "<p style='text-align:center;'>No products found</p>";
+}
+
+function filterCategory(cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    if (cat === "All") renderProducts(PRODUCTS);
+    else renderProducts(PRODUCTS.filter(p => p.category.toLowerCase().includes(cat.toLowerCase())));
+}
+
+document.getElementById("searchBar").addEventListener("input", (e) => {
+    const term = e.target.value.toLowerCase();
+    const filtered = PRODUCTS.filter(p => p.title.toLowerCase().includes(term) || p.description.toLowerCase().includes(term));
+    renderProducts(filtered);
+});
+
+window.onload = () => {
+    loadProducts();
+    // Blog Articles
+    const blogHTML = `
+        <div class="blog-card"><h3>Marshall Monitor III ANC Review</h3><p>70 Hours battery + Active Noise Cancellation</p><a href="#" style="color:var(--primary)">Read Full →</a></div>
+        <div class="blog-card"><h3>Marshall Major V Review</h3><p>100+ Hours Battery King</p><a href="#" style="color:var(--primary)">Read Full →</a></div>
+        <div class="blog-card"><h3>Logitech G915 vs Razer Huntsman</h3><p>Gaming Keyboard Comparison</p><a href="#" style="color:var(--primary)">Read Full →</a></div>
+    `;
+    document.getElementById("blog-grid").innerHTML = blogHTML;
+};
+</script>
+
+</body>
+</html>
