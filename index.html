@@ -1,211 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="referrer" content="no-referrer"/>
-  <title>GearPick India — Best Tech Gadgets & Accessories on Amazon 2026</title>
-  <meta name="description" content="Best Budget Tech Gadgets & Accessories on Amazon India 2026. Honest Reviews, Latest Deals on Headphones, Keyboards, Gaming Mice & more."/>
-  <meta name="keywords" content="best tech gadgets India, amazon affiliate, headphones India, gaming keyboard, wireless mouse India, GearPick India"/>
-  <link rel="canonical" href="https://naveen0111kumar-code.github.io/gearpickindia2/"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c26;
-      --border: rgba(255,255,255,0.07); --accent: #00d4ff;
-      --accent2: #ff6b00; --gold: #f5c842; --text: #e8e8f0;
-      --muted: #7878a0; --radius: 16px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; }
-    a { text-decoration: none; }
-    nav {
-      background: rgba(10,10,15,0.97); backdrop-filter: blur(12px);
-      position: sticky; top: 0; z-index: 100;
-      padding: 1rem 2rem; border-bottom: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--accent); }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-    .disclosure { background: rgba(0,212,255,0.06); border-left: 3px solid var(--accent); padding: 0.5rem 1.5rem; font-size: 0.78rem; color: var(--muted); text-align: center; font-family: 'Syne', sans-serif; }
-    .hero { position: relative; overflow: hidden; padding: 6rem 1.5rem 5rem; text-align: center; animation: fadeUp 0.6s ease both; }
-    .hero-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(0,212,255,0.12) 0%, transparent 65%); pointer-events: none; }
-    .hero-tag { display: inline-block; background: linear-gradient(135deg, var(--accent2), #ff9a00); color: #fff; font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; padding: 4px 16px; border-radius: 20px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.25rem; }
-    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 1rem; }
-    .hero h1 span { color: var(--accent); }
-    .hero p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
-    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-primary { background: linear-gradient(135deg, #ff9a00, var(--accent2)); color: #fff; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 0.85rem 2rem; border-radius: 10px; transition: opacity 0.2s, transform 0.2s; }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-    .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 0.85rem 2rem; border-radius: 10px; transition: border-color 0.2s, color 0.2s; }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-    .badges { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 0 1.5rem 4rem; }
-    .badge { display: flex; align-items: center; gap: 0.5rem; font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--muted); }
-    section { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 5rem; }
-    .section-head { text-align: center; margin-bottom: 2.5rem; }
-    .section-head h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
-    .section-head h2 span { color: var(--accent); }
-    .section-head p { color: var(--muted); font-size: 0.95rem; }
-    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-    .cat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.25s, border-color 0.25s; }
-    .cat-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.3); }
-    .cat-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-    .cat-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
-    .cat-card p { font-size: 0.8rem; color: var(--muted); }
-    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
-    .prod-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; }
-    .prod-card:hover { transform: translateY(-5px); border-color: rgba(0,212,255,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
-    .prod-img { background: #fff; height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .prod-img img { width: 100%; height: 100%; object-fit: contain; padding: 0.75rem; transition: transform 0.4s; }
-    .prod-card:hover .prod-img img { transform: scale(1.07); }
-    .prod-body { padding: 1.1rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
-    .prod-cat { font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
-    .prod-title { font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; color: #fff; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .prod-footer { margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .prod-price { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--gold); }
-    .prod-btn { background: linear-gradient(135deg, #ff9a00, var(--accent2)); color: #fff; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.75rem; padding: 0.5rem 1.1rem; border-radius: 8px; transition: opacity 0.2s; }
-    .prod-btn:hover { opacity: 0.88; }
-    .view-all-wrap { text-align: center; margin-top: 1rem; }
-    .view-all-btn { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid var(--accent); color: var(--accent); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 0.85rem 2.5rem; border-radius: 10px; transition: background 0.2s, color 0.2s; }
-    .view-all-btn:hover { background: var(--accent); color: #000; }
-    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
-    .blog-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: transform 0.25s, border-color 0.25s; }
-    .blog-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.25); }
-    .blog-tag { font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 700; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
-    .blog-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 0.6rem; }
-    .blog-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-    .blog-link { font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--accent); }
-    .blog-link:hover { text-decoration: underline; }
-    footer { background: var(--surface); border-top: 1px solid var(--border); text-align: center; padding: 2.5rem 1rem; font-family: 'Syne', sans-serif; font-size: 0.78rem; color: var(--muted); }
-    .footer-logo { font-size: 1.2rem; font-weight: 800; color: var(--accent); margin-bottom: 0.5rem; }
-    .disc { font-style: italic; margin-top: 0.6rem; font-size: 0.73rem; }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    @media(max-width:480px) { nav { padding: 1rem; } .nav-links { gap: 1rem; } .hero { padding: 4rem 1rem 3rem; } }
-  </style>
-</head>
-<body>
+import { createFileRoute } from "@tanstack/react-router";
+import { products } from "@/data/products";
 
-<nav>
-  <div class="nav-logo">⚡ GearPick India</div>
-  <div class="nav-links">
-    <a href="#categories">Categories</a>
-    <a href="top-picks.html">Top Picks</a>
-    <a href="#blogs">Blogs</a>
-  </div>
-</nav>
+export const Route = createFileRoute("/")({
+  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Top Tech Picks — Curated Headphones, Mice & Keyboards" },
+      {
+        name: "description",
+        content:
+          "Hand-picked headphones, gaming mice, and keyboards with detailed specs, prices, and direct buy links.",
+      },
+    ],
+  }),
+});
 
-<div class="disclosure">⚠️ As an Amazon Associate, GearPick India earns from qualifying purchases — at no extra cost to you.</div>
+function formatPrice(p: string) {
+  const cleaned = p.replace(/[^\d]/g, "");
+  if (!cleaned) return p;
+  return "₹" + Number(cleaned).toLocaleString("en-IN");
+}
 
-<div class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-tag">🇮🇳 Made for India</div>
-  <h1>Best <span>Tech Gadgets</span><br/>& Accessories</h1>
-  <p>Amazon India पर सबसे सही deals — Headphones, Keyboards, Gaming Mice और बहुत कुछ। Honest reviews, real prices.</p>
-  <div class="hero-btns">
-    <a href="top-picks.html" class="btn-primary">🔥 View Top Picks</a>
-    <a href="#blogs" class="btn-secondary">📖 Read Reviews</a>
-  </div>
-</div>
+function Index() {
+  return (
+    <div className="relative min-h-screen overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-gradient-brand opacity-30 blur-3xl animate-blob" />
+      <div aria-hidden className="pointer-events-none absolute top-1/3 -right-40 h-[28rem] w-[28rem] rounded-full bg-gradient-brand opacity-20 blur-3xl animate-blob" style={{ animationDelay: "-6s" }} />
 
-<div class="badges">
-  <div class="badge"><span>✅</span> Updated Daily</div>
-  <div class="badge"><span>⭐</span> Honest Reviews</div>
-  <div class="badge"><span>💰</span> Best Amazon Prices</div>
-  <div class="badge"><span>🔒</span> Safe Affiliate Links</div>
-</div>
-
-<section id="categories">
-  <div class="section-head">
-    <h2>Shop by <span>Category</span></h2>
-    <p>Find the best gear in your favourite category</p>
-  </div>
-  <div class="cat-grid">
-    <a href="top-picks.html"><div class="cat-card"><div class="cat-icon">🎧</div><h3>Headphones</h3><p>Wireless, ANC & Premium</p></div></a>
-    <a href="top-picks.html"><div class="cat-card"><div class="cat-icon">⌨️</div><h3>Gaming Keyboards</h3><p>Mechanical & Wireless</p></div></a>
-    <a href="top-picks.html"><div class="cat-card"><div class="cat-icon">🖱️</div><h3>Productivity Mice</h3><p>Ergonomic & Multi-device</p></div></a>
-    <a href="top-picks.html"><div class="cat-card"><div class="cat-icon">🎮</div><h3>Gaming Mice</h3><p>Lightweight & High DPI</p></div></a>
-  </div>
-</section>
-
-<section id="products-section">
-  <div class="section-head">
-    <h2>🔥 <span>Featured</span> Products</h2>
-    <p>Handpicked top sellers on Amazon India</p>
-  </div>
-  <div class="prod-grid">
-    <div class="prod-card">
-      <div class="prod-img"><img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/81M31hLf2NL._SL1500_.jpg" alt="Marshall Monitor III" loading="lazy"/></div>
-      <div class="prod-body">
-        <div class="prod-cat">🎧 Headphones</div>
-        <div class="prod-title">Marshall Monitor III Active Noise Canceling Bluetooth Headphones</div>
-        <div class="prod-footer">
-          <div class="prod-price">₹26,999</div>
-          <a href="https://amzn.to/3PEKi02" class="prod-btn" target="_blank" rel="nofollow noopener">Buy Now</a>
+      <nav className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-lg bg-gradient-brand shadow-glow" />
+          <span className="text-lg font-bold tracking-tight text-foreground">
+            TopTech<span className="text-gradient">Picks</span>
+          </span>
         </div>
-      </div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/61nD0vAkYmL._SL1500_.jpg" alt="Logitech G915 X" loading="lazy"/></div>
-      <div class="prod-body">
-        <div class="prod-cat">⌨️ Keyboard</div>
-        <div class="prod-title">Logitech G915 X LIGHTSPEED Low-Profile Wireless Gaming Keyboard</div>
-        <div class="prod-footer">
-          <div class="prod-price">₹19,495</div>
-          <a href="https://amzn.to/4tDqSGV" class="prod-btn" target="_blank" rel="nofollow noopener">Buy Now</a>
+        <a href="#products" className="hidden rounded-full border border-border bg-card/50 px-4 py-2 text-sm font-medium text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-card sm:inline-flex">
+          Browse picks ↓
+        </a>
+      </nav>
+
+      <header className="relative z-10 mx-auto max-w-6xl px-6 pb-16 pt-10 text-center sm:pt-16">
+        <span className="inline-flex animate-fade-up items-center gap-2 rounded-full border border-border bg-card/40 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur">
+          <span className="h-1.5 w-1.5 rounded-full bg-gradient-brand" />
+          Curated · Updated regularly
+        </span>
+        <h1 className="mt-6 animate-fade-up text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl" style={{ animationDelay: "0.1s" }}>
+          Gear that <span className="text-gradient">actually</span>
+          <br className="hidden sm:block" /> deserves your desk.
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl animate-fade-up text-base text-muted-foreground sm:text-lg" style={{ animationDelay: "0.2s" }}>
+          Hand-picked headphones, mice, and keyboards — every one tested, reviewed, and ready to buy.
+        </p>
+        <div className="mt-8 flex animate-fade-up flex-wrap items-center justify-center gap-3" style={{ animationDelay: "0.3s" }}>
+          <a href="#products" className="inline-flex items-center justify-center rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-background shadow-glow transition hover:scale-105">
+            Explore picks
+          </a>
+          <span className="text-sm text-muted-foreground">{products.length} products · live</span>
         </div>
-      </div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/618IJzC-fFL._SL1500_.jpg" alt="Logitech MX Master 3S" loading="lazy"/></div>
-      <div class="prod-body">
-        <div class="prod-cat">🖱️ Mouse</div>
-        <div class="prod-title">Logitech MX Master 3S Wireless Performance Mouse — Graphite</div>
-        <div class="prod-footer">
-          <div class="prod-price">₹7,495</div>
-          <a href="https://amzn.to/4wt2Hxt" class="prod-btn" target="_blank" rel="nofollow noopener">Buy Now</a>
+      </header>
+
+      <main id="products" className="relative z-10 mx-auto max-w-6xl scroll-mt-20 px-6 pb-20">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((p, i) => (
+            <article key={p.link} className="group relative flex animate-fade-up flex-col overflow-hidden rounded-2xl border border-border bg-card/60 shadow-card backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:shadow-glow" style={{ animationDelay: `${0.05 * i}s` }}>
+              <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-muted/40 to-muted/10">
+                <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" />
+                <div className="absolute right-3 top-3 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold text-foreground backdrop-blur">
+                  {formatPrice(p.price)}
+                </div>
+              </div>
+              <div className="relative flex flex-1 flex-col gap-3 p-5">
+                <h2 className="line-clamp-2 text-base font-semibold leading-snug text-card-foreground">{p.title}</h2>
+                <p className="line-clamp-3 text-sm text-muted-foreground">{p.description}</p>
+                <a href={p.link} target="_blank" rel="noopener noreferrer sponsored" className="mt-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-brand px-4 py-2.5 text-sm font-semibold text-background shadow-sm transition hover:shadow-glow">
+                  Buy now <span aria-hidden>→</span>
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="view-all-wrap">
-    <a href="top-picks.html" class="view-all-btn">View All 10 Products →</a>
-  </div>
-</section>
+      </main>
 
-<section id="blogs">
-  <div class="section-head">
-    <h2>Latest <span>Reviews</span></h2>
-    <p>In-depth guides to help you buy smarter</p>
-  </div>
-  <div class="blog-grid">
-    <div class="blog-card">
-      <div class="blog-tag">🖱️ Mouse Review</div>
-      <h3>Logitech MX Master 3S Review 2026 — Still the Best?</h3>
-      <p>Silent clicks, MagSpeed scrolling, and 70-day battery. Is it worth ₹7,495 in 2026? Full honest review.</p>
-      <a href="mx-master-3s-review.html" class="blog-link">Read Full Review →</a>
+      <footer className="relative z-10 border-t border-border">
+        <div className="mx-auto max-w-6xl px-6 py-8 text-center text-xs text-muted-foreground">
+          Some links are affiliate links — we may earn a commission at no extra cost to you. © {new Date().getFullYear()} TopTechPicks.
+        </div>
+      </footer>
     </div>
-    <div class="blog-card">
-      <div class="blog-tag">🎮 Gaming</div>
-      <h3>Best Gaming Mouse Under ₹25,000 in India 2026</h3>
-      <p>GravaStar Mercury X Pro vs Logitech G Pro X vs Razer Viper V3 Pro — which one should you buy?</p>
-      <a href="#" class="blog-link">Coming Soon →</a>
-    </div>
-    <div class="blog-card">
-      <div class="blog-tag">⌨️ Keyboard</div>
-      <h3>Best Wireless Gaming Keyboards in India 2026</h3>
-      <p>Logitech G915 X vs Razer Huntsman V3 Pro. Full comparison of specs, feel, and value for money.</p>
-      <a href="#" class="blog-link">Coming Soon →</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">⚡ GearPick India</div>
-  <div>© 2026 GearPick India — Tech Gadgets & Accessories</div>
-  <div class="disc">As an Amazon Associate I earn from qualifying purchases. Prices are approximate and subject to change on Amazon.</div>
-</footer>
-
-</body>
-</html>
+  );
+}
+        
