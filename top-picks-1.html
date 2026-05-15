@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top Picks – Best Tech Gadgets & Accessories | GearPick India</title>
+  <meta name="description" content="Top picked tech gadgets, headphones, keyboards and gaming mice on Amazon India. Handpicked by GearPick India."/>
+  <meta name="referrer" content="no-referrer"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface2: #1c1c26;
+      --border: rgba(255,255,255,0.07);
+      --accent: #00d4ff;
+      --accent2: #ff6b00;
+      --gold: #f5c842;
+      --text: #e8e8f0;
+      --muted: #7878a0;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      background: rgba(10,10,15,0.96);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.2rem;
+      color: var(--accent); text-decoration: none;
+    }
+    .nav-links a {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--muted); text-decoration: none;
+      margin-left: 1.5rem; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* DISCLOSURE */
+    .disclosure {
+      background: rgba(0,212,255,0.06);
+      border-left: 3px solid var(--accent);
+      padding: 0.55rem 1.5rem;
+      font-size: 0.78rem; color: var(--muted);
+      text-align: center; font-family: 'Syne', sans-serif;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(0,212,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent2), #ff9a00);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      padding: 4px 14px; border-radius: 20px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; color: #fff; line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto;
+    }
+
+    /* FILTER TABS */
+    .filters {
+      display: flex; gap: 0.5rem;
+      justify-content: center; flex-wrap: wrap;
+      padding: 0 1.5rem 2rem;
+    }
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 0.5rem 1.2rem; border-radius: 30px;
+      cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      animation: fadeUp 0.5s ease both;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,212,255,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,212,255,0.05);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      background: #fff;
+      height: 200px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 1rem;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .card-img-wrap img { transform: scale(1.06); }
+
+    .card-category {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--bg);
+      color: var(--accent);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.65rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      border: 1px solid rgba(0,212,255,0.3);
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      display: flex; flex-direction: column;
+      flex: 1; gap: 0.6rem;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.92rem; font-weight: 700;
+      color: #fff; line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-desc {
+      font-size: 0.8rem; color: var(--muted);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    }
+
+    .card-price {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem; font-weight: 800;
+      color: var(--gold);
+    }
+    .card-price .rupee { font-size: 0.85rem; }
+
+    .buy-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: linear-gradient(135deg, #ff9a00, var(--accent2));
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      padding: 0.55rem 1.2rem; border-radius: 8px;
+      text-decoration: none; white-space: nowrap;
+      transition: opacity 0.2s, transform 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .buy-btn:hover { opacity: 0.88; transform: scale(1.03); }
+
+    /* HIDDEN */
+    .card.hidden { display: none; }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 3rem;
+      padding: 1.5rem 1.5rem 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem; font-weight: 800; color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem; color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem; color: var(--muted);
+    }
+    footer span { display: block; margin-top: 0.4rem; font-style: italic; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.20s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+    .card:nth-child(6) { animation-delay: 0.30s; }
+    .card:nth-child(7) { animation-delay: 0.35s; }
+    .card:nth-child(8) { animation-delay: 0.40s; }
+    .card:nth-child(9) { animation-delay: 0.45s; }
+    .card:nth-child(10){ animation-delay: 0.50s; }
+
+    @media(max-width: 480px) {
+      .grid { grid-template-columns: 1fr; }
+      .stats-bar { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://naveen0111kumar-code.github.io/gearpickindia2/">⚡ GearPick India</a>
+  <div class="nav-links">
+    <a href="https://naveen0111kumar-code.github.io/gearpickindia2/#categories">Categories</a>
+    <a href="https://naveen0111kumar-code.github.io/gearpickindia2/#blogs">Blogs</a>
+  </div>
+</nav>
+
+<!-- DISCLOSURE -->
+<div class="disclosure">
+  ⚠️ As an Amazon Associate, GearPick India earns from qualifying purchases. All links below are affiliate links at no extra cost to you.
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🔥 Handpicked For You</div>
+  <h1>Our <span>Top Picks</span><br/>in Tech & Gadgets</h1>
+  <p>The best headphones, keyboards & mice on Amazon India — curated by GearPick.</p>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">10</div><div class="stat-label">Products</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">Categories</div></div>
+  <div class="stat"><div class="stat-num">₹5K+</div><div class="stat-label">Starting Price</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Amazon Verified</div></div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <button class="filter-btn active" onclick="filter('all', this)">All Products</button>
+  <button class="filter-btn" onclick="filter('headphones', this)">🎧 Headphones</button>
+  <button class="filter-btn" onclick="filter('keyboard', this)">⌨️ Keyboards</button>
+  <button class="filter-btn" onclick="filter('mouse', this)">🖱️ Mice</button>
+  <button class="filter-btn" onclick="filter('gaming', this)">🎮 Gaming</button>
+</div>
+
+<!-- PRODUCT GRID -->
+<div class="grid" id="grid">
+
+  <!-- 1. Marshall Monitor III -->
+  <div class="card" data-cat="headphones">
+    <div class="card-img-wrap">
+      <span class="card-category">🎧 Headphones</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/81M31hLf2NL._SL1500_.jpg" alt="Marshall Monitor III ANC Headphones" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Marshall Monitor III Active Noise Canceling Over Ear Bluetooth Headphones</div>
+      <div class="card-desc">70 hours of wireless playtime with Active Noise Cancellation. 100 hours without. Explosive Marshall signature sound with thunderous bass and crisp highs.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>26,999</div>
+        <a href="https://amzn.to/3PEKi02" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Marshall Major V -->
+  <div class="card" data-cat="headphones">
+    <div class="card-img-wrap">
+      <span class="card-category">🎧 Headphones</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71zqqGdkY+L._SL1500_.jpg" alt="Marshall Major V Wireless Headphones" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Marshall Major V Wireless On Ear Headphones, Cream</div>
+      <div class="card-desc">Marshall signature sound — thunderous bass, smooth mids and crisp treble. Packed with 100+ hours of wireless playtime. Your perfect travel companion.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>13,499</div>
+        <a href="https://amzn.to/4dDnOpo" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Logitech G915 X -->
+  <div class="card" data-cat="keyboard">
+    <div class="card-img-wrap">
+      <span class="card-category">⌨️ Keyboard</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/61nD0vAkYmL._SL1500_.jpg" alt="Logitech G915 X LIGHTSPEED Keyboard" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Logitech G915 X LIGHTSPEED Low-Profile Wireless Gaming Keyboard — GL Brown</div>
+      <div class="card-desc">Tri-mode connectivity: LIGHTSPEED 2.4GHz wireless, Bluetooth, or USB-C wired. Sleek aluminum build with double-shot PBT keycaps and full RGB backlighting.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>19,495</div>
+        <a href="https://amzn.to/4tDqSGV" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Razer Huntsman V3 Pro -->
+  <div class="card" data-cat="keyboard gaming">
+    <div class="card-img-wrap">
+      <span class="card-category">⌨️ Keyboard</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71W475+zCYL._SX679_.jpg" alt="Razer Huntsman V3 Pro" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Razer Huntsman V3 Pro 8KHz Analog Optical Esports Keyboard</div>
+      <div class="card-desc">The world's first analog optical esports keyboard with 8KHz polling rate. Feel every keypress with precision analog actuation — built for competitive gaming at the highest level.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>28,389</div>
+        <a href="https://amzn.to/3Pkw6co" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Logitech MX Master 4 -->
+  <div class="card" data-cat="mouse">
+    <div class="card-img-wrap">
+      <span class="card-category">🖱️ Mouse</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/61D7dUYR3DL._SL1500_.jpg" alt="Logitech MX Master 4" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Logitech MX Master 4 Ergonomic Wireless Mouse — Pale Grey</div>
+      <div class="card-desc">Precision you can feel with the Haptic Sense Panel. Customisable feedback on shortcuts and notifications. MagSpeed scroll wheel: 1,000 lines per second, near silence.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>11,995</div>
+        <a href="https://amzn.to/4ucFbDi" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Logitech MX Master 3S -->
+  <div class="card" data-cat="mouse">
+    <div class="card-img-wrap">
+      <span class="card-category">🖱️ Mouse</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/618IJzC-fFL._SL1500_.jpg" alt="Logitech MX Master 3S" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Logitech MX Master 3S Wireless Performance Mouse — Graphite</div>
+      <div class="card-desc">8K DPI sensor tracks on any surface including glass. 90% quieter clicks. MagSpeed scrolling is 90% faster and ultra precise. Up to 70-day battery life with USB-C fast charge.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>7,495</div>
+        <a href="https://amzn.to/4wt2Hxt" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Logitech Lift -->
+  <div class="card" data-cat="mouse">
+    <div class="card-img-wrap">
+      <span class="card-category">🖱️ Mouse</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/61OkuiCWbDL._SL1500_.jpg" alt="Logitech Lift Vertical Ergonomic Mouse" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Logitech Lift Vertical Ergonomic Mouse — Wireless, Graphite</div>
+      <div class="card-desc">Designed to reduce wrist strain with a natural vertical grip angle. Quiet clicks, Bluetooth or Logi Bolt wireless. Compatible with Windows, macOS, and iPadOS.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>5,245</div>
+        <a href="https://amzn.to/42z6EmE" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. GravaStar Mercury X Pro -->
+  <div class="card" data-cat="mouse gaming">
+    <div class="card-img-wrap">
+      <span class="card-category">🎮 Gaming Mouse</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/61AsNPxU58L._SL1500_.jpg" alt="GravaStar Mercury X Pro" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">GravaStar Mercury X Pro Wireless Gaming Mouse — 32,000 DPI, 8KHz, 49g</div>
+      <div class="card-desc">Hollow magnesium alloy frame at just 49g. PAW 3950 sensor with 32K DPI and 8,000Hz polling rate. Tri-mode: Bluetooth, 2.4G, and wired. RGB lighting included.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>22,918</div>
+        <a href="https://amzn.to/4uTScSt" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Logitech G Pro X Superlight 2 -->
+  <div class="card" data-cat="mouse gaming">
+    <div class="card-img-wrap">
+      <span class="card-category">🎮 Gaming Mouse</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71lf56SvTsL._SL1500_.jpg" alt="Logitech G Pro X Superlight 2" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Logitech G PRO X Superlight 2 LIGHTSPEED Wireless Gaming Mouse — Black</div>
+      <div class="card-desc">HERO 2 sensor: 32K DPI, 500+ IPS tracking, zero smoothing. LIGHTFORCE hybrid optical-mechanical switches. 95-hour battery, USB-C charging, 60g. Built with esports pros.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>12,495</div>
+        <a href="https://amzn.to/49LL9mo" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. Razer Viper V3 Pro Faker Edition -->
+  <div class="card" data-cat="mouse gaming">
+    <div class="card-img-wrap">
+      <span class="card-category">🎮 Gaming Mouse</span>
+      <img referrerpolicy="no-referrer" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71pHfo4qfML._SL1500_.jpg" alt="Razer Viper V3 Pro Faker Edition" loading="lazy"/>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Razer Viper V3 Pro Faker Edition — 54g, 8KHz HyperPolling, 35K DPI</div>
+      <div class="card-desc">Designed with world-class esports pros. Focus Pro 35K DPI Gen-2 sensor. Razer 8KHz HyperPolling for ultra-low latency. 95-hour battery. Gen-3 optical switches at 0.2ms actuation.</div>
+      <div class="card-footer">
+        <div class="card-price"><span class="rupee">₹</span>15,995</div>
+        <a href="https://amzn.to/4uTXXQ5" class="buy-btn" target="_blank" rel="nofollow noopener">🛒 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 GearPick India — Tech Gadgets & Accessories
+  <span>As an Amazon Associate I earn from qualifying purchases. Prices shown are approximate and may vary on Amazon.</span>
+</footer>
+
+<script>
+  function filter(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      if (cat === 'all') {
+        card.classList.remove('hidden');
+      } else {
+        const cats = card.dataset.cat || '';
+        cats.includes(cat) ? card.classList.remove('hidden') : card.classList.add('hidden');
+      }
+    });
+  }
+</script>
+</body>
+</html>
