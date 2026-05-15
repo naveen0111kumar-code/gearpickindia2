@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Best Budget Tech Gadgets | Handpicked & Honest Reviews"/>
-    <title>TopTechPicks India • Premium Tech Gear</title>
+    <meta name="description" content="GearPick India - Best Budget Gaming Gear, Headphones & Keyboards on Amazon"/>
+    <title>GearPick India • Best Tech Picks 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --primary: #00f5ff;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #00f5ff; }
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a, #1a0033);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%);
             color: #fff;
             min-height: 100vh;
         }
@@ -23,34 +21,40 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ffffff20;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .logo {
             font-size: 28px;
-            font-weight: 700;
+            font-weight: 800;
             background: linear-gradient(90deg, #00f5ff, #ff00ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .hero {
             text-align: center;
-            padding: 100px 8% 60px;
+            padding: 100px 8% 80px;
         }
         .hero h1 {
-            font-size: 52px;
+            font-size: 48px;
             line-height: 1.1;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
-        .hero span { color: var(--primary); }
         .hero p {
             font-size: 22px;
-            color: #aaa;
+            color: #ccc;
             max-width: 700px;
             margin: 0 auto;
         }
-
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            font-size: 18px;
+        }
         .products {
-            padding: 40px 8%;
+            padding: 20px 8% 80px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 28px;
@@ -59,12 +63,12 @@
             background: #111;
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s;
-            border: 1px solid #ffffff15;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.08);
         }
         .card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 245, 255, 0.2);
         }
         .card img {
             width: 100%;
@@ -75,6 +79,15 @@
         }
         .card-content {
             padding: 20px;
+        }
+        .category {
+            font-size: 13px;
+            background: rgba(0,245,255,0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
         }
         .price {
             font-size: 26px;
@@ -97,38 +110,31 @@
             border-radius: 12px;
             font-size: 17px;
             cursor: pointer;
-            transition: 0.3s;
         }
-        .btn:hover {
-            transform: scale(1.03);
-        }
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #ff00ff;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
+        .btn:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">TopTechPicks</div>
+    <div class="logo">GearPick India</div>
 </header>
 
 <section class="hero">
-    <h1>Gear that <span>actually deserves</span> your desk.</h1>
-    <p>Hand-picked headphones, keyboards & mice — Tested & Updated Daily</p>
+    <h1>Our Top Picks in <span>Tech & Gadgets</span></h1>
+    <p>Handpicked • Tested • Honest Reviews • Best Amazon Deals India</p>
+    
+    <div class="stats">
+        <div>10+ Products</div>
+        <div>4 Categories</div>
+        <div>₹5K+ Starting</div>
+        <div>100% Verified</div>
+    </div>
 </section>
 
 <section class="products" id="products">
-    <div style="text-align:center; grid-column:1/-1; padding:60px 20px; color:#888;">
-        Loading premium picks...
+    <div style="grid-column:1/-1; text-align:center; padding:80px 20px; color:#888;">
+        Loading Premium Picks...
     </div>
 </section>
 
@@ -143,20 +149,19 @@ async function loadProducts() {
         let html = "";
         data.forEach(p => {
             if (!p.title || p.title.trim() === "") return;
-
+            
             const price = parseFloat(String(p.price || "0").replace(/[^0-9.]/g, "")) || 0;
             const original = Math.round(price * 1.35);
 
             html += `
                 <div class="card">
-                    <div style="position:relative">
-                        <img src="${p.image}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/666?text=No+Image'">
-                        <div class="badge">Best Pick</div>
-                    </div>
+                    <img src="${p.image}" alt="${p.title}" 
+                         onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/666?text=No+Image'">
                     <div class="card-content">
-                        <h3 style="margin-bottom:10px; font-size:18px;">${p.title}</h3>
-                        <p style="color:#aaa; font-size:14px; line-height:1.5; margin-bottom:15px;">
-                            ${p.description ? p.description.substring(0, 110) + '...' : ''}
+                        <div class="category">HEADPHONES / KEYBOARD</div>
+                        <h3>${p.title}</h3>
+                        <p style="color:#aaa; font-size:14.5px; margin:12px 0;">
+                            ${p.description ? p.description.substring(0, 130) + '...' : 'Premium quality gear'}
                         </p>
                         <div class="price">₹${price.toLocaleString('en-IN')}</div>
                         <div class="original">₹${original.toLocaleString('en-IN')}</div>
@@ -168,9 +173,9 @@ async function loadProducts() {
             `;
         });
 
-        document.getElementById("products").innerHTML = html;
+        document.getElementById("products").innerHTML = html || "<p>No products found</p>";
     } catch(e) {
-        document.getElementById("products").innerHTML = `<div style="text-align:center; grid-column:1/-1; padding:60px; color:red;">Error loading products. Refresh karo.</div>`;
+        document.getElementById("products").innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:red;">Error loading products. Refresh karo.</div>`;
     }
 }
 
