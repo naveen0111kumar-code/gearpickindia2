@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <rect width="1000" height="1500" fill="#0b132b"/>
+  <rect x="80" y="80" width="840" height="1340" rx="32" fill="#1c2541" stroke="#5bc0be"/>
+  <text x="120" y="180" fill="#5bc0be" font-size="36" font-family="Inter, Arial">PROBLEM → SOLUTION</text>
+  <text x="120" y="300" fill="#fff" font-size="62" font-family="Inter, Arial" font-weight="800">{{TITLE}}</text>
+  <rect x="120" y="840" width="760" height="300" rx="24" fill="#0b132b"/>
+  <text x="150" y="930" fill="#bde0fe" font-size="30" font-family="Inter, Arial">{{DESCRIPTION}}</text>
+  <rect x="120" y="1240" width="760" height="120" rx="60" fill="#e63946"/>
+  <text x="500" y="1318" text-anchor="middle" fill="#fff" font-size="36" font-family="Inter, Arial">{{CTA}}</text>
+</svg>
