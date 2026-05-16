@@ -20,7 +20,7 @@ Production-oriented monorepo implementing an evolution from static marketing pag
 - `shared`: shared types and helpers
 
 ## Quick Start
-1. Copy `.env.example` to `.env`.
+1. Copy `.env.example` to `.env` (required for Docker Compose).
 2. Run `docker compose -f infra/docker/docker-compose.yml up --build`.
 3. Open frontend at `http://localhost:5173`, backend at `http://localhost:4000`.
 
@@ -44,3 +44,9 @@ See `.env.example`.
 - Local dev (frontend + backend): `make dev`
 - Containerized stack: `make up`
 - Stop stack: `make down`
+
+
+## Deployment Troubleshooting
+- If deployment fails with workspace conflicts, ensure each workspace has its own `package.json` (already added for `services/*` and `shared`).
+- If Docker fails to load env vars, verify `.env` exists (compose now reads `.env`, not `.env.example`).
+- Use `make ci` before deploy to validate syntax/tests locally.

@@ -1,7 +1,7 @@
 services:
   backend:
     build: { context: ../.., dockerfile: infra/docker/Dockerfile.backend }
-    env_file: ../../.env.example
+    env_file: ../../.env
     ports: ["4000:4000"]
   frontend:
     build: { context: ../.., dockerfile: infra/docker/Dockerfile.frontend }

@@ -1,0 +1,6 @@
+{
+  "name": "billing-service",
+  "type": "module",
+  "scripts": { "start": "node src/index.js" },
+  "dependencies": { "express": "^4.19.2" }
+}
