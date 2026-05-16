@@ -141,7 +141,65 @@
 
 <script>
 const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/Sheet1";
+const CSV_FALLBACK_URL = "spreadsheet/products/products.csv";
 let PRODUCTS = [];
+
+function parseCsvRows(csvText) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < csvText.length; i++) {
+    const ch = csvText[i];
+    const next = csvText[i + 1];
+
+    if (ch === '"') {
+      if (inQuotes && next === '"') {
+        field += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (ch === ',' && !inQuotes) {
+      row.push(field.trim());
+      field = '';
+      continue;
+    }
+
+    if ((ch === '\n' || ch === '\r') && !inQuotes) {
+      if (ch === '\r' && next === '\n') i++;
+      row.push(field.trim());
+      if (row.some(cell => cell.length)) rows.push(row);
+      row = [];
+      field = '';
+      continue;
+    }
+
+    field += ch;
+  }
+
+  if (field.length || row.length) {
+    row.push(field.trim());
+    if (row.some(cell => cell.length)) rows.push(row);
+  }
+
+  if (!rows.length) return [];
+  const headers = rows[0];
+  return rows.slice(1).map(values => headers.reduce((obj, key, idx) => {
+    obj[key] = (values[idx] || '').trim();
+    return obj;
+  }, {}));
+}
+
+async function getProductRows() {
+  const sheetRes = await fetch(SHEET_URL, { cache: 'no-store' });
+  if (!sheetRes.ok) throw new Error(`Sheet request failed with ${sheetRes.status}`);
+  return sheetRes.json();
+}
 
 function loadFacebookPixel(pixelId) {
   if (!pixelId || pixelId.includes('YOUR_')) return;
@@ -218,9 +276,17 @@ function startOfferTimer() {
 
 async function loadProducts() {
   try {
-    const res = await fetch(SHEET_URL, { cache: 'force-cache' });
-    const data = await res.json();
-    PRODUCTS = data.map(p => ({
+    let rows = [];
+    try {
+      rows = await getProductRows();
+    } catch (_) {
+      const csvRes = await fetch(CSV_FALLBACK_URL, { cache: 'no-store' });
+      if (!csvRes.ok) throw new Error(`CSV fallback failed with ${csvRes.status}`);
+      const csvText = await csvRes.text();
+      rows = parseCsvRows(csvText);
+    }
+
+    PRODUCTS = rows.map(p => ({
       title: (p.title || '').trim(),
       description: (p.description || '').trim(),
       image: (p.image || '').trim(),
