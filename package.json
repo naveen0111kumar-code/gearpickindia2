@@ -1,0 +1,12 @@
+{
+  "name": "ai-marketing-os",
+  "private": true,
+  "workspaces": ["frontend", "backend", "agents", "services/*", "shared"],
+  "scripts": {
+    "dev": "concurrently \"npm --workspace backend run dev\" \"npm --workspace frontend run dev\"",
+    "test": "npm --workspace backend run test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
