@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#240046"/><stop offset="1" stop-color="#00b4d8"/></linearGradient></defs>
+  <rect width="1000" height="1500" fill="url(#g)"/>
+  <rect x="60" y="60" width="880" height="1380" rx="42" fill="#020617" fill-opacity="0.72"/>
+  <text x="120" y="170" fill="#caf0f8" font-size="38" font-family="Inter, Arial">FEATURE FOCUS</text>
+  <text x="120" y="280" fill="#fff" font-size="62" font-family="Inter, Arial" font-weight="800">{{TITLE}}</text>
+  <text x="120" y="980" fill="#fff" font-size="32" font-family="Inter, Arial">{{DESCRIPTION}}</text>
+  <rect x="120" y="1250" width="760" height="120" rx="60" fill="#ff006e"/>
+  <text x="500" y="1328" text-anchor="middle" fill="#fff" font-size="36" font-family="Inter, Arial">{{CTA}}</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <rect width="1000" height="1500" fill="#10192f"/>
+  <rect x="70" y="70" width="860" height="1360" rx="36" fill="#0a0f1f" stroke="#00deff"/>
+  <text x="110" y="180" fill="#00deff" font-size="38" font-family="Inter, Arial">DEAL ALERT</text>
+  <text x="110" y="280" fill="#fff" font-size="66" font-family="Inter, Arial" font-weight="800">{{TITLE}}</text>
+  <text x="110" y="1160" fill="#8ff4ff" font-size="54" font-family="Inter, Arial" font-weight="700">{{PRICE}}</text>
+  <rect x="110" y="1260" width="780" height="120" rx="60" fill="#e60023"/>
+  <text x="500" y="1336" text-anchor="middle" fill="#fff" font-size="38" font-family="Inter, Arial">{{CTA}}</text>
+</svg>
