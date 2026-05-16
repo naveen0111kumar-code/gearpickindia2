@@ -30,10 +30,15 @@
   </div>
 <script>
 const SHEET_URL="https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/Sheet1";
+const CSV_FALLBACK_URL="spreadsheet/products/products.csv";
 const category='Keyboard';
 const compare=(p)=>`${p.description.slice(0,120)}${p.description.length>120?'...':''}`;
 const why=(p)=>`Agar aapko ${category.toLowerCase()} category mein balanced performance chahiye, toh ${p.title} value-for-money option hai.`;
-(async()=>{try{const res=await fetch(SHEET_URL);const data=await res.json();
+const parseCsvRows=(csvText)=>{const lines=csvText.split(/\r?\n/).filter(Boolean);if(!lines.length)return [];const headers=lines[0].split(',').map(h=>h.trim());return lines.slice(1).map(line=>{const values=line.split(',');return headers.reduce((obj,key,i)=>{obj[key]=(values[i]||'').trim();return obj;},{});});};
+(async()=>{try{
+let data=[];
+try{const res=await fetch(SHEET_URL,{cache:'no-store'});if(!res.ok) throw new Error(`Sheet request failed: ${res.status}`);data=await res.json();}
+catch(_){const csvRes=await fetch(CSV_FALLBACK_URL,{cache:'no-store'});if(!csvRes.ok) throw new Error(`CSV fallback failed: ${csvRes.status}`);data=parseCsvRows(await csvRes.text());}
 const list=data.map(p=>({title:(p.title||'').trim(),description:(p.description||'').trim(),price:parseFloat(String(p.price||'0').replace(/[^0-9.]/g,''))||0,affiliate_link:p.affiliate_link||'#',category:(p.category||'Other').trim()})).filter(p=>p.title&&p.category.toLowerCase().includes(category.toLowerCase()));
 rows.innerHTML=list.map(p=>`<tr><td>${p.title}</td><td class='price'>₹${p.price.toLocaleString('en-IN')}</td><td>${compare(p)}</td><td class='why'>${why(p)}</td><td><a class='btn' target='_blank' rel='nofollow noopener' href='${p.affiliate_link}'>Buy</a></td></tr>`).join('')||"<tr><td colspan='5'>No products found.</td></tr>";
 }catch(e){rows.innerHTML="<tr><td colspan='5'>Failed to load products.</td></tr>"}})();

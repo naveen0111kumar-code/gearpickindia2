@@ -141,7 +141,27 @@
 
 <script>
 const SHEET_URL = "https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/Sheet1";
+const CSV_FALLBACK_URL = "spreadsheet/products/products.csv";
 let PRODUCTS = [];
+
+function parseCsvRows(csvText) {
+  const lines = csvText.split(/\r?\n/).filter(Boolean);
+  if (!lines.length) return [];
+  const headers = lines[0].split(',').map(h => h.trim());
+  return lines.slice(1).map(line => {
+    const values = line.split(',');
+    return headers.reduce((obj, key, i) => {
+      obj[key] = (values[i] || '').trim();
+      return obj;
+    }, {});
+  });
+}
+
+async function getProductRows() {
+  const sheetRes = await fetch(SHEET_URL, { cache: 'no-store' });
+  if (!sheetRes.ok) throw new Error(`Sheet request failed with ${sheetRes.status}`);
+  return sheetRes.json();
+}
 
 function loadFacebookPixel(pixelId) {
   if (!pixelId || pixelId.includes('YOUR_')) return;
@@ -218,9 +238,17 @@ function startOfferTimer() {
 
 async function loadProducts() {
   try {
-    const res = await fetch(SHEET_URL, { cache: 'force-cache' });
-    const data = await res.json();
-    PRODUCTS = data.map(p => ({
+    let rows = [];
+    try {
+      rows = await getProductRows();
+    } catch (_) {
+      const csvRes = await fetch(CSV_FALLBACK_URL, { cache: 'no-store' });
+      if (!csvRes.ok) throw new Error(`CSV fallback failed with ${csvRes.status}`);
+      const csvText = await csvRes.text();
+      rows = parseCsvRows(csvText);
+    }
+
+    PRODUCTS = rows.map(p => ({
       title: (p.title || '').trim(),
       description: (p.description || '').trim(),
       image: (p.image || '').trim(),
