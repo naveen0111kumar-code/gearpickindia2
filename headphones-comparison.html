@@ -34,7 +34,7 @@ const CSV_FALLBACK_URL="spreadsheet/products/products.csv";
 const category='Headphones';
 const compare=(p)=>`${p.description.slice(0,120)}${p.description.length>120?'...':''}`;
 const why=(p)=>`Agar aapko ${category.toLowerCase()} category mein balanced performance chahiye, toh ${p.title} value-for-money option hai.`;
-const parseCsvRows=(csvText)=>{const lines=csvText.split(/\r?\n/).filter(Boolean);if(!lines.length)return [];const headers=lines[0].split(',').map(h=>h.trim());return lines.slice(1).map(line=>{const values=line.split(',');return headers.reduce((obj,key,i)=>{obj[key]=(values[i]||'').trim();return obj;},{});});};
+const parseCsvRows=(csvText)=>{const rows=[];let row=[],field='',inQuotes=false;for(let i=0;i<csvText.length;i++){const ch=csvText[i],next=csvText[i+1];if(ch==='\"'){if(inQuotes&&next==='\"'){field+='\"';i++;}else inQuotes=!inQuotes;continue;}if(ch===','&&!inQuotes){row.push(field.trim());field='';continue;}if((ch==='\n'||ch==='\r')&&!inQuotes){if(ch==='\r'&&next==='\n')i++;row.push(field.trim());if(row.some(cell=>cell.length))rows.push(row);row=[];field='';continue;}field+=ch;}if(field.length||row.length){row.push(field.trim());if(row.some(cell=>cell.length))rows.push(row);}if(!rows.length)return[];const headers=rows[0];return rows.slice(1).map(values=>headers.reduce((obj,key,idx)=>{obj[key]=(values[idx]||'').trim();return obj;},{}));};
 (async()=>{try{
 let data=[];
 try{const res=await fetch(SHEET_URL,{cache:'no-store'});if(!res.ok) throw new Error(`Sheet request failed: ${res.status}`);data=await res.json();}

@@ -145,16 +145,54 @@ const CSV_FALLBACK_URL = "spreadsheet/products/products.csv";
 let PRODUCTS = [];
 
 function parseCsvRows(csvText) {
-  const lines = csvText.split(/\r?\n/).filter(Boolean);
-  if (!lines.length) return [];
-  const headers = lines[0].split(',').map(h => h.trim());
-  return lines.slice(1).map(line => {
-    const values = line.split(',');
-    return headers.reduce((obj, key, i) => {
-      obj[key] = (values[i] || '').trim();
-      return obj;
-    }, {});
-  });
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < csvText.length; i++) {
+    const ch = csvText[i];
+    const next = csvText[i + 1];
+
+    if (ch === '"') {
+      if (inQuotes && next === '"') {
+        field += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (ch === ',' && !inQuotes) {
+      row.push(field.trim());
+      field = '';
+      continue;
+    }
+
+    if ((ch === '\n' || ch === '\r') && !inQuotes) {
+      if (ch === '\r' && next === '\n') i++;
+      row.push(field.trim());
+      if (row.some(cell => cell.length)) rows.push(row);
+      row = [];
+      field = '';
+      continue;
+    }
+
+    field += ch;
+  }
+
+  if (field.length || row.length) {
+    row.push(field.trim());
+    if (row.some(cell => cell.length)) rows.push(row);
+  }
+
+  if (!rows.length) return [];
+  const headers = rows[0];
+  return rows.slice(1).map(values => headers.reduce((obj, key, idx) => {
+    obj[key] = (values[idx] || '').trim();
+    return obj;
+  }, {}));
 }
 
 async function getProductRows() {
