@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mouse Comparison | GearPick India</title>
+  <style>
+    body{font-family:Inter,system-ui,sans-serif;background:#0b1020;color:#e9eeff;margin:0}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    a{color:#69f0ff}
+    h1{margin:0 0 8px}
+    .sub{color:#aab4d6;margin-bottom:20px}
+    table{width:100%;border-collapse:collapse;background:#141b33;border-radius:12px;overflow:hidden}
+    th,td{padding:12px;border-bottom:1px solid #253055;text-align:left;vertical-align:top}
+    th{background:#1a2342}
+    .why{color:#c8d2f4;font-size:.95rem;line-height:1.45}
+    .price{font-weight:700;color:#7df4b3}
+    .btn{display:inline-block;padding:8px 12px;background:linear-gradient(90deg,#00e5ff,#8b5dff);color:#081025;text-decoration:none;border-radius:8px;font-weight:700}
+  </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S3Z18L8KPD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S3Z18L8KPD');
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <p><a href="index.html">← Back to Home</a></p>
+    <h1>Mouse Comparison</h1>
+    <p class="sub">Har product ka quick comparison + “Why should you buy this?” section.</p>
+    <table>
+      <thead><tr><th>Product</th><th>Price</th><th>Comparison</th><th>Why you should buy this</th><th>Action</th></tr></thead>
+      <tbody id="rows"><tr><td colspan="5">Loading...</td></tr></tbody>
+    </table>
+  </div>
+<script>
+const SHEET_URL="https://opensheet.elk.sh/11MjkRDuO7fDy4gWDQcRqWJZlEX3BJa2kXhwXoa97rCs/Sheet1";
+const CSV_FALLBACK_URL="spreadsheet/products/products.csv";
+const category='Mouse';
+const compare=(p)=>`${p.description.slice(0,120)}${p.description.length>120?'...':''}`;
+const why=(p)=>`Agar aapko ${category.toLowerCase()} category mein balanced performance chahiye, toh ${p.title} value-for-money option hai.`;
+const parseCsvRows=(csvText)=>{const rows=[];let row=[],field='',inQuotes=false;for(let i=0;i<csvText.length;i++){const ch=csvText[i],next=csvText[i+1];if(ch==='"'){if(inQuotes&&next==='"'){field+='"';i++;}else inQuotes=!inQuotes;continue;}if(ch===','&&!inQuotes){row.push(field.trim());field='';continue;}if((ch==='\n'||ch==='\r')&&!inQuotes){if(ch==='\r'&&next==='\n')i++;row.push(field.trim());if(row.some(cell=>cell.length))rows.push(row);row=[];field='';continue;}field+=ch;}if(field.length||row.length){row.push(field.trim());if(row.some(cell=>cell.length))rows.push(row);}if(!rows.length)return[];const headers=rows[0];return rows.slice(1).map(values=>headers.reduce((obj,key,idx)=>{obj[key]=(values[idx]||'').trim();return obj;},{}));};
+(async()=>{try{
+let data=[];
+try{const res=await fetch(SHEET_URL,{cache:'no-store'});if(!res.ok) throw new Error(`Sheet request failed: ${res.status}`);data=await res.json();}
+catch(_){const csvRes=await fetch(CSV_FALLBACK_URL,{cache:'no-store'});if(!csvRes.ok) throw new Error(`CSV fallback failed: ${csvRes.status}`);data=parseCsvRows(await csvRes.text());}
+const list=data.map(p=>({title:(p.title||'').trim(),description:(p.description||'').trim(),price:parseFloat(String(p.price||'0').replace(/[^0-9.]/g,''))||0,affiliate_link:p.affiliate_link||'#',category:(p.category||'Other').trim()})).filter(p=>p.title&&p.category.toLowerCase().includes(category.toLowerCase()));
+rows.innerHTML=list.map(p=>`<tr><td>${p.title}</td><td class='price'>₹${p.price.toLocaleString('en-IN')}</td><td>${compare(p)}</td><td class='why'>${why(p)}</td><td><a class='btn' target='_blank' rel='nofollow noopener' href='${p.affiliate_link}'>Buy</a></td></tr>`).join('')||"<tr><td colspan='5'>No products found.</td></tr>";
+}catch(e){rows.innerHTML="<tr><td colspan='5'>Failed to load products.</td></tr>"}})();
+</script>
+</body>
+</html>
