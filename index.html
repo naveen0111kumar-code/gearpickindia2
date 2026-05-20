@@ -9,314 +9,120 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <style>
+    html { scroll-behavior: smooth; }
     :root {
-      --bg: #0a0a0f;
-      --surface: #13131a;
-      --border: #1f1f2e;
-      --accent: #ff5c28;
-      --accent2: #ffb800;
-      --text: #f0ede8;
-      --muted: #7a7a8c;
-      --card: #16161f;
+      --bg: #f3e4c9;
+      --surface: #faf4e8;
+      --border: #dcc9a8;
+      --accent: #8a5f41;
+      --accent2: #ccd67f;
+      --text: #2d1f0e;
+      --muted: #a77f60;
+      --card: #fff8ee;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      min-height: 100vh;
-    }
-
-    /* NAV */
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 2.5rem;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: rgba(10,10,15,0.92);
-      backdrop-filter: blur(12px);
-      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 2.5rem; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: rgba(243,228,201,0.92);
+      backdrop-filter: blur(12px); z-index: 100;
     }
-
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
+    .logo { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; }
     .logo span { color: var(--accent); }
-
-    nav ul {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
     nav a:hover { color: var(--text); }
 
-    /* HERO */
-    .hero {
-      padding: 5rem 2.5rem 3rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
+    .hero { padding: 5rem 2.5rem 3rem; max-width: 900px; margin: 0 auto; text-align: center; }
     .hero-tag {
-      display: inline-block;
-      background: rgba(255,92,40,0.12);
-      color: var(--accent);
-      border: 1px solid rgba(255,92,40,0.3);
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.3rem 1rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      display: inline-block; background: rgba(138,95,65,0.1); color: var(--accent);
+      border: 1px solid rgba(138,95,65,0.3); border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600; padding: 0.3rem 1rem;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem;
     }
-
     .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-      letter-spacing: -1px;
+      font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800; line-height: 1.1; margin-bottom: 1.2rem; letter-spacing: -1px;
     }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 560px; margin: 0 auto 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.92rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s; border: none; font-family: inherit; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: #ff7040; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.7;
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.75rem 1.8rem;
-      border-radius: 8px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: none;
-      font-family: inherit;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #ff7040;
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* CATEGORIES */
-    .categories {
-      display: flex;
-      gap: 0.6rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 0 2.5rem 3rem;
-    }
-
+    .categories { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; padding: 0 2.5rem 3rem; }
     .cat-btn {
-      padding: 0.5rem 1.2rem;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
+      padding: 0.5rem 1.2rem; border-radius: 100px; border: 1px solid var(--border);
+      background: transparent; color: var(--muted); font-size: 0.85rem;
+      font-family: inherit; cursor: pointer; transition: all 0.2s;
     }
+    .cat-btn.active, .cat-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(138,95,65,0.1); }
 
-    .cat-btn.active, .cat-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(255,92,40,0.08);
-    }
+    .section { max-width: 1200px; margin: 0 auto; padding: 1rem 2.5rem 5rem; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; }
 
-    /* PRODUCTS */
-    .section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 2.5rem 5rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-    }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.2rem;
-    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.2rem; }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.4rem;
-      transition: border-color 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; transition: border-color 0.2s, transform 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .card:hover { border-color: rgba(138,95,65,0.5); transform: translateY(-3px); }
+
+    .card-img {
+      width: 100%; height: 200px; object-fit: contain;
+      background: #f0e4cc; padding: 1rem;
+    }
+    .card-img-placeholder {
+      width: 100%; height: 200px; background: #f0e4cc;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
     }
 
-    .card:hover {
-      border-color: rgba(255,92,40,0.4);
-      transform: translateY(-2px);
-    }
-
-    .card-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent2);
-    }
-
-    .card-name {
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-
-    .card-meta {
-      display: flex;
-      gap: 1rem;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .rating { color: var(--accent2); }
-
-    .card-price {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .card-footer {
-      margin-top: auto;
-      padding-top: 0.8rem;
-      border-top: 1px solid var(--border);
-    }
-
+    .card-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
+    .card-tag { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent2); }
+    .card-name { font-size: 0.92rem; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-price { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+    .card-footer { margin-top: auto; padding-top: 0.8rem; border-top: 1px solid var(--border); }
     .buy-btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 0.65rem;
-      background: rgba(255,92,40,0.1);
-      color: var(--accent);
-      border: 1px solid rgba(255,92,40,0.3);
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      font-family: inherit;
-      cursor: pointer;
+      display: block; width: 100%; text-align: center; padding: 0.65rem;
+      background: rgba(138,95,65,0.1); color: var(--accent);
+      border: 1px solid rgba(138,95,65,0.35); border-radius: 8px;
+      font-size: 0.88rem; font-weight: 600; text-decoration: none;
+      transition: all 0.2s; font-family: inherit; cursor: pointer;
     }
+    .buy-btn:hover { background: var(--accent); color: #fff8ee; }
 
-    .buy-btn:hover {
-      background: var(--accent);
-      color: white;
-    }
-
-    /* LOADING & EMPTY */
-    .loading {
-      text-align: center;
-      padding: 4rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .loading-dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      margin: 0 3px;
-      animation: pulse 1.2s ease-in-out infinite;
-    }
-
+    .loading { text-align: center; padding: 4rem; color: var(--muted); font-size: 0.95rem; }
+    .loading-dot { display: inline-block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin: 0 3px; animation: pulse 1.2s ease-in-out infinite; }
     .loading-dot:nth-child(2) { animation-delay: 0.2s; }
     .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)} }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.2); }
-    }
+    .error-box { background: rgba(138,95,65,0.08); border: 1px solid rgba(138,95,65,0.3); border-radius: 10px; padding: 1.5rem; color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+    .error-box strong { color: var(--accent); }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 2.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
 
+    footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
     footer a { color: var(--accent); text-decoration: none; }
 
     @media (max-width: 600px) {
       nav ul { display: none; }
+      .hamburger { display: flex !important; }
+      .mobile-menu { display: none; flex-direction: column; gap: 0; background: #faf4e8; border-bottom: 1px solid var(--border); }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a { padding: 0.9rem 2rem; color: var(--text); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid var(--border); }
+      .mobile-menu a:last-child { border-bottom: none; }
       .hero { padding: 3rem 1.5rem 2rem; }
       .section { padding: 1rem 1.5rem 3rem; }
       .categories { padding: 0 1.5rem 2rem; }
@@ -326,29 +132,37 @@
 <body>
 
   <nav>
-    <div class="logo">Gear<span>Pick</span> India</div>
+    <div class="logo" onclick="filterCategory('all',event)" style="cursor:pointer">Gear<span>Pick</span> India</div>
     <ul>
-      <li><a href="#headphones">Headphones</a></li>
-      <li><a href="#keyboards">Keyboards</a></li>
-      <li><a href="#mice">Mice</a></li>
+      <li><a href="#products" onclick="filterCategory('headphones',event)">Headphones</a></li>
+      <li><a href="#products" onclick="filterCategory('keyboard',event)">Keyboards</a></li>
+      <li><a href="#products" onclick="filterCategory('mouse',event)">Mice</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#products" onclick="filterCategory('all',event);toggleMenu()">🛒 All Gear</a>
+    <a href="#products" onclick="filterCategory('headphones',event);toggleMenu()">🎧 Headphones</a>
+    <a href="#products" onclick="filterCategory('keyboard',event);toggleMenu()">⌨️ Keyboards</a>
+    <a href="#products" onclick="filterCategory('mouse',event);toggleMenu()">🖱️ Mice</a>
+  </div>
 
   <div class="hero">
     <div class="hero-tag">🇮🇳 Made for India</div>
     <h1>Pick the <em>right gear</em>,<br/>skip the confusion.</h1>
-    <p>Handpicked Amazon deals on headphones, keyboards & mice — verified ratings, honest picks, direct checkout.</p>
+    <p>Handpicked Amazon deals on headphones, keyboards & mice — verified picks, direct checkout.</p>
     <div class="hero-btns">
       <a href="#products" class="btn btn-primary">Browse Picks</a>
-      <a href="https://github.com/naveen0111kumar-code/gearpickindia2" class="btn btn-outline" target="_blank">View on GitHub</a>
     </div>
   </div>
 
   <div class="categories">
-    <button class="cat-btn active" onclick="filterCategory('all')">All Gear</button>
-    <button class="cat-btn" onclick="filterCategory('headphones')">🎧 Headphones</button>
-    <button class="cat-btn" onclick="filterCategory('keyboard')">⌨️ Keyboards</button>
-    <button class="cat-btn" onclick="filterCategory('mouse')">🖱️ Mice</button>
+    <button class="cat-btn active" onclick="filterCategory('all',event)">🛒 All Gear</button>
+    <button class="cat-btn" onclick="filterCategory('headphones',event)">🎧 Headphones</button>
+    <button class="cat-btn" onclick="filterCategory('keyboard',event)">⌨️ Keyboards</button>
+    <button class="cat-btn" onclick="filterCategory('mouse',event)">🖱️ Mice</button>
   </div>
 
   <div class="section" id="products">
@@ -358,102 +172,138 @@
     </div>
     <div class="grid" id="product-grid">
       <div class="loading">
-        <span class="loading-dot"></span>
-        <span class="loading-dot"></span>
-        <span class="loading-dot"></span>
-        <p style="margin-top:1rem">Loading products...</p>
+        <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
+        <p style="margin-top:1rem">Loading products from spreadsheet...</p>
       </div>
     </div>
   </div>
 
   <footer>
-    <p>© 2026 GearPick India · <a href="https://github.com/naveen0111kumar-code/gearpickindia2" target="_blank">GitHub</a> · Affiliate links via Amazon India</p>
+    <p>© 2026 GearPick India &nbsp;·&nbsp; Affiliate links via Amazon India</p>
   </footer>
 
   <script>
-    // ✅ FIXED: Using correct CSV export URL (not pubhtml)
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    // ✅ Your Google Sheet published as CSV
+    // To update: File → Share → Publish to web → CSV → copy URL here
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9LFlUmyOee9fc02skxWglRj4Y926bI2mcr0Fs5yF9Kj-191gVS1iM85S6Y-_tQ8wGPSkA6-KKS22F/pub?output=csv';
 
     let allProducts = [];
-    let activeCategory = 'all';
 
-    // Fallback demo products (shown if sheet fails to load)
-    const demoProducts = [
-      { name: 'Sony WH-1000XM5', category: 'headphones', price: '₹24,990', rating: '4.7', reviews: '12.4k', link: '#' },
-      { name: 'boAt Rockerz 450', category: 'headphones', price: '₹1,299', rating: '4.3', reviews: '85k', link: '#' },
-      { name: 'Logitech MX Keys Mini', category: 'keyboard', price: '₹8,995', rating: '4.6', reviews: '3.2k', link: '#' },
-      { name: 'Keychron K2 (Hot-swap)', category: 'keyboard', price: '₹7,500', rating: '4.5', reviews: '1.8k', link: '#' },
-      { name: 'Logitech MX Master 3S', category: 'mouse', price: '₹7,495', rating: '4.8', reviews: '5.6k', link: '#' },
-      { name: 'Razer DeathAdder V3', category: 'mouse', price: '₹5,999', rating: '4.5', reviews: '2.1k', link: '#' },
-    ];
+    function detectCategory(title) {
+      const t = title.toLowerCase();
+      if (t.includes('headphone') || t.includes('earphone') || t.includes('earbud') || t.includes('marshall') || t.includes('sony wh') || t.includes('boat rockerz') || t.includes('monitor iii') || t.includes('major v')) return 'headphones';
+      if (t.includes('keyboard') || t.includes('keys') || t.includes('huntsman') || t.includes('g915') || t.includes('keychron') || t.includes('k630') || t.includes('katana') || t.includes('kreo swarm') || t.includes('zebronics k') || t.includes('hp 350')) return 'keyboard';
+      if (t.includes('mouse') || t.includes('mx master') || t.includes('deathadder') || t.includes('viper') || t.includes('g pro') || t.includes('lift vertical') || t.includes('gravastar') || t.includes('pebble')) return 'mouse';
+      return 'gear';
+    }
+
+    function formatPrice(raw) {
+      if (!raw) return 'Check Price';
+      const cleaned = raw.replace(/[^0-9.]/g, '');
+      if (!cleaned) return raw;
+      const num = parseFloat(cleaned);
+      if (isNaN(num)) return raw;
+      return '₹' + num.toLocaleString('en-IN');
+    }
 
     function renderProducts(products) {
       const grid = document.getElementById('product-grid');
       const count = document.getElementById('product-count');
 
       if (!products.length) {
-        grid.innerHTML = '<p style="color:var(--muted);padding:2rem">No products found.</p>';
+        grid.innerHTML = '<p style="color:var(--muted);padding:2rem 0">No products found in this category.</p>';
+        count.textContent = '0 items';
         return;
       }
 
       count.textContent = `${products.length} item${products.length !== 1 ? 's' : ''}`;
 
-      grid.innerHTML = products.map(p => `
-        <div class="card">
-          <div class="card-tag">${p.category || 'Gear'}</div>
-          <div class="card-name">${p.name}</div>
-          <div class="card-meta">
-            <span class="rating">★ ${p.rating || 'N/A'}</span>
-            <span>${p.reviews || ''} reviews</span>
-          </div>
-          <div class="card-price">${p.price || 'Check Price'}</div>
-          <div class="card-footer">
-            <a href="${p.link || '#'}" target="_blank" class="buy-btn">Buy on Amazon →</a>
-          </div>
-        </div>
-      `).join('');
+      const catEmoji = { headphones: '🎧', keyboard: '⌨️', mouse: '🖱️', gear: '🎮' };
+
+      grid.innerHTML = products.map(p => {
+        const cat = p.category || 'gear';
+        const imgHtml = p.image
+          ? `<img class="card-img" src="${p.image}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : '';
+        const placeholder = `<div class="card-img-placeholder" ${p.image ? 'style="display:none"' : ''}>${catEmoji[cat] || '🎮'}</div>`;
+
+        return `
+          <div class="card">
+            ${imgHtml}${placeholder}
+            <div class="card-body">
+              <div class="card-tag">${catEmoji[cat] || ''} ${cat}</div>
+              <div class="card-name">${p.title || 'Unknown Product'}</div>
+              ${p.description ? `<div class="card-desc">${p.description}</div>` : ''}
+              <div class="card-price">${formatPrice(p.price)}</div>
+              <div class="card-footer">
+                <a href="${p.affiliate_link || '#'}" target="_blank" rel="noopener noreferrer" class="buy-btn">Buy on Amazon →</a>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
     }
 
-    function filterCategory(cat) {
-      activeCategory = cat;
+    function filterCategory(cat, event) {
+      if (event) event.preventDefault();
       document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
-
-      const filtered = cat === 'all'
-        ? allProducts
-        : allProducts.filter(p => p.category && p.category.toLowerCase().includes(cat));
+      // Sync cat-btn active state whether called from nav or category buttons
+      const matchBtn = [...document.querySelectorAll('.cat-btn')].find(b =>
+        b.getAttribute('onclick') && b.getAttribute('onclick').includes(`'${cat}'`)
+      );
+      if (matchBtn) matchBtn.classList.add('active');
+      const filtered = cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat);
       renderProducts(filtered);
+    }
+
+    function parseCSV(csv) {
+      const lines = csv.trim().split('\n');
+      if (lines.length < 2) return [];
+      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+      return lines.slice(1).map(line => {
+        // Handle quoted fields with commas inside
+        const cols = [];
+        let current = '';
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+          if (line[i] === '"') { inQuotes = !inQuotes; }
+          else if (line[i] === ',' && !inQuotes) { cols.push(current.trim()); current = ''; }
+          else { current += line[i]; }
+        }
+        cols.push(current.trim());
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, ''));
+        return obj;
+      }).filter(p => p.title && p.title.trim());
     }
 
     async function loadProducts() {
       try {
-        // Try to fetch from Google Sheet (CSV format)
         const res = await fetch(SHEET_CSV_URL);
-        if (!res.ok) throw new Error('Sheet unavailable');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const csv = await res.text();
+        const products = parseCSV(csv);
 
-        const rows = csv.trim().split('\n');
-        const headers = rows[0].split(',').map(h => h.trim().toLowerCase().replace(/"/g, ''));
+        if (!products.length) throw new Error('No products found in sheet');
 
-        const products = rows.slice(1).map(row => {
-          const cols = row.split(',').map(c => c.trim().replace(/"/g, ''));
-          const obj = {};
-          headers.forEach((h, i) => obj[h] = cols[i] || '');
-          return obj;
-        }).filter(p => p.name);
+        // Auto-detect category from title
+        allProducts = products.map(p => ({ ...p, category: detectCategory(p.title) }));
+        renderProducts(allProducts);
 
-        if (products.length > 0) {
-          allProducts = products;
-          renderProducts(products);
-          return;
-        }
-      } catch (e) {
-        console.warn('Could not load from Google Sheet, using demo data:', e.message);
+      } catch (err) {
+        console.error('Sheet load error:', err);
+        document.getElementById('product-grid').innerHTML = `
+          <div class="error-box" style="grid-column:1/-1">
+            <strong>⚠️ Could not load products from spreadsheet.</strong><br/><br/>
+            Make sure your Google Sheet is published:<br/>
+            <strong>File → Share → Publish to web → Comma-separated values (.csv) → Publish</strong><br/><br/>
+            Error: ${err.message}
+          </div>`;
+        document.getElementById('product-count').textContent = '';
       }
-
-      // Fall back to demo products
-      allProducts = demoProducts;
-      renderProducts(demoProducts);
     }
 
     loadProducts();
