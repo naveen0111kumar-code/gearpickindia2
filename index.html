@@ -12,5 +12,29 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <script>
+  // Neeche apni Google Sheet ki CSV link paste karo
+  const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9LFlUmyOee9fc02skxWglRj4Y926bI2mcr0Fs5yF9Kj-191gVS1iM85S6Y-_tQ8wGPSkA6-KKS22F/pubhtml';
+
+  fetch(sheetUrl)
+    .then(response => response.text())
+    .then(data => {
+      // CSV data ko lines mein todna
+      const rows = data.split('\n');
+      
+      // HTML mein data dikhane ke liye ek div chahiye
+      const container = document.getElementById('sheet-data');
+      
+      rows.forEach(row => {
+        const columns = row.split(','); // Comma ke hisaab se data alag karna
+        const div = document.createElement('div');
+        div.textContent = columns.join(' | '); // Har row ko | se separate karke dikhana
+        container.appendChild(div);
+      });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+</script>
+
+<!-- Data yahan dikhega -->
+<div id="sheet-data"></div></body>
 </html>
