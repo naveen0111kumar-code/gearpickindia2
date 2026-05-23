@@ -32,6 +32,7 @@
     <p><a href="index.html">← Back to Home</a></p>
     <h1>Mouse Comparison</h1>
     <p class="sub">Har product ka quick comparison + “Why should you buy this?” section.</p>
+    <p class="sub">Disclosure: Kuch links Amazon affiliate links ho sakte hain. Aapke liye price same rehta hai, humein chhota commission mil sakta hai.</p>
     <table>
       <thead><tr><th>Product</th><th>Price</th><th>Comparison</th><th>Why you should buy this</th><th>Action</th></tr></thead>
       <tbody id="rows"><tr><td colspan="5">Loading...</td></tr></tbody>
@@ -43,13 +44,22 @@ const CSV_FALLBACK_URL="spreadsheet/products/products.csv";
 const category='Mouse';
 const compare=(p)=>`${p.description.slice(0,120)}${p.description.length>120?'...':''}`;
 const why=(p)=>`Agar aapko ${category.toLowerCase()} category mein balanced performance chahiye, toh ${p.title} value-for-money option hai.`;
+const isValidAffiliateLink=(url)=>{
+  if(!url||url==='#') return false;
+  try{
+    const parsed=new URL(url);
+    return /(^|\.)amazon\./i.test(parsed.hostname)||/(^|\.)amzn\.to$/i.test(parsed.hostname);
+  }catch{
+    return false;
+  }
+};
 const parseCsvRows=(csvText)=>{const rows=[];let row=[],field='',inQuotes=false;for(let i=0;i<csvText.length;i++){const ch=csvText[i],next=csvText[i+1];if(ch==='"'){if(inQuotes&&next==='"'){field+='"';i++;}else inQuotes=!inQuotes;continue;}if(ch===','&&!inQuotes){row.push(field.trim());field='';continue;}if((ch==='\n'||ch==='\r')&&!inQuotes){if(ch==='\r'&&next==='\n')i++;row.push(field.trim());if(row.some(cell=>cell.length))rows.push(row);row=[];field='';continue;}field+=ch;}if(field.length||row.length){row.push(field.trim());if(row.some(cell=>cell.length))rows.push(row);}if(!rows.length)return[];const headers=rows[0];return rows.slice(1).map(values=>headers.reduce((obj,key,idx)=>{obj[key]=(values[idx]||'').trim();return obj;},{}));};
 (async()=>{try{
 let data=[];
 try{const res=await fetch(SHEET_URL,{cache:'no-store'});if(!res.ok) throw new Error(`Sheet request failed: ${res.status}`);data=await res.json();}
 catch(_){const csvRes=await fetch(CSV_FALLBACK_URL,{cache:'no-store'});if(!csvRes.ok) throw new Error(`CSV fallback failed: ${csvRes.status}`);data=parseCsvRows(await csvRes.text());}
 const list=data.map(p=>({title:(p.title||'').trim(),description:(p.description||'').trim(),price:parseFloat(String(p.price||'0').replace(/[^0-9.]/g,''))||0,affiliate_link:p.affiliate_link||'#',category:(p.category||'Other').trim()})).filter(p=>p.title&&p.category.toLowerCase().includes(category.toLowerCase()));
-rows.innerHTML=list.map(p=>`<tr><td>${p.title}</td><td class='price'>₹${p.price.toLocaleString('en-IN')}</td><td>${compare(p)}</td><td class='why'>${why(p)}</td><td><a class='btn' target='_blank' rel='nofollow noopener' href='${p.affiliate_link}'>Buy</a></td></tr>`).join('')||"<tr><td colspan='5'>No products found.</td></tr>";
+rows.innerHTML=list.map(p=>{const validLink=isValidAffiliateLink(p.affiliate_link);return `<tr><td>${p.title}</td><td class='price'>₹${p.price.toLocaleString('en-IN')}</td><td>${compare(p)}</td><td class='why'>${why(p)}</td><td>${validLink?`<a class='btn' target='_blank' rel='nofollow sponsored noopener' href='${p.affiliate_link}'>Buy</a>`:`<span title='Invalid affiliate link'>Link unavailable</span>`}</td></tr>`;}).join('')||"<tr><td colspan='5'>No products found.</td></tr>";
 }catch(e){rows.innerHTML="<tr><td colspan='5'>Failed to load products.</td></tr>"}})();
 </script>
 </body>
