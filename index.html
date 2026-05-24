@@ -1,411 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GearPick India — Best Headphones, Keyboards & Mice for Students</title>
-  <meta name="description" content="Handpicked Amazon India deals on headphones, keyboards and mice for students. Verified picks under ₹500–₹3000 with honest reviews and direct checkout." />
-  <meta name="keywords" content="best headphones india, gaming keyboard india, best mouse under 1000, student tech deals india, amazon india gadgets" />
-  <meta property="og:title" content="GearPick India — Best Gear for Students" />
-  <meta property="og:description" content="Handpicked Amazon deals on headphones, keyboards & mice for Indian students." />
-  <meta property="og:url" content="https://naveen0111kumar-code.github.io/gearpickindia2/" />
-  <link rel="canonical" href="https://naveen0111kumar-code.github.io/gearpickindia2/" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0d0f14;
-      --surface: #13161e;
-      --surface2: #1a1e28;
-      --border: #252933;
-      --accent: #f97316;
-      --accent-dim: rgba(249,115,22,0.12);
-      --text: #e8eaf0;
-      --muted: #7a8099;
-      --green: #22c55e;
-      --card-hover: #1e2230;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GearPick India — Premium Gaming Gear</title>
+<meta name="description" content="Handpicked Amazon India deals on premium gaming mice, keyboards and headphones. Verified picks with direct checkout."/>
+<meta name="keywords" content="gaming mouse india, gaming keyboard india, best gaming gear india, amazon gaming deals india"/>
+<link rel="canonical" href="https://naveen0111kumar-code.github.io/gearpickindia2/"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#060809;
+  --bg2:#0c1014;
+  --bg3:#111820;
+  --lime:#b8ff00;
+  --lime-dim:rgba(184,255,0,0.08);
+  --lime-glow:0 0 20px rgba(184,255,0,0.3);
+  --text:#f0f4f0;
+  --muted:#5a6870;
+  --border:rgba(184,255,0,0.1);
+  --card:#0d1318;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+  pointer-events:none;z-index:0;
+}
 
-    /* DISCLOSURE BANNER */
-    .disclosure {
-      background: var(--accent-dim);
-      border-bottom: 1px solid rgba(249,115,22,0.2);
-      text-align: center;
-      padding: 8px 20px;
-      font-size: 12px;
-      color: #f4a45a;
-    }
+/* DISCLOSURE */
+.disc{
+  background:var(--lime-dim);border-bottom:1px solid var(--border);
+  text-align:center;padding:7px 16px;font-size:11px;
+  color:rgba(184,255,0,0.6);font-family:'Space Mono',monospace;
+  letter-spacing:0.5px;position:relative;z-index:10;
+}
 
-    /* NAV */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(13,15,20,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 58px;
-    }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 18px;
-      color: var(--text);
-      text-decoration: none;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 24px; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
-    @media (max-width: 600px) { .nav-links { display: none; } }
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,8,9,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;letter-spacing:3px;
+  text-decoration:none;color:var(--text);
+  display:flex;align-items:center;gap:0;
+}
+.logo .hi{color:var(--lime)}
+.nav-r{display:flex;align-items:center;gap:28px}
+.nav-r a{color:var(--muted);text-decoration:none;font-size:13px;font-family:'Space Mono',monospace;letter-spacing:1px;transition:color .2s}
+.nav-r a:hover{color:var(--lime)}
+.nav-tag{
+  background:var(--lime);color:#060809;
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+  padding:3px 10px;border-radius:2px;letter-spacing:1px;
+}
+@media(max-width:600px){.nav-r a{display:none}}
 
-    /* HERO */
-    .hero {
-      padding: 64px 24px 48px;
-      max-width: 860px; margin: 0 auto;
-      text-align: center;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--accent-dim);
-      border: 1px solid rgba(249,115,22,0.3);
-      border-radius: 20px; padding: 4px 14px;
-      font-size: 12px; color: var(--accent);
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(32px, 6vw, 54px);
-      font-weight: 800; line-height: 1.1;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-    }
-    .hero h1 em { color: var(--accent); font-style: normal; }
-    .hero p { color: var(--muted); font-size: 16px; max-width: 520px; margin: 0 auto 28px; }
-    .hero-stats {
-      display: flex; gap: 32px; justify-content: center;
-      border-top: 1px solid var(--border);
-      padding-top: 24px; margin-top: 24px;
-    }
-    .stat { text-align: center; }
-    .stat-num { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px; color: var(--accent); }
-    .stat-label { font-size: 12px; color: var(--muted); }
+/* HERO */
+.hero{
+  min-height:88vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:60px 24px 40px;
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,255,0,0.06) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-label{
+  font-family:'Space Mono',monospace;font-size:11px;
+  color:var(--lime);letter-spacing:3px;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-label::before,.hero-label::after{content:'//';color:var(--muted)}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(56px,12vw,130px);
+  line-height:0.9;letter-spacing:4px;
+  margin-bottom:24px;
+}
+.hero h1 .g{
+  color:var(--lime);
+  text-shadow:0 0 40px rgba(184,255,0,0.4);
+}
+.hero-sub{
+  font-size:15px;color:var(--muted);
+  max-width:480px;margin:0 auto 40px;
+  font-family:'Space Mono',monospace;line-height:1.7;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--lime);color:#060809;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;
+  padding:14px 36px;text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,12px 100%);
+  transition:all .2s;
+}
+.hero-cta:hover{background:#d4ff33;box-shadow:var(--lime-glow);transform:translateY(-2px)}
+.hero-stats{
+  display:flex;gap:48px;justify-content:center;
+  margin-top:60px;padding-top:40px;
+  border-top:1px solid var(--border);
+  width:100%;max-width:600px;
+}
+.hstat-n{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--lime);letter-spacing:2px}
+.hstat-l{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:2px}
 
-    /* FILTERS */
-    .filters {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      padding: 0 24px 28px;
-      max-width: 1100px; margin: 0 auto;
-    }
-    .filter-btn {
-      padding: 7px 18px;
-      border-radius: 30px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
-    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
+/* FILTERS */
+.filter-wrap{
+  padding:32px 32px 0;
+  display:flex;gap:8px;flex-wrap:wrap;
+  position:relative;z-index:10;
+}
+.fb{
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;
+  padding:8px 20px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);
+  cursor:pointer;transition:all .2s;
+  clip-path:polygon(0 0,calc(100% - 6px) 0,100% 100%,6px 100%);
+}
+.fb:hover{border-color:var(--lime);color:var(--lime)}
+.fb.on{background:var(--lime);color:#060809;border-color:var(--lime);font-weight:700}
 
-    /* GRID */
-    .products-section { padding: 0 24px 60px; max-width: 1100px; margin: 0 auto; }
-    .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; }
-    .section-header h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
-    .section-header .count { font-size: 13px; color: var(--muted); }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
+/* SECTION */
+.sec{padding:24px 32px 80px;max-width:1400px;margin:0 auto;position:relative;z-index:10}
+.sec-hd{
+  display:flex;align-items:center;gap:16px;margin-bottom:28px;
+  font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;
+}
+.sec-hd::before{content:'>';color:var(--lime)}
+.sec-hd span{color:var(--text);font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;letter-spacing:0}
 
-    /* PRODUCT CARD */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s, background 0.2s;
-      display: flex; flex-direction: column;
-    }
-    .card:hover { transform: translateY(-3px); border-color: rgba(249,115,22,0.3); background: var(--card-hover); }
-    .card-img {
-      width: 100%; aspect-ratio: 4/3;
-      background: var(--surface2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 52px;
-      position: relative;
-    }
-    .badge-tag {
-      position: absolute; top: 10px; left: 10px;
-      background: var(--accent); color: #fff;
-      font-size: 10px; font-weight: 500;
-      padding: 2px 8px; border-radius: 4px;
-      letter-spacing: 0.5px;
-    }
-    .badge-tag.popular { background: var(--green); }
-    .card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; }
-    .product-category { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
-    .product-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 6px; line-height: 1.3; }
-    .stars { color: #fbbf24; font-size: 13px; margin-bottom: 6px; }
-    .stars span { color: var(--muted); font-size: 12px; margin-left: 4px; }
-    .product-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; flex: 1; margin-bottom: 14px; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--border); }
-    .price { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; }
-    .price .old { font-size: 12px; color: var(--muted); text-decoration: line-through; font-weight: 400; margin-left: 4px; }
-    .buy-btn {
-      background: var(--accent);
-      color: #fff; border: none;
-      padding: 7px 14px; border-radius: 8px;
-      font-size: 12px; font-weight: 500;
-      cursor: pointer; text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      white-space: nowrap;
-    }
-    .buy-btn:hover { background: #ea6c05; transform: scale(1.03); }
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1px;background:var(--border);
+}
+.card{
+  background:var(--card);
+  display:flex;flex-direction:column;
+  transition:background .2s;
+  position:relative;overflow:hidden;
+}
+.card:hover{background:var(--bg3)}
+.card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:var(--lime);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.card:hover::before{transform:scaleX(1)}
+.card-img{
+  width:100%;aspect-ratio:1;
+  background:var(--bg2);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.card-img img{
+  width:80%;height:80%;object-fit:contain;
+  transition:transform .4s;
+  filter:brightness(0.9);
+}
+.card:hover .card-img img{transform:scale(1.08);filter:brightness(1)}
+.cbadge{
+  position:absolute;top:10px;left:10px;
+  font-family:'Space Mono',monospace;font-size:9px;font-weight:700;
+  padding:3px 8px;letter-spacing:1px;
+  background:var(--lime);color:#060809;
+}
+.cbadge.hot{background:#ff4444;color:#fff}
+.cbadge.new{background:#00cfff;color:#060809}
+.card-body{padding:16px;flex:1;display:flex;flex-direction:column}
+.ccat{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:var(--muted);margin-bottom:6px;text-transform:uppercase;
+}
+.cname{
+  font-size:13px;font-weight:500;line-height:1.4;
+  flex:1;margin-bottom:12px;color:var(--text);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.cfoot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);
+}
+.cprice{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;
+  color:var(--lime);letter-spacing:1px;
+}
+.cprice small{font-family:'Outfit',sans-serif;font-size:11px;color:var(--muted);display:block;line-height:1}
+.cbuy{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;
+  background:transparent;border:1px solid var(--lime);
+  color:var(--lime);padding:7px 12px;
+  text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%);
+  transition:all .2s;white-space:nowrap;
+}
+.cbuy:hover{background:var(--lime);color:#060809;box-shadow:var(--lime-glow)}
 
-    /* SEO CONTENT SECTION */
-    .seo-section {
-      max-width: 860px; margin: 0 auto 60px;
-      padding: 0 24px;
-    }
-    .seo-section h2 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-    .seo-section p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
-    .articles-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 16px; }
-    .article-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 10px; padding: 14px;
-      text-decoration: none; color: var(--text);
-      transition: border-color 0.2s;
-    }
-    .article-card:hover { border-color: rgba(249,115,22,0.4); }
-    .article-card .tag { font-size: 11px; color: var(--accent); margin-bottom: 6px; }
-    .article-card h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; line-height: 1.35; }
+/* HIDDEN */
+.hidden{display:none!important}
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 24px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    footer a { color: var(--muted); }
-    footer strong { color: var(--text); }
-
-    /* HIDDEN class */
-    .hidden { display: none !important; }
-  </style>
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:32px;text-align:center;
+  font-family:'Space Mono',monospace;font-size:11px;
+  color:var(--muted);letter-spacing:1px;
+  position:relative;z-index:10;
+}
+footer strong{color:var(--lime)}
+</style>
 </head>
 <body>
 
-  <!-- AFFILIATE DISCLOSURE -->
-  <div class="disclosure">
-    ⚡ GearPick India is a participant in the Amazon Associates programme. We earn a small commission on purchases — at no extra cost to you.
+<div class="disc">// AFFILIATE DISCLOSURE — GEARPICK INDIA EARNS FROM QUALIFYING AMAZON PURCHASES AT NO EXTRA COST TO YOU //</div>
+
+<nav>
+  <a class="logo" href="#">GEAR<span class="hi">PICK</span>&nbsp;INDIA</a>
+  <div class="nav-r">
+    <a href="#gear">ALL GEAR</a>
+    <a href="headphones-under-1000.html">GUIDES</a>
+    <span class="nav-tag">IN</span>
   </div>
+</nav>
 
-  <!-- NAV -->
-  <nav>
-    <a class="logo" href="#">Gear<span>Pick</span> <span style="color:var(--muted);font-size:13px;font-weight:400">India</span></a>
-    <div class="nav-links">
-      <a href="#products">All Gear</a>
-      <a href="headphones-under-1000.html">Top Lists</a>
-      <a href="#about">About</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-badge">🇮🇳 Made for Indian Students</div>
-    <h1>Pick the <em>right gear</em>,<br/>skip the confusion.</h1>
-    <p>Handpicked Amazon deals on headphones, keyboards & mice — honest reviews, verified picks, direct checkout.</p>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Verified Picks</div></div>
-      <div class="stat"><div class="stat-num">₹299+</div><div class="stat-label">Starts From</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Amazon India</div></div>
-    </div>
-  </section>
-
-  <!-- FILTERS -->
-  <div class="filters" id="products">
-    <button class="filter-btn active" onclick="filterProducts('all', this)">🛒 All Gear</button>
-    <button class="filter-btn" onclick="filterProducts('headphone', this)">🎧 Headphones</button>
-    <button class="filter-btn" onclick="filterProducts('keyboard', this)">⌨️ Keyboards</button>
-    <button class="filter-btn" onclick="filterProducts('mouse', this)">🖱️ Mice</button>
+<section class="hero">
+  <div class="hero-label">PREMIUM GAMING GEAR</div>
+  <h1>PICK YOUR<br/><span class="g">WEAPON.</span></h1>
+  <p class="hero-sub">// handpicked amazon deals on gaming mice, keyboards & headphones — verified, direct checkout //</p>
+  <a class="hero-cta" href="#gear">EXPLORE GEAR</a>
+  <div class="hero-stats">
+    <div><div class="hstat-n">33</div><div class="hstat-l">PRODUCTS</div></div>
+    <div><div class="hstat-n">3</div><div class="hstat-l">CATEGORIES</div></div>
+    <div><div class="hstat-n">100%</div><div class="hstat-l">AMAZON IN</div></div>
   </div>
+</section>
 
-  <!-- PRODUCTS GRID -->
-  <section class="products-section">
-    <div class="section-header">
-      <h2>Top Picks</h2>
-      <span class="count" id="count">12 products</span>
+<div class="filter-wrap" id="gear">
+  <button class="fb on" onclick="filter('all',this)">// ALL</button>
+  <button class="fb" onclick="filter('mouse',this)">// MICE</button>
+  <button class="fb" onclick="filter('keyboard',this)">// KEYBOARDS</button>
+  <button class="fb" onclick="filter('headphone',this)">// HEADPHONES</button>
+</div>
+
+<section class="sec">
+  <div class="sec-hd"><span id="count-label">33 products loaded</span></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<footer>
+  <p><strong>GEARPICK INDIA</strong> &mdash; HANDPICKED AMAZON GEAR FOR GAMERS &amp; STUDENTS</p>
+  <p style="margin-top:8px">AS AN AMAZON ASSOCIATE WE EARN FROM QUALIFYING PURCHASES &mdash; PRICES APPROXIMATE &amp; MAY VARY &mdash; &copy; 2026</p>
+</footer>
+
+<script>
+const products = [
+  {title:"Marshall Monitor III ANC Headphones",price:"26,999",img:"https://m.media-amazon.com/images/I/81M31hLf2NL._SL500_.jpg",link:"https://amzn.to/3PEKi02",cat:"headphone",badge:"PREMIUM"},
+  {title:"Marshall Major V Wireless Headphones",price:"13,499",img:"https://m.media-amazon.com/images/I/71zqqGdkY+L._SL500_.jpg",link:"https://amzn.to/4dDnOpo",cat:"headphone",badge:"TOP PICK"},
+  {title:"Logitech G915 X LIGHTSPEED Wireless Gaming Keyboard",price:"19,495",img:"https://m.media-amazon.com/images/I/61nD0vAkYmL._SL500_.jpg",link:"https://amzn.to/4tDqSGV",cat:"keyboard",badge:"PREMIUM"},
+  {title:"Razer Huntsman V3 Pro 8KHz Analog Optical Keyboard",price:"28,389",img:"https://m.media-amazon.com/images/I/71W475+zCYL._SL500_.jpg",link:"https://amzn.to/3Pkw6co",cat:"keyboard",badge:"ELITE"},
+  {title:"Logitech MX Master 4 Wireless Mouse",price:"11,995",img:"https://m.media-amazon.com/images/I/61D7dUYR3DL._SL500_.jpg",link:"https://amzn.to/4ucFbDi",cat:"mouse",badge:"NEW"},
+  {title:"Logitech MX Master 3S Wireless Performance Mouse",price:"7,495",img:"https://m.media-amazon.com/images/I/618IJzC-fFL._SL500_.jpg",link:"https://amzn.to/4wt2Hxt",cat:"mouse",badge:"TOP PICK"},
+  {title:"Logitech Lift Vertical Ergonomic Wireless Mouse",price:"5,245",img:"https://m.media-amazon.com/images/I/61OkuiCWbDL._SL500_.jpg",link:"https://amzn.to/42z6EmE",cat:"mouse",badge:null},
+  {title:"GravaStar Mercury X Pro Wireless Gaming Mouse 32K DPI",price:"22,918",img:"https://m.media-amazon.com/images/I/61AsNPxU58L._SL500_.jpg",link:"https://amzn.to/4uTScSt",cat:"mouse",badge:"ELITE"},
+  {title:"Logitech G PRO X Superlight 2 Wireless Gaming Mouse",price:"12,495",img:"https://m.media-amazon.com/images/I/71lf56SvTsL._SL500_.jpg",link:"https://amzn.to/49LL9mo",cat:"mouse",badge:"PRO"},
+  {title:"Razer Viper V3 Pro Faker Edition 8KHz Gaming Mouse",price:"15,995",img:"https://m.media-amazon.com/images/I/71pHfo4qfML._SL500_.jpg",link:"https://amzn.to/4uTXXQ5",cat:"mouse",badge:"ELITE"},
+  {title:"Kreo Swarm 75% Wireless Mechanical Keyboard",price:"4,999",img:"https://m.media-amazon.com/images/I/71uKU6o11zL._SL500_.jpg",link:"https://amzn.to/4dNJ8Zq",cat:"keyboard",badge:"TOP PICK"},
+  {title:"Razer DeathAdder Essential Wired Gaming Mouse",price:"1,389",img:"https://m.media-amazon.com/images/I/61t9BQyeJkS._SL500_.jpg",link:"https://amzn.to/4dvOmHS",cat:"mouse",badge:null},
+  {title:"Kreo Chimera V2 RGB Wireless Gaming Mouse",price:"1,999",img:"https://m.media-amazon.com/images/I/51Zd4blv+3L._SL500_.jpg",link:"https://amzn.to/4tIi4jc",cat:"mouse",badge:null},
+  {title:"Logitech G102 LIGHTSYNC RGB Gaming Mouse 8K DPI",price:"1,195",img:"https://m.media-amazon.com/images/I/61RYwHoeHjL._SL500_.jpg",link:"https://amzn.to/3PNt2FY",cat:"mouse",badge:"HOT"},
+  {title:"HP Z3700 Dual Silver Wireless Mouse",price:"1,199",img:"https://m.media-amazon.com/images/I/31QzmPdXgZL._SL500_.jpg",link:"https://amzn.to/4uX5jSU",cat:"mouse",badge:null},
+  {title:"EvoFox Banshee 2 Wireless Gaming Mouse with Display",price:"1,799",img:"https://m.media-amazon.com/images/I/51iPDXicJML._SL500_.jpg",link:"https://amzn.to/3PrQico",cat:"mouse",badge:"NEW"},
+  {title:"Cosmic Byte Ignis Wireless Tri-Mode Gaming Mouse 54g",price:"1,999",img:"https://m.media-amazon.com/images/I/51EkIVyi99L._SL500_.jpg",link:"https://amzn.to/4tFM8fi",cat:"mouse",badge:null},
+  {title:"Amkette XS Flow Ergonomic Wireless Mouse 4-Device",price:"1,699",img:"https://m.media-amazon.com/images/I/51swGZPiUBL._SL500_.jpg",link:"https://amzn.to/4wP2dSG",cat:"mouse",badge:null},
+  {title:"Redragon M810 Pro Wireless Gaming Mouse 10K DPI",price:"1,989",img:"https://m.media-amazon.com/images/I/51UCF1KOnKL._SL500_.jpg",link:"https://amzn.to/4dg3IS1",cat:"mouse",badge:null},
+  {title:"HyperX Pulsefire Core RGB Gaming Mouse 6200 DPI",price:"1,199",img:"https://m.media-amazon.com/images/I/51vAazIqn-L._SL500_.jpg",link:"https://amzn.to/4wRHSMD",cat:"mouse",badge:null},
+  {title:"EvoFox Banshee Wireless Gaming Mouse Tri-Mode 10K DPI",price:"1,699",img:"https://m.media-amazon.com/images/I/51NkmvvPohL._SL500_.jpg",link:"https://amzn.to/4nEusiO",cat:"mouse",badge:null},
+  {title:"Kreo Hawk RGB Gaming Mouse 12400 DPI Optical",price:"1,149",img:"https://m.media-amazon.com/images/I/61gTZK9as+L._SL500_.jpg",link:"https://amzn.to/4nwp0hI",cat:"mouse",badge:null},
+  {title:"EvoFox Blaze 2 Wireless Gaming Mouse Tri-Mode 12800 DPI",price:"1,379",img:"https://m.media-amazon.com/images/I/61cTjSygCcL._SL500_.jpg",link:"https://amzn.to/4dc0YFi",cat:"mouse",badge:null},
+  {title:"Redragon M612 PRO RGB Gaming Mouse 8K Wireless",price:"1,889",img:"https://m.media-amazon.com/images/I/51VV+zLR66L._SL500_.jpg",link:"https://amzn.to/3PlBn3F",cat:"mouse",badge:null},
+  {title:"Archer Tech Lab Recurve 600 Wireless Gaming Mouse 10K DPI",price:"1,377",img:"https://m.media-amazon.com/images/I/61XpDCzLwNL._SL500_.jpg",link:"https://amzn.to/4eSBKwT",cat:"mouse",badge:null},
+  {title:"Logitech Pebble Mouse 2 M350s Slim Bluetooth Mouse",price:"1,595",img:"https://m.media-amazon.com/images/I/51pIShw4V8L._SL500_.jpg",link:"https://amzn.to/4dCq9Qu",cat:"mouse",badge:null},
+  {title:"Amkette XS Flow S Ergonomic Wireless Mouse 800mAh",price:"1,299",img:"https://m.media-amazon.com/images/I/616nb9AO7UL._SL500_.jpg",link:"https://amzn.to/3RLu1qL",cat:"mouse",badge:null},
+  {title:"EvoFox Phantom Air Wireless Gaming Mouse 69g Lightweight",price:"1,179",img:"https://m.media-amazon.com/images/I/61S9CERmwJL._SL500_.jpg",link:"https://amzn.to/4tJwTlo",cat:"mouse",badge:null},
+  {title:"Zebronics K5002MW Slim Wireless Keyboard AI Copilot Key",price:"1,699",img:"https://m.media-amazon.com/images/I/71w83CCQGAL._SL500_.jpg",link:"https://amzn.to/4ulSH7O",cat:"keyboard",badge:null},
+  {title:"HP 350 Compact Multi-Device Bluetooth Keyboard",price:"1,899",img:"https://m.media-amazon.com/images/I/61NDxacIk1L._SL500_.jpg",link:"https://amzn.to/3PrRf4s",cat:"keyboard",badge:null},
+  {title:"Redragon K630 Dragonborn 60% Wired Mechanical Keyboard",price:"1,989",img:"https://m.media-amazon.com/images/I/619t8CVd03L._SL500_.jpg",link:"https://amzn.to/3PH8Mpz",cat:"keyboard",badge:null},
+  {title:"EvoFox Katana X2 TKL Mechanical Gaming Keyboard",price:"1,699",img:"https://m.media-amazon.com/images/I/61LULmvXjfL._SL500_.jpg",link:"https://amzn.to/4wpM0D4",cat:"keyboard",badge:"HOT"},
+  {title:"Redragon Shiva K512 RGB Membrane Gaming Keyboard",price:"1,889",img:"https://m.media-amazon.com/images/I/71w9I5LAUZL._SL500_.jpg",link:"https://amzn.to/4nCJQMv",cat:"keyboard",badge:null},
+];
+
+const catLabel={mouse:"MOUSE",keyboard:"KEYBOARD",headphone:"HEADPHONE"};
+const grid=document.getElementById('grid');
+const countLabel=document.getElementById('count-label');
+
+function renderCard(p){
+  const badgeHTML=p.badge?`<span class="cbadge${p.badge==='HOT'?' hot':p.badge==='NEW'?' new':''}">${p.badge}</span>`:'';
+  return `<div class="card" data-cat="${p.cat}">
+    <div class="card-img">
+      <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'"/>
+      ${badgeHTML}
     </div>
-    <div class="grid" id="grid">
-
-      <!-- HEADPHONES -->
-      <div class="card" data-cat="headphone">
-        <div class="card-img">🎧<span class="badge-tag popular">POPULAR</span></div>
-        <div class="card-body">
-          <div class="product-category">Headphones</div>
-          <div class="product-name">boAt Bassheads 100 In-Ear</div>
-          <div class="stars">★★★★☆ <span>4.1 (21k ratings)</span></div>
-          <div class="product-desc">Best-selling wired earphones for students. Deep bass, tangle-free cable, and a mic for calls — all under ₹350. Great daily driver.</div>
-          <div class="card-footer">
-            <div class="price">₹349 <span class="old">₹699</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/dp/B07GWJSY4T/?tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
+    <div class="card-body">
+      <div class="ccat">${catLabel[p.cat]||p.cat}</div>
+      <div class="cname">${p.title}</div>
+      <div class="cfoot">
+        <div class="cprice"><small>FROM</small>₹${p.price}</div>
+        <a class="cbuy" href="${p.link}" target="_blank" rel="nofollow noopener">GET IT &rsaquo;</a>
       </div>
+    </div>
+  </div>`;
+}
 
-      <div class="card" data-cat="headphone">
-        <div class="card-img">🎧</div>
-        <div class="card-body">
-          <div class="product-category">Headphones</div>
-          <div class="product-name">JBL C50HI Wired Earphones</div>
-          <div class="stars">★★★★☆ <span>4.0 (18k ratings)</span></div>
-          <div class="product-desc">JBL's entry-level earphone with punchy sound. 1-button mic, 3.5mm jack. Works with all phones. Reliable brand at a student-friendly price.</div>
-          <div class="card-footer">
-            <div class="price">₹599 <span class="old">₹1,299</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=JBL+C50HI&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
+function filter(cat,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const cards=grid.querySelectorAll('.card');
+  let n=0;
+  cards.forEach(c=>{
+    const show=cat==='all'||c.dataset.cat===cat;
+    c.classList.toggle('hidden',!show);
+    if(show)n++;
+  });
+  countLabel.textContent=n+' product'+(n!==1?'s':'')+' loaded';
+}
 
-      <div class="card" data-cat="headphone">
-        <div class="card-img">🎧<span class="badge-tag">BEST VALUE</span></div>
-        <div class="card-body">
-          <div class="product-category">Headphones</div>
-          <div class="product-name">Sony MDR-ZX110 Over-Ear</div>
-          <div class="stars">★★★★☆ <span>4.2 (35k ratings)</span></div>
-          <div class="product-desc">Sony quality at a budget price. Over-ear design, 30mm drivers, foldable — perfect for long study sessions or commutes. Best Sony under ₹1000.</div>
-          <div class="card-footer">
-            <div class="price">₹799 <span class="old">₹1,990</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/dp/B00ICXQ8LM/?tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-cat="headphone">
-        <div class="card-img">🎧</div>
-        <div class="card-body">
-          <div class="product-category">Headphones · Wireless</div>
-          <div class="product-name">boAt Rockerz 255 Pro+</div>
-          <div class="stars">★★★★☆ <span>4.1 (50k ratings)</span></div>
-          <div class="product-desc">Wireless neckband with 40hrs battery and ASAP charging (10 min = 200 min). Best wireless earphone under ₹1000 for sports & daily use.</div>
-          <div class="card-footer">
-            <div class="price">₹999 <span class="old">₹2,990</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=boat+rockerz+255+pro+plus&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-cat="headphone">
-        <div class="card-img">🎧<span class="badge-tag">GAMING</span></div>
-        <div class="card-body">
-          <div class="product-category">Headphones · Gaming</div>
-          <div class="product-name">Zebronics Zeb-Thunder Gaming Headset</div>
-          <div class="stars">★★★★☆ <span>3.9 (12k ratings)</span></div>
-          <div class="product-desc">Over-ear gaming headset with mic. LED lights, 40mm drivers, soft cushions. Best budget gaming headset under ₹1000 for PC/mobile gaming.</div>
-          <div class="card-footer">
-            <div class="price">₹899 <span class="old">₹1,799</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=zebronics+zeb+thunder+headset&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- KEYBOARDS -->
-      <div class="card" data-cat="keyboard">
-        <div class="card-img">⌨️<span class="badge-tag popular">POPULAR</span></div>
-        <div class="card-body">
-          <div class="product-category">Keyboards</div>
-          <div class="product-name">Zebronics Zeb-K11 USB Keyboard</div>
-          <div class="stars">★★★★☆ <span>4.0 (28k ratings)</span></div>
-          <div class="product-desc">Full-size membrane keyboard, USB plug-and-play, spill-resistant. Zero setup needed. Best option for students on a tight budget who need reliability.</div>
-          <div class="card-footer">
-            <div class="price">₹349 <span class="old">₹799</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=zebronics+zeb+k11+keyboard&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-cat="keyboard">
-        <div class="card-img">⌨️<span class="badge-tag">BEST VALUE</span></div>
-        <div class="card-body">
-          <div class="product-category">Keyboards</div>
-          <div class="product-name">Ant Esports MK3400 Mechanical</div>
-          <div class="stars">★★★★☆ <span>4.1 (8k ratings)</span></div>
-          <div class="product-desc">Budget mechanical keyboard with Blue switches — clicky tactile feedback. RGB backlight, full-size layout. Best mechanical keyboard under ₹1500.</div>
-          <div class="card-footer">
-            <div class="price">₹1,299 <span class="old">₹2,999</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=ant+esports+mk3400&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-cat="keyboard">
-        <div class="card-img">⌨️</div>
-        <div class="card-body">
-          <div class="product-category">Keyboards · Wireless</div>
-          <div class="product-name">Portronics Chicklet+ Wireless</div>
-          <div class="stars">★★★★☆ <span>3.8 (5k ratings)</span></div>
-          <div class="product-desc">Compact wireless keyboard with up to 4 months battery. Slim, silent keys. Great for laptop users who hate cables on their desk.</div>
-          <div class="card-footer">
-            <div class="price">₹999 <span class="old">₹1,999</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=portronics+chicklet+wireless+keyboard&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- MICE -->
-      <div class="card" data-cat="mouse">
-        <div class="card-img">🖱️<span class="badge-tag popular">POPULAR</span></div>
-        <div class="card-body">
-          <div class="product-category">Mice</div>
-          <div class="product-name">Logitech B100 Optical Mouse</div>
-          <div class="stars">★★★★★ <span>4.4 (95k ratings)</span></div>
-          <div class="product-desc">India's most trusted budget mouse. Logitech's 3-year durability warranty, ambidextrous design. Works on any surface. Cannot go wrong at this price.</div>
-          <div class="card-footer">
-            <div class="price">₹449 <span class="old">₹699</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=logitech+b100+mouse&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-cat="mouse">
-        <div class="card-img">🖱️<span class="badge-tag">GAMING</span></div>
-        <div class="card-body">
-          <div class="product-category">Mice · Gaming</div>
-          <div class="product-name">Zebronics Zeb-Transformer M</div>
-          <div class="stars">★★★★☆ <span>3.9 (9k ratings)</span></div>
-          <div class="product-desc">RGB gaming mouse with 7 buttons, 2400 DPI. Ergonomic right-hand design. Best entry gaming mouse under ₹500 — solid for casual gaming and studies.</div>
-          <div class="card-footer">
-            <div class="price">₹449 <span class="old">₹999</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=zebronics+transformer+m+mouse&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-cat="mouse">
-        <div class="card-img">🖱️</div>
-        <div class="card-body">
-          <div class="product-category">Mice</div>
-          <div class="product-name">HP X500 Wired Mouse</div>
-          <div class="stars">★★★★☆ <span>4.2 (22k ratings)</span></div>
-          <div class="product-desc">HP brand reliability at ₹549. Smooth scroll, comfortable grip, plug-and-play. Great for everyday laptop/desktop use with a recognisable brand name.</div>
-          <div class="card-footer">
-            <div class="price">₹549 <span class="old">₹999</span></div>
-            <a class="buy-btn" href="https://www.amazon.in/s?k=hp+x500+wired+mouse&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-cat="mouse">
-        <div class="card-img">🖱️<span class="badge-tag">WIRELESS</span></div>
-        <div class="card-body">
-          <div class="product-category">Mice · Wireless</div>
-          <div class="product-name">Portronics
+grid.innerHTML=products.map(renderCard).join('');
+</script>
+</body>
+</html>
