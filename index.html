@@ -167,8 +167,9 @@ nav{
   width:100%;aspect-ratio:1;
   background:var(--bg2);overflow:hidden;
   display:flex;align-items:center;justify-content:center;
-  position:relative;
+  position:relative;cursor:pointer;
 }
+.card-img-link{display:flex;width:100%;height:100%;align-items:center;justify-content:center;position:relative;}
 .card-img img{
   width:80%;height:80%;object-fit:contain;
   transition:transform .4s;
@@ -214,6 +215,48 @@ nav{
 
 /* HIDDEN */
 .hidden{display:none!important}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+  padding:20px;
+}
+.lightbox.open{opacity:1;pointer-events:all}
+.lightbox-inner{
+  position:relative;max-width:560px;width:100%;
+  background:var(--bg2);border:1px solid var(--border);
+  padding:20px;
+}
+.lightbox-inner img{width:100%;object-fit:contain;max-height:60vh;display:block}
+.lightbox-title{
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
+  color:var(--text);margin-top:14px;line-height:1.4;
+}
+.lightbox-price{
+  font-family:'Bebas Neue',sans-serif;font-size:26px;
+  color:var(--lime);margin-top:6px;
+}
+.lightbox-buy{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--lime);color:#060809;
+  font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;
+  padding:11px 28px;text-decoration:none;margin-top:14px;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%);
+  transition:all .2s;
+}
+.lightbox-buy:hover{background:#d4ff33}
+.lightbox-close{
+  position:absolute;top:12px;right:12px;
+  background:rgba(255,255,255,0.08);border:none;
+  color:var(--text);font-size:18px;width:32px;height:32px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.lightbox-close:hover{background:var(--red)}
+.card-img{cursor:zoom-in!important}
 
 /* FOOTER */
 footer{
@@ -268,6 +311,17 @@ footer strong{color:var(--lime)}
   <p style="margin-top:8px">AS AN AMAZON ASSOCIATE WE EARN FROM QUALIFYING PURCHASES &mdash; PRICES APPROXIMATE &amp; MAY VARY &mdash; &copy; 2026</p>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner" id="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lb-img" src="" alt=""/>
+    <div class="lightbox-title" id="lb-title"></div>
+    <div class="lightbox-price" id="lb-price"></div>
+    <a class="lightbox-buy" id="lb-buy" href="#" target="_blank" rel="nofollow noopener">CHECK PRICE ON AMAZON →</a>
+  </div>
+</div>
+
 <script>
 const products = [
   {title:"Marshall Monitor III ANC Headphones",price:"26,999",img:"https://m.media-amazon.com/images/I/81M31hLf2NL._SL500_.jpg",link:"https://amzn.to/3PEKi02",cat:"headphone",badge:"PREMIUM"},
@@ -312,13 +366,13 @@ const countLabel=document.getElementById('count-label');
 function renderCard(p){
   const badgeHTML=p.badge?`<span class="cbadge${p.badge==='HOT'?' hot':p.badge==='NEW'?' new':''}">${p.badge}</span>`:'';
   return `<div class="card" data-cat="${p.cat}">
-    <div class="card-img">
+    <div class="card-img" onclick="openLightbox('${p.img.replace(/'/g,"\\'")}','${p.title.replace(/'/g,"\\'")}','${p.price}','${p.link}')">
       <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'"/>
       ${badgeHTML}
     </div>
     <div class="card-body">
       <div class="ccat">${catLabel[p.cat]||p.cat}</div>
-      <div class="cname">${p.title}</div>
+      <a class="cname" href="${p.link}" target="_blank" rel="nofollow noopener" style="text-decoration:none;color:var(--text)">${p.title}</a>
       <div class="cfoot">
         <div class="cprice"><small>FROM</small>₹${p.price}</div>
         <a class="cbuy" href="${p.link}" target="_blank" rel="nofollow noopener">GET IT &rsaquo;</a>
@@ -341,6 +395,22 @@ function filter(cat,btn){
 }
 
 grid.innerHTML=products.map(renderCard).join('');
+countLabel.textContent=products.length+' products loaded';
+
+function openLightbox(img,title,price,link){
+  document.getElementById('lb-img').src=img;
+  document.getElementById('lb-title').textContent=title;
+  document.getElementById('lb-price').textContent='₹'+price;
+  document.getElementById('lb-buy').href=link;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e){
+  if(e && document.getElementById('lightbox-inner').contains(e.target)) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
 </script>
 </body>
 </html>
