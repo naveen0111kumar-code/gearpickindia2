@@ -3,310 +3,409 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GearPick India</title>
-  <meta name="description" content="India's fastest way to pick the right gadget. Handpicked Amazon deals on headphones, keyboards, and mice with verified ratings and direct checkout." />
+  <title>GearPick India — Best Headphones, Keyboards & Mice for Students</title>
+  <meta name="description" content="Handpicked Amazon India deals on headphones, keyboards and mice for students. Verified picks under ₹500–₹3000 with honest reviews and direct checkout." />
+  <meta name="keywords" content="best headphones india, gaming keyboard india, best mouse under 1000, student tech deals india, amazon india gadgets" />
+  <meta property="og:title" content="GearPick India — Best Gear for Students" />
+  <meta property="og:description" content="Handpicked Amazon deals on headphones, keyboards & mice for Indian students." />
+  <meta property="og:url" content="https://naveen0111kumar-code.github.io/gearpickindia2/" />
+  <link rel="canonical" href="https://naveen0111kumar-code.github.io/gearpickindia2/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    html { scroll-behavior: smooth; }
     :root {
-      --bg: #f3e4c9;
-      --surface: #faf4e8;
-      --border: #dcc9a8;
-      --accent: #8a5f41;
-      --accent2: #ccd67f;
-      --text: #2d1f0e;
-      --muted: #a77f60;
-      --card: #fff8ee;
+      --bg: #0d0f14;
+      --surface: #13161e;
+      --surface2: #1a1e28;
+      --border: #252933;
+      --accent: #f97316;
+      --accent-dim: rgba(249,115,22,0.12);
+      --text: #e8eaf0;
+      --muted: #7a8099;
+      --green: #22c55e;
+      --card-hover: #1e2230;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
 
+    /* DISCLOSURE BANNER */
+    .disclosure {
+      background: var(--accent-dim);
+      border-bottom: 1px solid rgba(249,115,22,0.2);
+      text-align: center;
+      padding: 8px 20px;
+      font-size: 12px;
+      color: #f4a45a;
+    }
+
+    /* NAV */
     nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,15,20,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 2.5rem; border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; background: rgba(243,228,201,0.92);
-      backdrop-filter: blur(12px); z-index: 100;
+      height: 58px;
     }
-    .logo { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
     .logo span { color: var(--accent); }
-    nav ul { display: flex; gap: 2rem; list-style: none; }
-    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-    nav a:hover { color: var(--text); }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    @media (max-width: 600px) { .nav-links { display: none; } }
 
-    .hero { padding: 5rem 2.5rem 3rem; max-width: 900px; margin: 0 auto; text-align: center; }
-    .hero-tag {
-      display: inline-block; background: rgba(138,95,65,0.1); color: var(--accent);
-      border: 1px solid rgba(138,95,65,0.3); border-radius: 100px;
-      font-size: 0.78rem; font-weight: 600; padding: 0.3rem 1rem;
-      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem;
+    /* HERO */
+    .hero {
+      padding: 64px 24px 48px;
+      max-width: 860px; margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 20px; padding: 4px 14px;
+      font-size: 12px; color: var(--accent);
+      margin-bottom: 20px;
     }
     .hero h1 {
-      font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 800; line-height: 1.1; margin-bottom: 1.2rem; letter-spacing: -1px;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 6vw, 54px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
     }
-    .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 560px; margin: 0 auto 2.5rem; }
-    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.92rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s; border: none; font-family: inherit; }
-    .btn-primary { background: var(--accent); color: white; }
-    .btn-primary:hover { background: #ff7040; transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-    .categories { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; padding: 0 2.5rem 3rem; }
-    .cat-btn {
-      padding: 0.5rem 1.2rem; border-radius: 100px; border: 1px solid var(--border);
-      background: transparent; color: var(--muted); font-size: 0.85rem;
-      font-family: inherit; cursor: pointer; transition: all 0.2s;
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero p { color: var(--muted); font-size: 16px; max-width: 520px; margin: 0 auto 28px; }
+    .hero-stats {
+      display: flex; gap: 32px; justify-content: center;
+      border-top: 1px solid var(--border);
+      padding-top: 24px; margin-top: 24px;
     }
-    .cat-btn.active, .cat-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(138,95,65,0.1); }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px; color: var(--accent); }
+    .stat-label { font-size: 12px; color: var(--muted); }
 
-    .section { max-width: 1200px; margin: 0 auto; padding: 1rem 2.5rem 5rem; }
-    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
-    .section-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; }
+    /* FILTERS */
+    .filters {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 0 24px 28px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.2rem; }
+    /* GRID */
+    .products-section { padding: 0 24px 60px; max-width: 1100px; margin: 0 auto; }
+    .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; }
+    .section-header h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
+    .section-header .count { font-size: 13px; color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
 
+    /* PRODUCT CARD */
     .card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      overflow: hidden; transition: border-color 0.2s, transform 0.2s;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
       display: flex; flex-direction: column;
     }
-    .card:hover { border-color: rgba(138,95,65,0.5); transform: translateY(-3px); }
-
+    .card:hover { transform: translateY(-3px); border-color: rgba(249,115,22,0.3); background: var(--card-hover); }
     .card-img {
-      width: 100%; height: 200px; object-fit: contain;
-      background: #f0e4cc; padding: 1rem;
-    }
-    .card-img-placeholder {
-      width: 100%; height: 200px; background: #f0e4cc;
+      width: 100%; aspect-ratio: 4/3;
+      background: var(--surface2);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem;
+      font-size: 52px;
+      position: relative;
     }
-
-    .card-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
-    .card-tag { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent2); }
-    .card-name { font-size: 0.92rem; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-price { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); }
-    .card-footer { margin-top: auto; padding-top: 0.8rem; border-top: 1px solid var(--border); }
+    .badge-tag {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--accent); color: #fff;
+      font-size: 10px; font-weight: 500;
+      padding: 2px 8px; border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .badge-tag.popular { background: var(--green); }
+    .card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; }
+    .product-category { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .product-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 6px; line-height: 1.3; }
+    .stars { color: #fbbf24; font-size: 13px; margin-bottom: 6px; }
+    .stars span { color: var(--muted); font-size: 12px; margin-left: 4px; }
+    .product-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; flex: 1; margin-bottom: 14px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--border); }
+    .price { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; }
+    .price .old { font-size: 12px; color: var(--muted); text-decoration: line-through; font-weight: 400; margin-left: 4px; }
     .buy-btn {
-      display: block; width: 100%; text-align: center; padding: 0.65rem;
-      background: rgba(138,95,65,0.1); color: var(--accent);
-      border: 1px solid rgba(138,95,65,0.35); border-radius: 8px;
-      font-size: 0.88rem; font-weight: 600; text-decoration: none;
-      transition: all 0.2s; font-family: inherit; cursor: pointer;
+      background: var(--accent);
+      color: #fff; border: none;
+      padding: 7px 14px; border-radius: 8px;
+      font-size: 12px; font-weight: 500;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
     }
-    .buy-btn:hover { background: var(--accent); color: #fff8ee; }
+    .buy-btn:hover { background: #ea6c05; transform: scale(1.03); }
 
-    .loading { text-align: center; padding: 4rem; color: var(--muted); font-size: 0.95rem; }
-    .loading-dot { display: inline-block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin: 0 3px; animation: pulse 1.2s ease-in-out infinite; }
-    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
-    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)} }
-
-    .error-box { background: rgba(138,95,65,0.08); border: 1px solid rgba(138,95,65,0.3); border-radius: 10px; padding: 1.5rem; color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
-    .error-box strong { color: var(--accent); }
-
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
-
-    footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
-    footer a { color: var(--accent); text-decoration: none; }
-
-    @media (max-width: 600px) {
-      nav ul { display: none; }
-      .hamburger { display: flex !important; }
-      .mobile-menu { display: none; flex-direction: column; gap: 0; background: #faf4e8; border-bottom: 1px solid var(--border); }
-      .mobile-menu.open { display: flex; }
-      .mobile-menu a { padding: 0.9rem 2rem; color: var(--text); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid var(--border); }
-      .mobile-menu a:last-child { border-bottom: none; }
-      .hero { padding: 3rem 1.5rem 2rem; }
-      .section { padding: 1rem 1.5rem 3rem; }
-      .categories { padding: 0 1.5rem 2rem; }
+    /* SEO CONTENT SECTION */
+    .seo-section {
+      max-width: 860px; margin: 0 auto 60px;
+      padding: 0 24px;
     }
+    .seo-section h2 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+    .seo-section p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
+    .articles-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 16px; }
+    .article-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px;
+      text-decoration: none; color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .article-card:hover { border-color: rgba(249,115,22,0.4); }
+    .article-card .tag { font-size: 11px; color: var(--accent); margin-bottom: 6px; }
+    .article-card h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; line-height: 1.35; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+    footer strong { color: var(--text); }
+
+    /* HIDDEN class */
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
+  <!-- AFFILIATE DISCLOSURE -->
+  <div class="disclosure">
+    ⚡ GearPick India is a participant in the Amazon Associates programme. We earn a small commission on purchases — at no extra cost to you.
+  </div>
+
+  <!-- NAV -->
   <nav>
-    <div class="logo" onclick="filterCategory('all',event)" style="cursor:pointer">Gear<span>Pick</span> India</div>
-    <ul>
-      <li><a href="#products" onclick="filterCategory('headphones',event)">Headphones</a></li>
-      <li><a href="#products" onclick="filterCategory('keyboard',event)">Keyboards</a></li>
-      <li><a href="#products" onclick="filterCategory('mouse',event)">Mice</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <a class="logo" href="#">Gear<span>Pick</span> <span style="color:var(--muted);font-size:13px;font-weight:400">India</span></a>
+    <div class="nav-links">
+      <a href="#products">All Gear</a>
+      <a href="headphones-under-1000.html">Top Lists</a>
+      <a href="#about">About</a>
+    </div>
   </nav>
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#products" onclick="filterCategory('all',event);toggleMenu()">🛒 All Gear</a>
-    <a href="#products" onclick="filterCategory('headphones',event);toggleMenu()">🎧 Headphones</a>
-    <a href="#products" onclick="filterCategory('keyboard',event);toggleMenu()">⌨️ Keyboards</a>
-    <a href="#products" onclick="filterCategory('mouse',event);toggleMenu()">🖱️ Mice</a>
-  </div>
 
-  <div class="hero">
-    <div class="hero-tag">🇮🇳 Made for India</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">🇮🇳 Made for Indian Students</div>
     <h1>Pick the <em>right gear</em>,<br/>skip the confusion.</h1>
-    <p>Handpicked Amazon deals on headphones, keyboards & mice — verified picks, direct checkout.</p>
-    <div class="hero-btns">
-      <a href="#products" class="btn btn-primary">Browse Picks</a>
+    <p>Handpicked Amazon deals on headphones, keyboards & mice — honest reviews, verified picks, direct checkout.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Verified Picks</div></div>
+      <div class="stat"><div class="stat-num">₹299+</div><div class="stat-label">Starts From</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Amazon India</div></div>
     </div>
+  </section>
+
+  <!-- FILTERS -->
+  <div class="filters" id="products">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">🛒 All Gear</button>
+    <button class="filter-btn" onclick="filterProducts('headphone', this)">🎧 Headphones</button>
+    <button class="filter-btn" onclick="filterProducts('keyboard', this)">⌨️ Keyboards</button>
+    <button class="filter-btn" onclick="filterProducts('mouse', this)">🖱️ Mice</button>
   </div>
 
-  <div class="categories">
-    <button class="cat-btn active" onclick="filterCategory('all',event)">🛒 All Gear</button>
-    <button class="cat-btn" onclick="filterCategory('headphones',event)">🎧 Headphones</button>
-    <button class="cat-btn" onclick="filterCategory('keyboard',event)">⌨️ Keyboards</button>
-    <button class="cat-btn" onclick="filterCategory('mouse',event)">🖱️ Mice</button>
-  </div>
-
-  <div class="section" id="products">
+  <!-- PRODUCTS GRID -->
+  <section class="products-section">
     <div class="section-header">
-      <h2 class="section-title">Top Picks</h2>
-      <span style="color:var(--muted);font-size:0.85rem;" id="product-count"></span>
+      <h2>Top Picks</h2>
+      <span class="count" id="count">12 products</span>
     </div>
-    <div class="grid" id="product-grid">
-      <div class="loading">
-        <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
-        <p style="margin-top:1rem">Loading products from spreadsheet...</p>
+    <div class="grid" id="grid">
+
+      <!-- HEADPHONES -->
+      <div class="card" data-cat="headphone">
+        <div class="card-img">🎧<span class="badge-tag popular">POPULAR</span></div>
+        <div class="card-body">
+          <div class="product-category">Headphones</div>
+          <div class="product-name">boAt Bassheads 100 In-Ear</div>
+          <div class="stars">★★★★☆ <span>4.1 (21k ratings)</span></div>
+          <div class="product-desc">Best-selling wired earphones for students. Deep bass, tangle-free cable, and a mic for calls — all under ₹350. Great daily driver.</div>
+          <div class="card-footer">
+            <div class="price">₹349 <span class="old">₹699</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/dp/B07GWJSY4T/?tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <footer>
-    <p>© 2026 GearPick India &nbsp;·&nbsp; Affiliate links via Amazon India</p>
-  </footer>
+      <div class="card" data-cat="headphone">
+        <div class="card-img">🎧</div>
+        <div class="card-body">
+          <div class="product-category">Headphones</div>
+          <div class="product-name">JBL C50HI Wired Earphones</div>
+          <div class="stars">★★★★☆ <span>4.0 (18k ratings)</span></div>
+          <div class="product-desc">JBL's entry-level earphone with punchy sound. 1-button mic, 3.5mm jack. Works with all phones. Reliable brand at a student-friendly price.</div>
+          <div class="card-footer">
+            <div class="price">₹599 <span class="old">₹1,299</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=JBL+C50HI&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById('mobile-menu').classList.toggle('open');
-    }
+      <div class="card" data-cat="headphone">
+        <div class="card-img">🎧<span class="badge-tag">BEST VALUE</span></div>
+        <div class="card-body">
+          <div class="product-category">Headphones</div>
+          <div class="product-name">Sony MDR-ZX110 Over-Ear</div>
+          <div class="stars">★★★★☆ <span>4.2 (35k ratings)</span></div>
+          <div class="product-desc">Sony quality at a budget price. Over-ear design, 30mm drivers, foldable — perfect for long study sessions or commutes. Best Sony under ₹1000.</div>
+          <div class="card-footer">
+            <div class="price">₹799 <span class="old">₹1,990</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/dp/B00ICXQ8LM/?tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-    // ✅ Your Google Sheet published as CSV
-    // To update: File → Share → Publish to web → CSV → copy URL here
-    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9LFlUmyOee9fc02skxWglRj4Y926bI2mcr0Fs5yF9Kj-191gVS1iM85S6Y-_tQ8wGPSkA6-KKS22F/pub?output=csv';
+      <div class="card" data-cat="headphone">
+        <div class="card-img">🎧</div>
+        <div class="card-body">
+          <div class="product-category">Headphones · Wireless</div>
+          <div class="product-name">boAt Rockerz 255 Pro+</div>
+          <div class="stars">★★★★☆ <span>4.1 (50k ratings)</span></div>
+          <div class="product-desc">Wireless neckband with 40hrs battery and ASAP charging (10 min = 200 min). Best wireless earphone under ₹1000 for sports & daily use.</div>
+          <div class="card-footer">
+            <div class="price">₹999 <span class="old">₹2,990</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=boat+rockerz+255+pro+plus&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-    let allProducts = [];
+      <div class="card" data-cat="headphone">
+        <div class="card-img">🎧<span class="badge-tag">GAMING</span></div>
+        <div class="card-body">
+          <div class="product-category">Headphones · Gaming</div>
+          <div class="product-name">Zebronics Zeb-Thunder Gaming Headset</div>
+          <div class="stars">★★★★☆ <span>3.9 (12k ratings)</span></div>
+          <div class="product-desc">Over-ear gaming headset with mic. LED lights, 40mm drivers, soft cushions. Best budget gaming headset under ₹1000 for PC/mobile gaming.</div>
+          <div class="card-footer">
+            <div class="price">₹899 <span class="old">₹1,799</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=zebronics+zeb+thunder+headset&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-    function detectCategory(title) {
-      const t = title.toLowerCase();
-      if (t.includes('headphone') || t.includes('earphone') || t.includes('earbud') || t.includes('marshall') || t.includes('sony wh') || t.includes('boat rockerz') || t.includes('monitor iii') || t.includes('major v')) return 'headphones';
-      if (t.includes('keyboard') || t.includes('keys') || t.includes('huntsman') || t.includes('g915') || t.includes('keychron') || t.includes('k630') || t.includes('katana') || t.includes('kreo swarm') || t.includes('zebronics k') || t.includes('hp 350')) return 'keyboard';
-      if (t.includes('mouse') || t.includes('mx master') || t.includes('deathadder') || t.includes('viper') || t.includes('g pro') || t.includes('lift vertical') || t.includes('gravastar') || t.includes('pebble')) return 'mouse';
-      return 'gear';
-    }
+      <!-- KEYBOARDS -->
+      <div class="card" data-cat="keyboard">
+        <div class="card-img">⌨️<span class="badge-tag popular">POPULAR</span></div>
+        <div class="card-body">
+          <div class="product-category">Keyboards</div>
+          <div class="product-name">Zebronics Zeb-K11 USB Keyboard</div>
+          <div class="stars">★★★★☆ <span>4.0 (28k ratings)</span></div>
+          <div class="product-desc">Full-size membrane keyboard, USB plug-and-play, spill-resistant. Zero setup needed. Best option for students on a tight budget who need reliability.</div>
+          <div class="card-footer">
+            <div class="price">₹349 <span class="old">₹799</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=zebronics+zeb+k11+keyboard&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-    function formatPrice(raw) {
-      if (!raw) return 'Check Price';
-      const cleaned = raw.replace(/[^0-9.]/g, '');
-      if (!cleaned) return raw;
-      const num = parseFloat(cleaned);
-      if (isNaN(num)) return raw;
-      return '₹' + num.toLocaleString('en-IN');
-    }
+      <div class="card" data-cat="keyboard">
+        <div class="card-img">⌨️<span class="badge-tag">BEST VALUE</span></div>
+        <div class="card-body">
+          <div class="product-category">Keyboards</div>
+          <div class="product-name">Ant Esports MK3400 Mechanical</div>
+          <div class="stars">★★★★☆ <span>4.1 (8k ratings)</span></div>
+          <div class="product-desc">Budget mechanical keyboard with Blue switches — clicky tactile feedback. RGB backlight, full-size layout. Best mechanical keyboard under ₹1500.</div>
+          <div class="card-footer">
+            <div class="price">₹1,299 <span class="old">₹2,999</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=ant+esports+mk3400&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-    function renderProducts(products) {
-      const grid = document.getElementById('product-grid');
-      const count = document.getElementById('product-count');
+      <div class="card" data-cat="keyboard">
+        <div class="card-img">⌨️</div>
+        <div class="card-body">
+          <div class="product-category">Keyboards · Wireless</div>
+          <div class="product-name">Portronics Chicklet+ Wireless</div>
+          <div class="stars">★★★★☆ <span>3.8 (5k ratings)</span></div>
+          <div class="product-desc">Compact wireless keyboard with up to 4 months battery. Slim, silent keys. Great for laptop users who hate cables on their desk.</div>
+          <div class="card-footer">
+            <div class="price">₹999 <span class="old">₹1,999</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=portronics+chicklet+wireless+keyboard&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-      if (!products.length) {
-        grid.innerHTML = '<p style="color:var(--muted);padding:2rem 0">No products found in this category.</p>';
-        count.textContent = '0 items';
-        return;
-      }
+      <!-- MICE -->
+      <div class="card" data-cat="mouse">
+        <div class="card-img">🖱️<span class="badge-tag popular">POPULAR</span></div>
+        <div class="card-body">
+          <div class="product-category">Mice</div>
+          <div class="product-name">Logitech B100 Optical Mouse</div>
+          <div class="stars">★★★★★ <span>4.4 (95k ratings)</span></div>
+          <div class="product-desc">India's most trusted budget mouse. Logitech's 3-year durability warranty, ambidextrous design. Works on any surface. Cannot go wrong at this price.</div>
+          <div class="card-footer">
+            <div class="price">₹449 <span class="old">₹699</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=logitech+b100+mouse&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-      count.textContent = `${products.length} item${products.length !== 1 ? 's' : ''}`;
+      <div class="card" data-cat="mouse">
+        <div class="card-img">🖱️<span class="badge-tag">GAMING</span></div>
+        <div class="card-body">
+          <div class="product-category">Mice · Gaming</div>
+          <div class="product-name">Zebronics Zeb-Transformer M</div>
+          <div class="stars">★★★★☆ <span>3.9 (9k ratings)</span></div>
+          <div class="product-desc">RGB gaming mouse with 7 buttons, 2400 DPI. Ergonomic right-hand design. Best entry gaming mouse under ₹500 — solid for casual gaming and studies.</div>
+          <div class="card-footer">
+            <div class="price">₹449 <span class="old">₹999</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=zebronics+transformer+m+mouse&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-      const catEmoji = { headphones: '🎧', keyboard: '⌨️', mouse: '🖱️', gear: '🎮' };
+      <div class="card" data-cat="mouse">
+        <div class="card-img">🖱️</div>
+        <div class="card-body">
+          <div class="product-category">Mice</div>
+          <div class="product-name">HP X500 Wired Mouse</div>
+          <div class="stars">★★★★☆ <span>4.2 (22k ratings)</span></div>
+          <div class="product-desc">HP brand reliability at ₹549. Smooth scroll, comfortable grip, plug-and-play. Great for everyday laptop/desktop use with a recognisable brand name.</div>
+          <div class="card-footer">
+            <div class="price">₹549 <span class="old">₹999</span></div>
+            <a class="buy-btn" href="https://www.amazon.in/s?k=hp+x500+wired+mouse&tag=gearpick03-21" target="_blank" rel="nofollow noopener">Check Price →</a>
+          </div>
+        </div>
+      </div>
 
-      grid.innerHTML = products.map(p => {
-        const cat = p.category || 'gear';
-        const imgHtml = p.image
-          ? `<img class="card-img" src="${p.image}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-          : '';
-        const placeholder = `<div class="card-img-placeholder" ${p.image ? 'style="display:none"' : ''}>${catEmoji[cat] || '🎮'}</div>`;
-
-        return `
-          <div class="card">
-            ${imgHtml}${placeholder}
-            <div class="card-body">
-              <div class="card-tag">${catEmoji[cat] || ''} ${cat}</div>
-              <div class="card-name">${p.title || 'Unknown Product'}</div>
-              ${p.description ? `<div class="card-desc">${p.description}</div>` : ''}
-              <div class="card-price">${formatPrice(p.price)}</div>
-              <div class="card-footer">
-                <a href="${p.affiliate_link || '#'}" target="_blank" rel="noopener noreferrer" class="buy-btn">Buy on Amazon →</a>
-              </div>
-            </div>
-          </div>`;
-      }).join('');
-    }
-
-    function filterCategory(cat, event) {
-      if (event) event.preventDefault();
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      // Sync cat-btn active state whether called from nav or category buttons
-      const matchBtn = [...document.querySelectorAll('.cat-btn')].find(b =>
-        b.getAttribute('onclick') && b.getAttribute('onclick').includes(`'${cat}'`)
-      );
-      if (matchBtn) matchBtn.classList.add('active');
-      const filtered = cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat);
-      renderProducts(filtered);
-    }
-
-    function parseCSV(csv) {
-      const lines = csv.trim().split('\n');
-      if (lines.length < 2) return [];
-      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
-      return lines.slice(1).map(line => {
-        // Handle quoted fields with commas inside
-        const cols = [];
-        let current = '';
-        let inQuotes = false;
-        for (let i = 0; i < line.length; i++) {
-          if (line[i] === '"') { inQuotes = !inQuotes; }
-          else if (line[i] === ',' && !inQuotes) { cols.push(current.trim()); current = ''; }
-          else { current += line[i]; }
-        }
-        cols.push(current.trim());
-        const obj = {};
-        headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, ''));
-        return obj;
-      }).filter(p => p.title && p.title.trim());
-    }
-
-    async function loadProducts() {
-      try {
-        const res = await fetch(SHEET_CSV_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const csv = await res.text();
-        const products = parseCSV(csv);
-
-        if (!products.length) throw new Error('No products found in sheet');
-
-        // Auto-detect category from title
-        allProducts = products.map(p => ({ ...p, category: detectCategory(p.title) }));
-        renderProducts(allProducts);
-
-      } catch (err) {
-        console.error('Sheet load error:', err);
-        document.getElementById('product-grid').innerHTML = `
-          <div class="error-box" style="grid-column:1/-1">
-            <strong>⚠️ Could not load products from spreadsheet.</strong><br/><br/>
-            Make sure your Google Sheet is published:<br/>
-            <strong>File → Share → Publish to web → Comma-separated values (.csv) → Publish</strong><br/><br/>
-            Error: ${err.message}
-          </div>`;
-        document.getElementById('product-count').textContent = '';
-      }
-    }
-
-    loadProducts();
-  </script>
-</body>
-</html>
+      <div class="card" data-cat="mouse">
+        <div class="card-img">🖱️<span class="badge-tag">WIRELESS</span></div>
+        <div class="card-body">
+          <div class="product-category">Mice · Wireless</div>
+          <div class="product-name">Portronics
