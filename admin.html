@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GearPick Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#080a0c;--bg2:#0e1114;--bg3:#141820;--lime:#b8ff00;--lime-dim:rgba(184,255,0,0.08);--lime-glow:0 0 20px rgba(184,255,0,0.25);--red:#ff4444;--red-dim:rgba(255,68,68,0.1);--blue:#00cfff;--blue-dim:rgba(0,207,255,0.1);--green:#22c55e;--text:#eef0ee;--muted:#4a5560;--border:rgba(184,255,0,0.12)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"Outfit",sans-serif;font-size:14px;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);pointer-events:none;z-index:0}
+.topbar{background:rgba(8,10,12,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.tlogo{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:3px;color:var(--text)}
+.tlogo span{color:var(--lime)}
+.tstatus{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:2px;display:flex;align-items:center;gap:6px}
+.tstatus.online{color:var(--lime)}.tstatus.offline{color:var(--red)}.tstatus.syncing{color:var(--blue)}
+.pulse{width:6px;height:6px;border-radius:50%;animation:pulse 2s infinite}
+.pulse.green{background:var(--lime)}.pulse.red{background:var(--red)}.pulse.blue{background:var(--blue);animation:pulse 0.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.setup-screen{position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.setup-box{background:var(--bg2);border:1px solid var(--border);padding:36px;width:100%;max-width:440px}
+.setup-title{font-family:"Bebas Neue",sans-serif;font-size:24px;letter-spacing:3px;color:var(--lime);margin-bottom:8px}
+.setup-sub{font-family:"Space Mono",monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:24px;line-height:1.7}
+.field{margin-bottom:14px}
+.field label{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:6px}
+.field input,.field select{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:"Outfit",sans-serif;font-size:13px;padding:10px 12px;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--lime)}
+.field input::placeholder{color:var(--muted)}
+.btn-connect{width:100%;font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:3px;background:var(--lime);color:#060809;border:none;padding:13px;cursor:pointer;margin-top:8px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%);transition:all .2s}
+.btn-connect:hover{background:#d4ff33}
+.setup-note{font-family:"Space Mono",monospace;font-size:10px;color:var(--muted);margin-top:14px;line-height:1.7}
+.setup-note a{color:var(--lime)}
+.layout{display:grid;grid-template-columns:320px 1fr;min-height:calc(100vh - 58px);position:relative;z-index:1}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.sidebar{border-right:1px solid var(--border);padding:20px;background:var(--bg2);position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto}
+@media(max-width:900px){.sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}}
+.sid-title{font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:2px;margin-bottom:16px;color:var(--lime)}
+.preview-img{width:100%;aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-top:6px;overflow:hidden}
+.preview-img img{max-width:80%;max-height:80%;object-fit:contain}
+.ph{font-family:"Space Mono",monospace;font-size:10px;color:var(--muted);letter-spacing:1px}
+.badge-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.badge-opt{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;border:1px solid var(--border);cursor:pointer;background:transparent;color:var(--muted);transition:all .15s}
+.badge-opt.sel,.badge-opt:hover{border-color:var(--lime);color:var(--lime);background:var(--lime-dim)}
+.btn-add{width:100%;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:3px;background:var(--lime);color:#060809;border:none;padding:12px;cursor:pointer;margin-top:8px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%);transition:all .2s}
+.btn-add:hover{background:#d4ff33}
+.main{padding:20px;overflow-y:auto}
+.stats{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.stat{background:var(--bg2);border:1px solid var(--border);padding:12px 18px;flex:1;min-width:90px}
+.stat-n{font-family:"Bebas Neue",sans-serif;font-size:28px;color:var(--lime);letter-spacing:2px}
+.stat-l{font-family:"Space Mono",monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:2px}
+.toolbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.filter-tabs{display:flex;gap:5px;flex:1;flex-wrap:wrap}
+.ftab{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:2px;padding:7px 14px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.ftab.on{background:var(--lime);color:#060809;border-color:var(--lime);font-weight:700}
+.ftab:hover:not(.on){border-color:var(--lime);color:var(--lime)}
+.btn-publish{font-family:"Bebas Neue",sans-serif;font-size:13px;letter-spacing:2px;background:var(--green);color:#060809;border:none;padding:8px 18px;cursor:pointer;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 100%,6px 100%);transition:all .2s;white-space:nowrap}
+.btn-publish:hover{background:#16a34a}
+.btn-publish:disabled{background:var(--muted);cursor:not-allowed}
+.btn-logout{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:1px;padding:7px 12px;background:var(--red-dim);border:1px solid var(--red);color:var(--red);cursor:pointer;transition:all .15s}
+.btn-logout:hover{background:var(--red);color:#fff}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:580px}
+thead tr{border-bottom:1px solid var(--lime);background:var(--bg2)}
+th{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:2px;color:var(--lime);padding:10px 12px;text-align:left;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:hover{background:var(--bg3)}
+td{padding:10px 12px;vertical-align:middle}
+.td-img-wrap{width:40px;height:40px;background:var(--bg3);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);overflow:hidden}
+.td-img-wrap img{width:36px;height:36px;object-fit:contain}
+.td-title{font-size:12px;font-weight:500;max-width:200px;line-height:1.4}
+.td-price{font-family:"Bebas Neue",sans-serif;font-size:16px;color:var(--lime)}
+.cat-chip{font-family:"Space Mono",monospace;font-size:9px;padding:2px 7px;border:1px solid var(--border);color:var(--muted)}
+.badge-chip{font-family:"Space Mono",monospace;font-size:9px;padding:2px 7px;background:var(--lime);color:#060809;font-weight:700}
+.acts{display:flex;gap:5px}
+.btn-edit{font-family:"Space Mono",monospace;font-size:9px;padding:5px 9px;background:var(--blue-dim);border:1px solid var(--blue);color:var(--blue);cursor:pointer;transition:all .15s}
+.btn-edit:hover{background:var(--blue);color:#060809}
+.btn-del{font-family:"Space Mono",monospace;font-size:9px;padding:5px 9px;background:var(--red-dim);border:1px solid var(--red);color:var(--red);cursor:pointer;transition:all .15s}
+.btn-del:hover{background:var(--red);color:#fff}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-bg.hide{display:none}
+.modal{background:var(--bg2);border:1px solid var(--border);padding:24px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;position:relative}
+.modal-title{font-family:"Bebas Neue",sans-serif;font-size:18px;letter-spacing:2px;color:var(--lime);margin-bottom:16px}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;transition:color .15s}
+.modal-close:hover{color:var(--red)}
+.btn-save{width:100%;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:3px;background:var(--blue);color:#060809;border:none;padding:11px;cursor:pointer;margin-top:10px;transition:all .2s}
+.btn-save:hover{background:#33d6ff}
+.toast{position:fixed;bottom:24px;right:24px;z-index:300;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:1px;padding:10px 20px;transform:translateY(60px);opacity:0;transition:all .3s}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:var(--lime);color:#060809}
+.toast.error{background:var(--red);color:#fff}
+.toast.info{background:var(--blue);color:#060809}
+.empty{text-align:center;padding:50px 20px;font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:1px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="setup-screen" id="setup-screen">
+  <div class="setup-box">
+    <div class="setup-title">CONNECT GITHUB</div>
+    <div class="setup-sub">// TOKEN DAALO — PRODUCTS DIRECTLY SITE PE SAVE HONGE //</div>
+    <div class="field">
+      <label>GitHub Personal Access Token</label>
+      <input id="gh-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/>
+    </div>
+    <div class="field">
+      <label>GitHub Username</label>
+      <input id="gh-user" type="text" value="naveen0111kumar-code"/>
+    </div>
+    <div class="field">
+      <label>Repository Name</label>
+      <input id="gh-repo" type="text" value="gearpickindia2"/>
+    </div>
+    <button class="btn-connect" id="connect-btn" onclick="connectGitHub()">CONNECT &amp; LOAD PRODUCTS</button>
+    <div class="setup-note">
+      Token sirf tumhare browser mein save hoga.<br/>
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=GearPick+Admin" target="_blank">Token banana hai? Click here</a>
+    </div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="tlogo">GEAR<span>PICK</span> ADMIN</div>
+  <div class="tstatus online" id="status-bar">
+    <div class="pulse green" id="status-pulse"></div>
+    <span id="status-text">READY</span>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sid-title">+ ADD PRODUCT</div>
+    <div class="field"><label>Product Title *</label><input id="f-title" type="text" placeholder="e.g. Logitech G502 X Plus"/></div>
+    <div class="field"><label>Price (Rs) *</label><input id="f-price" type="text" placeholder="e.g. 2,999"/></div>
+    <div class="field">
+      <label>Category *</label>
+      <select id="f-cat">
+        <option value="mouse">Mouse</option>
+        <option value="keyboard">Keyboard</option>
+        <option value="headphone">Headphone</option>
+      </select>
+    </div>
+    <div class="field"><label>Amazon Affiliate Link *</label><input id="f-link" type="text" placeholder="https://amzn.to/..."/></div>
+    <div class="field">
+      <label>Amazon Image URL</label>
+      <input id="f-img" type="text" placeholder="https://m.media-amazon.com/images/..." oninput="previewImg(this.value,'add-preview')"/>
+      <div class="preview-img" id="add-preview"><span class="ph">IMAGE PREVIEW</span></div>
+    </div>
+    <div class="field">
+      <label>Badge</label>
+      <div class="badge-row" id="add-badge-row">
+        <button class="badge-opt sel" onclick="setBadge('',this)">NONE</button>
+        <button class="badge-opt" onclick="setBadge('HOT',this)">HOT</button>
+        <button class="badge-opt" onclick="setBadge('NEW',this)">NEW</button>
+        <button class="badge-opt" onclick="setBadge('TOP PICK',this)">TOP PICK</button>
+        <button class="badge-opt" onclick="setBadge('PREMIUM',this)">PREMIUM</button>
+        <button class="badge-opt" onclick="setBadge('ELITE',this)">ELITE</button>
+      </div>
+    </div>
+    <button class="btn-add" onclick="addProduct()">ADD TO ARSENAL</button>
+  </aside>
+
+  <main class="main">
+    <div class="stats">
+      <div class="stat"><div class="stat-n" id="s-total">0</div><div class="stat-l">TOTAL</div></div>
+      <div class="stat"><div class="stat-n" id="s-mouse">0</div><div class="stat-l">MICE</div></div>
+      <div class="stat"><div class="stat-n" id="s-keyboard">0</div><div class="stat-l">KEYBOARDS</div></div>
+      <div class="stat"><div class="stat-n" id="s-headphone">0</div><div class="stat-l">HEADPHONES</div></div>
+    </div>
+    <div class="toolbar">
+      <div class="filter-tabs">
+        <button class="ftab on" onclick="filterTbl('all',this)">ALL</button>
+        <button class="ftab" onclick="filterTbl('mouse',this)">MICE</button>
+        <button class="ftab" onclick="filterTbl('keyboard',this)">KEYBOARDS</button>
+        <button class="ftab" onclick="filterTbl('headphone',this)">HEADPHONES</button>
+      </div>
+      <button class="btn-publish" id="publish-btn" onclick="publishToGitHub()">PUBLISH TO SITE</button>
+      <button class="btn-logout" onclick="logout()">LOGOUT</button>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>IMG</th><th>PRODUCT</th><th>CAT</th><th>PRICE</th><th>BADGE</th><th>ACTIONS</th></tr></thead>
+        <tbody id="tbl-body"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="empty-msg">// NO PRODUCTS FOUND //</div>
+  </main>
+</div>
+
+<div class="modal-bg hide" id="edit-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">X</button>
+    <div class="modal-title">EDIT PRODUCT</div>
+    <input type="hidden" id="e-idx"/>
+    <div class="field"><label>Title</label><input id="e-title" type="text"/></div>
+    <div class="field"><label>Price</label><input id="e-price" type="text"/></div>
+    <div class="field">
+      <label>Category</label>
+      <select id="e-cat">
+        <option value="mouse">Mouse</option>
+        <option value="keyboard">Keyboard</option>
+        <option value="headphone">Headphone</option>
+      </select>
+    </div>
+    <div class="field"><label>Affiliate Link</label><input id="e-link" type="text"/></div>
+    <div class="field">
+      <label>Image URL</label>
+      <input id="e-img" type="text" oninput="previewImg(this.value,'edit-preview')"/>
+      <div class="preview-img" id="edit-preview"><span class="ph">IMAGE PREVIEW</span></div>
+    </div>
+    <div class="field">
+      <label>Badge</label>
+      <div class="badge-row" id="e-badge-row">
+        <button class="badge-opt" onclick="setEditBadge('',this)">NONE</button>
+        <button class="badge-opt" onclick="setEditBadge('HOT',this)">HOT</button>
+        <button class="badge-opt" onclick="setEditBadge('NEW',this)">NEW</button>
+        <button class="badge-opt" onclick="setEditBadge('TOP PICK',this)">TOP PICK</button>
+        <button class="badge-opt" onclick="setEditBadge('PREMIUM',this)">PREMIUM</button>
+        <button class="badge-opt" onclick="setEditBadge('ELITE',this)">ELITE</button>
+      </div>
+    </div>
+    <button class="btn-save" onclick="saveEdit()">SAVE CHANGES</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var OWNER = 'naveen0111kumar-code';
+var REPO  = 'gearpickindia2';
+var FILE  = 'index.html';
+var BRANCH = 'main';
+
+var products = [];
+var curFilter = 'all';
+var curAddBadge = '';
+var curEditBadge = '';
+var ghToken = '';
+var fileSHA = '';
+var hasChanges = false;
+
+window.onload = function() {
+  var saved = localStorage.getItem('gp_gh_token');
+  if (saved) {
+    ghToken = saved;
+    hideSetup();
+    loadFromGitHub();
+  }
+};
+
+function connectGitHub() {
+  var token = document.getElementById('gh-token').value.trim();
+  if (!token) { showToast('TOKEN DAALO!', 'error'); return; }
+  var btn = document.getElementById('connect-btn');
+  btn.textContent = 'CONNECTING...';
+  btn.disabled = true;
+  ghToken = token;
+  setStatus('syncing', 'CONNECTING...');
+  fetch('https://api.github.com/repos/' + OWNER + '/' + REPO, {
+    headers: { 'Authorization': 'Bearer ' + token }
+  }).then(function(r) {
+    if (r.ok) {
+      localStorage.setItem('gp_gh_token', token);
+      hideSetup();
+      loadFromGitHub();
+    } else {
+      setStatus('offline', 'FAILED');
+      showToast('TOKEN INVALID! CHECK KARO', 'error');
+      btn.textContent = 'CONNECT & LOAD PRODUCTS';
+      btn.disabled = false;
+    }
+  }).catch(function() {
+    setStatus('offline', 'ERROR');
+    showToast('CONNECTION ERROR', 'error');
+    btn.textContent = 'CONNECT & LOAD PRODUCTS';
+    btn.disabled = false;
+  });
+}
+
+function hideSetup() {
+  document.getElementById('setup-screen').style.display = 'none';
+}
+
+function logout() {
+  localStorage.removeItem('gp_gh_token');
+  location.reload();
+}
+
+function loadFromGitHub() {
+  setStatus('syncing', 'LOADING...');
+  fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + FILE + '?ref=' + BRANCH, {
+    headers: { 'Authorization': 'Bearer ' + ghToken, 'Accept': 'application/vnd.github.v3+json' }
+  }).then(function(r) { return r.json(); })
+  .then(function(data) {
+    fileSHA = data.sha;
+    var content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+    var match = content.match(/const products\s*=\s*(\[[\s\S]*?\]);[\s\S]*?const catLabel/);
+    if (match) {
+      try {
+        products = JSON.parse(match[1]);
+        showToast(products.length + ' PRODUCTS LOADED!', 'success');
+      } catch(e) {
+        products = [];
+        showToast('PARSE ERROR - FRESH START', 'info');
+      }
+    } else {
+      products = [];
+      showToast('PRODUCTS NOT FOUND', 'info');
+    }
+    setStatus('online', 'CONNECTED');
+    render();
+  }).catch(function(e) {
+    setStatus('offline', 'LOAD FAILED');
+    showToast('LOAD FAILED', 'error');
+    render();
+  });
+}
+
+function publishToGitHub() {
+  if (!hasChanges) { showToast('KOI CHANGES NAHI HAIN!', 'info'); return; }
+  var btn = document.getElementById('publish-btn');
+  btn.disabled = true;
+  btn.textContent = 'PUBLISHING...';
+  setStatus('syncing', 'PUBLISHING...');
+
+  fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + FILE + '?ref=' + BRANCH, {
+    headers: { 'Authorization': 'Bearer ' + ghToken }
+  }).then(function(r) { return r.json(); })
+  .then(function(d) {
+    fileSHA = d.sha;
+    var newHTML = buildIndexHTML();
+    var encoded = btoa(unescape(encodeURIComponent(newHTML)));
+    return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + FILE, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + ghToken,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'GearPick Admin: Updated ' + products.length + ' products',
+        content: encoded,
+        sha: fileSHA,
+        branch: BRANCH
+      })
+    });
+  }).then(function(r) {
+    if (r.ok) {
+      hasChanges = false;
+      setStatus('online', 'PUBLISHED!');
+      showToast('SITE UPDATE HO RAHI HAI! 2 MIN MEIN LIVE', 'success');
+    } else {
+      throw new Error('Publish failed');
+    }
+    btn.disabled = false;
+    btn.textContent = 'PUBLISH TO SITE';
+    render();
+  }).catch(function(e) {
+    setStatus('online', 'FAILED');
+    showToast('PUBLISH FAILED: ' + e.message, 'error');
+    btn.disabled = false;
+    btn.textContent = 'PUBLISH TO SITE';
+  });
+}
+
+function buildIndexHTML() {
+  var pJSON = JSON.stringify(products, null, 2);
+  var count = products.length;
+  return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8"/>\n<meta name="viewport" content="width=device-width,initial-scale=1.0"/>\n<title>GearPick India \u2014 Premium Gaming Gear</title>\n<meta name="description" content="Handpicked Amazon India deals on premium gaming mice, keyboards and headphones."/>\n<link rel="canonical" href="https://naveen0111kumar-code.github.io/gearpickindia2/"/>\n<link rel="preconnect" href="https://fonts.googleapis.com"/>\n<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>\n<style>\n:root{--bg:#060809;--bg2:#0c1014;--bg3:#111820;--lime:#b8ff00;--lime-dim:rgba(184,255,0,0.08);--lime-glow:0 0 20px rgba(184,255,0,0.3);--text:#f0f4f0;--muted:#5a6870;--border:rgba(184,255,0,0.1);--card:#0d1318}\n*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}\nbody{background:var(--bg);color:var(--text);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}\n.disc{background:var(--lime-dim);border-bottom:1px solid var(--border);text-align:center;padding:7px 16px;font-size:11px;color:rgba(184,255,0,0.6);font-family:"Space Mono",monospace;letter-spacing:.5px;position:relative;z-index:10}\nnav{position:sticky;top:0;z-index:100;background:rgba(6,8,9,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}\n.logo{font-family:"Bebas Neue",sans-serif;font-size:26px;letter-spacing:3px;text-decoration:none;color:var(--text)}\n.logo .hi{color:var(--lime)}\n.nav-r{display:flex;align-items:center;gap:28px}\n.nav-r a{color:var(--muted);text-decoration:none;font-size:13px;font-family:"Space Mono",monospace;letter-spacing:1px;transition:color .2s}\n.nav-r a:hover{color:var(--lime)}\n.nav-tag{background:var(--lime);color:#060809;font-family:"Space Mono",monospace;font-size:10px;font-weight:700;padding:3px 10px;letter-spacing:1px}\n@media(max-width:600px){.nav-r a{display:none}}\n.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 24px 40px;position:relative;overflow:hidden}\n.hero::after{content:"";position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(184,255,0,0.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}\n.hero-label{font-family:"Space Mono",monospace;font-size:11px;color:var(--lime);letter-spacing:3px;margin-bottom:20px;display:flex;align-items:center;gap:10px}\n.hero-label::before,.hero-label::after{content:"//";color:var(--muted)}\n.hero h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(56px,12vw,130px);line-height:.9;letter-spacing:4px;margin-bottom:24px}\n.hero h1 .g{color:var(--lime);text-shadow:0 0 40px rgba(184,255,0,0.4)}\n.hero-sub{font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 40px;font-family:"Space Mono",monospace;line-height:1.7}\n.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:#060809;font-family:"Bebas Neue",sans-serif;font-size:18px;letter-spacing:3px;padding:14px 36px;text-decoration:none;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,12px 100%);transition:all .2s}\n.hero-cta:hover{background:#d4ff33;box-shadow:var(--lime-glow);transform:translateY(-2px)}\n.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:60px;padding-top:40px;border-top:1px solid var(--border);width:100%;max-width:600px}\n.hstat-n{font-family:"Bebas Neue",sans-serif;font-size:38px;color:var(--lime);letter-spacing:2px}\n.hstat-l{font-family:"Space Mono",monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:2px}\n.filter-wrap{padding:32px 32px 0;display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:10}\n.fb{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:2px;padding:8px 20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 100%,6px 100%)}\n.fb:hover{border-color:var(--lime);color:var(--lime)}\n.fb.on{background:var(--lime);color:#060809;border-color:var(--lime);font-weight:700}\n.sec{padding:24px 32px 80px;max-width:1400px;margin:0 auto;position:relative;z-index:10}\n.sec-hd{display:flex;align-items:center;gap:16px;margin-bottom:28px;font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:2px}\n.sec-hd::before{content:">";color:var(--lime)}\n.sec-hd span{color:var(--text);font-size:14px;font-weight:600;font-family:"Outfit",sans-serif;letter-spacing:0}\n.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border)}\n.card{background:var(--card);display:flex;flex-direction:column;transition:background .2s;position:relative;overflow:hidden}\n.card:hover{background:var(--bg3)}\n.card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .3s}\n.card:hover::before{transform:scaleX(1)}\n.card-img{width:100%;aspect-ratio:1;background:var(--bg2);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;cursor:zoom-in}\n.card-img img{width:80%;height:80%;object-fit:contain;transition:transform .4s;filter:brightness(.9)}\n.card:hover .card-img img{transform:scale(1.08);filter:brightness(1)}\n.cbadge{position:absolute;top:10px;left:10px;font-family:"Space Mono",monospace;font-size:9px;font-weight:700;padding:3px 8px;letter-spacing:1px;background:var(--lime);color:#060809}\n.cbadge.hot{background:#ff4444;color:#fff}\n.cbadge.new{background:#00cfff;color:#060809}\n.card-body{padding:16px;flex:1;display:flex;flex-direction:column}\n.ccat{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:6px;text-transform:uppercase}\n.cname{font-size:13px;font-weight:500;line-height:1.4;flex:1;margin-bottom:12px;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}\n.cfoot{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05)}\n.cprice{font-family:"Bebas Neue",sans-serif;font-size:22px;color:var(--lime);letter-spacing:1px}\n.cprice small{font-family:"Outfit",sans-serif;font-size:11px;color:var(--muted);display:block;line-height:1}\n.cbuy{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:1px;background:transparent;border:1px solid var(--lime);color:var(--lime);padding:7px 12px;text-decoration:none;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%);transition:all .2s;white-space:nowrap}\n.cbuy:hover{background:var(--lime);color:#060809}\n.hidden{display:none!important}\n.lightbox{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;padding:20px}\n.lightbox.open{opacity:1;pointer-events:all}\n.lightbox-inner{position:relative;max-width:560px;width:100%;background:var(--bg2);border:1px solid var(--border);padding:20px}\n.lightbox-inner img{width:100%;object-fit:contain;max-height:60vh;display:block}\n.lightbox-title{font-size:13px;font-weight:500;color:var(--text);margin-top:14px;line-height:1.4}\n.lightbox-price{font-family:"Bebas Neue",sans-serif;font-size:26px;color:var(--lime);margin-top:6px}\n.lightbox-buy{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#060809;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:2px;padding:11px 28px;text-decoration:none;margin-top:14px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%);transition:all .2s}\n.lightbox-buy:hover{background:#d4ff33}\n.lightbox-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.08);border:none;color:var(--text);font-size:18px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center}\nfooter{border-top:1px solid var(--border);padding:32px;text-align:center;font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:1px;position:relative;z-index:10}\nfooter strong{color:var(--lime)}\n</style>\n</head>\n<body>\n<div class="disc">// AFFILIATE DISCLOSURE \u2014 GEARPICK INDIA EARNS FROM QUALIFYING AMAZON PURCHASES AT NO EXTRA COST TO YOU //</div>\n<nav>\n  <a class="logo" href="#">GEAR<span class="hi">PICK</span>\u00a0INDIA</a>\n  <div class="nav-r"><a href="#gear">ALL GEAR</a><a href="headphones-under-1000.html">GUIDES</a><span class="nav-tag">IN</span></div>\n</nav>\n<section class="hero">\n  <div class="hero-label">PREMIUM GAMING GEAR</div>\n  <h1>PICK YOUR<br/><span class="g">WEAPON.</span></h1>\n  <p class="hero-sub">// handpicked amazon deals on gaming mice, keyboards &amp; headphones \u2014 verified, direct checkout //</p>\n  <a class="hero-cta" href="#gear">EXPLORE GEAR</a>\n  <div class="hero-stats">\n    <div><div class="hstat-n">' + count + '</div><div class="hstat-l">PRODUCTS</div></div>\n    <div><div class="hstat-n">3</div><div class="hstat-l">CATEGORIES</div></div>\n    <div><div class="hstat-n">100%</div><div class="hstat-l">AMAZON IN</div></div>\n  </div>\n</section>\n<div class="filter-wrap" id="gear">\n  <button class="fb on" onclick="filter(\u0027all\u0027,this)">// ALL</button>\n  <button class="fb" onclick="filter(\u0027mouse\u0027,this)">// MICE</button>\n  <button class="fb" onclick="filter(\u0027keyboard\u0027,this)">// KEYBOARDS</button>\n  <button class="fb" onclick="filter(\u0027headphone\u0027,this)">// HEADPHONES</button>\n</div>\n<section class="sec">\n  <div class="sec-hd"><span id="count-label">' + count + ' products loaded</span></div>\n  <div class="grid" id="grid"></div>\n</section>\n<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">\n  <div class="lightbox-inner" id="lightbox-inner">\n    <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>\n    <img id="lb-img" src="" alt=""/>\n    <div class="lightbox-title" id="lb-title"></div>\n    <div class="lightbox-price" id="lb-price"></div>\n    <a class="lightbox-buy" id="lb-buy" href="#" target="_blank" rel="nofollow noopener">CHECK PRICE ON AMAZON &#x2192;</a>\n  </div>\n</div>\n<footer>\n  <p><strong>GEARPICK INDIA</strong> &mdash; HANDPICKED AMAZON GEAR FOR GAMERS &amp; STUDENTS</p>\n  <p style="margin-top:8px">AS AN AMAZON ASSOCIATE WE EARN FROM QUALIFYING PURCHASES &mdash; &copy; 2026</p>\n</footer>\n<script>\nvar products=' + pJSON + ';\nvar catLabel={mouse:"MOUSE",keyboard:"KEYBOARD",headphone:"HEADPHONE"};\nvar grid=document.getElementById("grid");\nvar countLabel=document.getElementById("count-label");\nfunction renderCard(p){\n  var b=p.badge?"<span class=\'cbadge"+(p.badge==="HOT"?" hot":p.badge==="NEW"?" new":"")+"\'>"+ p.badge+"<\/span>":"";\n  return "<div class=\'card\' data-cat=\'"+p.cat+"\'>"+\n    "<div class=\'card-img\' onclick=\'openLightbox(\""+p.img.replace(/\"/g,"\\\"")+"\",\""+p.title.replace(/\"/g,"\\\"")+"\",\""+p.price+"\",\""+p.link+"\")\'><img src=\'"+p.img+"\' alt=\'"+p.title+"\' loading=\'lazy\' onerror=\'this.style.display=&quot;none&quot;\'/>"+ b+"<\/div>"+\n    "<div class=\'card-body\'>"+\n    "<div class=\'ccat\'>"+(catLabel[p.cat]||p.cat)+"<\/div>"+\n    "<div class=\'cname\'>"+p.title+"<\/div>"+\n    "<div class=\'cfoot\'>"+\n    "<div class=\'cprice\'><small>FROM<\/small>\u20b9"+p.price+"<\/div>"+\n    "<a class=\'cbuy\' href=\'"+p.link+"\' target=\'_blank\' rel=\'nofollow noopener\'>GET IT &rsaquo;<\/a>"+\n    "<\/div><\/div><\/div>";\n}\nfunction filter(cat,btn){\n  document.querySelectorAll(".fb").forEach(function(b){b.classList.remove("on")});btn.classList.add("on");\n  var cards=grid.querySelectorAll(".card");var n=0;\n  cards.forEach(function(c){var show=cat==="all"||c.dataset.cat===cat;c.classList.toggle("hidden",!show);if(show)n++;});\n  countLabel.textContent=n+" product"+(n!==1?"s":"")+" loaded";\n}\nfunction openLightbox(img,title,price,link){\n  document.getElementById("lb-img").src=img;\n  document.getElementById("lb-title").textContent=title;\n  document.getElementById("lb-price").textContent="\u20b9"+price;\n  document.getElementById("lb-buy").href=link;\n  document.getElementById("lightbox").classList.add("open");\n  document.body.style.overflow="hidden";\n}\nfunction closeLightbox(e){\n  if(e&&document.getElementById("lightbox-inner").contains(e.target))return;\n  document.getElementById("lightbox").classList.remove("open");\n  document.body.style.overflow="";\n}\ndocument.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox();});\ngrid.innerHTML=products.map(renderCard).join("");\n<\/script>\n</body>\n</html>';
+}
+
+function addProduct() {
+  var title = document.getElementById('f-title').value.trim();
+  var price = document.getElementById('f-price').value.trim();
+  var cat   = document.getElementById('f-cat').value;
+  var link  = document.getElementById('f-link').value.trim();
+  var img   = document.getElementById('f-img').value.trim();
+  if (!title || !price || !link) { showToast('TITLE, PRICE & LINK ZAROORI HAIN!', 'error'); return; }
+  products.push({ title: title, price: price, img: img, link: link, cat: cat, badge: curAddBadge || null });
+  hasChanges = true;
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-price').value = '';
+  document.getElementById('f-link').value  = '';
+  document.getElementById('f-img').value   = '';
+  document.getElementById('add-preview').innerHTML = '<span class="ph">IMAGE PREVIEW</span>';
+  curAddBadge = '';
+  document.querySelectorAll('#add-badge-row .badge-opt').forEach(function(b){ b.classList.remove('sel'); });
+  document.querySelector('#add-badge-row .badge-opt').classList.add('sel');
+  render();
+  showToast('PRODUCT ADDED!', 'success');
+}
+
+function delProduct(idx) {
+  if (!confirm('Delete "' + products[idx].title + '"?')) return;
+  products.splice(idx, 1);
+  hasChanges = true;
+  render();
+  showToast('PRODUCT REMOVED', 'info');
+}
+
+function openEdit(idx) {
+  var p = products[idx];
+  document.getElementById('e-idx').value   = idx;
+  document.getElementById('e-title').value = p.title;
+  document.getElementById('e-price').value = p.price;
+  document.getElementById('e-cat').value   = p.cat;
+  document.getElementById('e-link').value  = p.link;
+  document.getElementById('e-img').value   = p.img || '';
+  curEditBadge = p.badge || '';
+  previewImg(p.img || '', 'edit-preview');
+  document.querySelectorAll('#e-badge-row .badge-opt').forEach(function(b){
+    b.classList.toggle('sel', b.textContent.trim() === (p.badge || 'NONE'));
+  });
+  document.getElementById('edit-modal').classList.remove('hide');
+}
+
+function closeModal() { document.getElementById('edit-modal').classList.add('hide'); }
+
+function saveEdit() {
+  var idx = parseInt(document.getElementById('e-idx').value);
+  products[idx] = {
+    title: document.getElementById('e-title').value.trim(),
+    price: document.getElementById('e-price').value.trim(),
+    cat:   document.getElementById('e-cat').value,
+    link:  document.getElementById('e-link').value.trim(),
+    img:   document.getElementById('e-img').value.trim(),
+    badge: curEditBadge || null
+  };
+  hasChanges = true;
+  render();
+  closeModal();
+  showToast('CHANGES SAVED!', 'success');
+}
+
+function setBadge(val, btn) {
+  curAddBadge = val;
+  document.querySelectorAll('#add-badge-row .badge-opt').forEach(function(b){ b.classList.remove('sel'); });
+  btn.classList.add('sel');
+}
+
+function setEditBadge(val, btn) {
+  curEditBadge = val;
+  document.querySelectorAll('#e-badge-row .badge-opt').forEach(function(b){ b.classList.remove('sel'); });
+  btn.classList.add('sel');
+}
+
+function previewImg(url, id) {
+  var box = document.getElementById(id);
+  if (!url) { box.innerHTML = '<span class="ph">IMAGE PREVIEW</span>'; return; }
+  box.innerHTML = '<img src="' + url + '" style="max-width:80%;max-height:80%;object-fit:contain" onerror="this.parentNode.innerHTML='<span class=\'ph\'>NOT FOUND</span>'">';
+}
+
+function render() {
+  var tbody = document.getElementById('tbl-body');
+  var filtered = curFilter === 'all' ? products : products.filter(function(p){ return p.cat === curFilter; });
+  if (!filtered.length) {
+    tbody.innerHTML = '';
+    document.getElementById('empty-msg').classList.remove('hidden');
+  } else {
+    document.getElementById('empty-msg').classList.add('hidden');
+    tbody.innerHTML = filtered.map(function(p) {
+      var idx = products.indexOf(p);
+      var b = p.badge ? '<span class="badge-chip">' + p.badge + '</span>' : '<span style="color:var(--muted);font-size:10px">-</span>';
+      return '<tr>' +
+        '<td style="font-family:Space Mono,monospace;font-size:10px;color:var(--muted)">' + String(idx+1).padStart(2,'0') + '</td>' +
+        '<td><div class="td-img-wrap"><img src="' + (p.img||'') + '" loading="lazy" onerror="this.style.display='none'" style="width:36px;height:36px;object-fit:contain"/></div></td>' +
+        '<td><div class="td-title">' + p.title + '</div></td>' +
+        '<td><span class="cat-chip">' + p.cat.toUpperCase() + '</span></td>' +
+        '<td><div class="td-price">Rs.' + p.price + '</div></td>' +
+        '<td>' + b + '</td>' +
+        '<td><div class="acts">' +
+        '<button class="btn-edit" onclick="openEdit(' + idx + ')">EDIT</button>' +
+        '<button class="btn-del" onclick="delProduct(' + idx + ')">DEL</button>' +
+        '</div></td></tr>';
+    }).join('');
+  }
+  document.getElementById('s-total').textContent     = products.length;
+  document.getElementById('s-mouse').textContent     = products.filter(function(p){ return p.cat==='mouse'; }).length;
+  document.getElementById('s-keyboard').textContent  = products.filter(function(p){ return p.cat==='keyboard'; }).length;
+  document.getElementById('s-headphone').textContent = products.filter(function(p){ return p.cat==='headphone'; }).length;
+  var pb = document.getElementById('publish-btn');
+  if (hasChanges) {
+    pb.textContent = 'PUBLISH TO SITE (' + products.length + ')';
+    pb.style.background = 'var(--green)';
+  } else {
+    pb.textContent = 'PUBLISH TO SITE';
+    pb.style.background = 'var(--muted)';
+  }
+}
+
+function filterTbl(cat, btn) {
+  curFilter = cat;
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  render();
+}
+
+function setStatus(type, text) {
+  var bar   = document.getElementById('status-bar');
+  var pulse = document.getElementById('status-pulse');
+  var span  = document.getElementById('status-text');
+  bar.className   = 'tstatus ' + type;
+  pulse.className = 'pulse ' + (type==='online' ? 'green' : type==='syncing' ? 'blue' : 'red');
+  span.textContent = text;
+}
+
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (type||'success');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+</script>
+</body>
+</html>
